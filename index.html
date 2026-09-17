@@ -2456,14 +2456,15 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
       printers.forEach(pr=>pr.resize());
     }
     addEventListener('hashchange',route);
-    // a fresh load always opens on the opening screen: drop a leftover jump to a section
-    // (e.g. #collection) and don't restore an old scroll position
+    // a fresh load always opens on the opening screen: drop whatever the address still holds
+    // (a section like #collection, or a page like #/account saved in a bookmark or home-screen icon)
+    // and don't restore an old scroll position. Links clicked inside the site keep working as usual.
     try{history.scrollRestoration='manual';}catch(e){}
-    if(location.hash&&!location.hash.startsWith('#/')){
+    if(location.hash){
       try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
     }
     route();
-    if(!location.hash||location.hash==='#/') requestAnimationFrame(()=>scrollTo(0,0));
+    requestAnimationFrame(()=>scrollTo(0,0));
   })();
 
   /* ---------- scroll reveal ---------- */
