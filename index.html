@@ -582,6 +582,77 @@ a.add{text-decoration:none;text-align:center}
 .admin-table td.num{font-family:var(--util);font-variant-numeric:tabular-nums;white-space:nowrap}
 .admin-table select{background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);color:inherit;font:inherit;padding:6px 8px;border-radius:6px}
 
+
+/* ---------- iPhone / touch ---------- */
+.add .go .sm{display:none}
+@media (max-width:760px){.pcard .add .go .lg{display:none}.pcard .add .go .sm{display:inline}}
+/* no gray flash on tap, no font inflation in landscape (invisible with a mouse) */
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* taps fire immediately; a long press on a control doesn't select its label */
+button,a,summary,[role="button"],.chip,.ptool,.add,.icon-btn{touch-action:manipulation}
+button,summary,[role="button"],.chip,.ptool,.add,.icon-btn,.cue,.ask-fab{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
+/* finger-sized targets wherever the pointer is a finger */
+@media (pointer:coarse){
+  input,textarea,select{font-size:max(16px,1em)}
+  .ptool{width:40px;height:40px}
+  .ptool svg,.ptool.pfav svg{width:19px;height:19px}
+  .pdots button{position:relative}
+  .pdots button::after{content:"";position:absolute;inset:-12px -6px}
+  .qty button{width:36px;height:36px}
+  .line .rm{padding:8px;margin:-6px}
+  .close{min-width:44px;min-height:44px}
+  .qa summary{min-height:52px}
+}
+
+@media (max-width:760px){
+  /* header: brand + account + cart on one row, the four links evenly on the second; nothing scrolls sideways */
+  .top .wrap{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;row-gap:2px;padding-block:8px 4px}
+  .top .wrap::after{content:"";order:3;flex-basis:100%;height:0}
+  .top .brand{order:0;flex:1;min-width:0}
+  .top .brand b{font-size:1.35rem;white-space:nowrap}
+  .brand .brand-logo{height:32px}
+  .top .nav{display:contents}
+  .top .nav a{order:4;display:inline-flex;align-items:center;min-height:40px;padding-inline:2px;font-size:.9rem;white-space:nowrap}
+  .top .nav a::after{bottom:6px}
+  .top .wrap{justify-content:space-between}
+  #loginBtn{order:1;padding:6px 10px;max-width:42vw}
+  #loginBtn .avatar{flex:none}
+  #loginBtn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #cartBtn{order:2;padding:6px 10px}
+
+  /* products: two per row so a phone shows more than one at a time */
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .pcard{border-radius:14px}
+  .pcard .pmedia{aspect-ratio:1/1.05}
+  .pbadge{top:8px;inset-inline-start:8px;font-size:.66rem;padding:3px 7px}
+  .ptools{top:6px;bottom:auto;inset-inline-end:6px;gap:4px}
+  .pdots{bottom:12px}
+  .pbody{padding:10px 10px 12px;gap:6px}
+  .pmeta{font-size:.66rem}
+  .pmeta span+span{display:none}
+  .pcard h3{font-size:.92rem;padding-bottom:8px;line-height:1.3}
+  .pprice b{font-size:1.1rem}
+  .pprice .from,.pprice small{font-size:.68rem}
+  .pbuy{gap:6px}
+  .pbuy .add{padding:10px 6px;font-size:.8rem;border-radius:9px;min-height:40px}
+
+  /* chat: a round button that doesn't cover the products */
+  .ask-fab{padding:0;width:56px;height:56px;justify-content:center;border-radius:50%;font-size:0;gap:0}
+  .ask-fab .lion{width:40px;height:40px}
+
+  /* dialogs sit higher and scroll inside themselves */
+  dialog{max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}
+  .qv .dlg{padding:14px}
+  /* messages drop in from the top, clear of the cart's order button and the chat button */
+  .toast{top:calc(10px + env(safe-area-inset-top,0px));bottom:auto;max-width:calc(100% - 24px)}
+  @starting-style{.toast{opacity:0;transform:translate(-50%,-14px)}}
+}
+@media (max-width:360px){
+  .top .nav a{font-size:.82rem}
+  .pbuy .add{font-size:.74rem}
+}
+
 /* ---------- drawer / dialog / toast ---------- */
 .scrim{position:fixed;inset:0;background:rgba(8,5,2,.55);z-index:40;opacity:0;visibility:hidden;transition:opacity 280ms ease,visibility 0s 280ms}
 .scrim.open{opacity:1;visibility:visible;transition:opacity 360ms ease,visibility 0s}
@@ -1249,8 +1320,8 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
       <p class="qdesc" id="qvDesc"></p>
       <div class="qfacts" id="qvFacts"></div>
       <div class="pbuy">
-        <button class="add phys" type="button" id="qvPhys"><span class="go">הזמנה פיזית (הדפסה)</span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>
-        <a class="add file" id="qvFile" href="#" target="_blank" rel="noopener"><span class="go">לרכישת קובץ דיגיטלי</span></a>
+        <button class="add phys" type="button" id="qvPhys"><span class="go"><span class="lg">הזמנה פיזית (הדפסה)</span><span class="sm">להזמנה</span></span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>
+        <a class="add file" id="qvFile" href="#" target="_blank" rel="noopener"><span class="go"><span class="lg">לרכישת קובץ דיגיטלי</span><span class="sm">קובץ דיגיטלי</span></span></a>
       </div>
     </div>
   </div>
@@ -1274,7 +1345,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
   </div>
 </dialog>
 
-<button class="ask-fab" type="button" id="askFab" aria-controls="ask" aria-expanded="false"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="manea" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#manea)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>צ'אט עם ארי</button>
+<button class="ask-fab" type="button" id="askFab" aria-controls="ask" aria-expanded="false" aria-label="צ'אט עם ארי"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="manea" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#manea)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>צ'אט עם ארי</button>
 <section class="ask" id="ask" role="dialog" aria-label="ארי, העוזר החכם של אור בראשית" inert>
   <div class="ask-head"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="maneb" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#maneb)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>
     <div><b>ארי · העוזר החכם</b><small>מוצרים, הזמנות, הקדשות ומשלוחים</small></div>
@@ -1655,7 +1726,6 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     document.getElementById('enterBtn').addEventListener('click',()=>{
       document.getElementById('site').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
     });
-    addEventListener('resize',build);
     let lastW=0;
     new ResizeObserver(es=>{const w=Math.round(es[0].contentRect.width);if(w&&w!==lastW){lastW=w;build();}}).observe(root);
     // fade the opening screen as the page scrolls past it
@@ -1726,8 +1796,8 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     el.className='pcard rv'; el.dataset.cat=p.cat; el.dataset.id=p.id;
     const badge=p.isNew?'<span class="pbadge">חדש באתר</span>':'';
     const physBtn=quoteOnly(p)
-      ?`<a class="add phys" href="${waLink('שלום אור בראשית, אשמח לקבל הצעת מחיר עבור: '+p.name)}" target="_blank" rel="noopener"><span class="go">לקבלת הצעת מחיר</span></a>`
-      :`<button class="add phys" type="button"><span class="go">הזמנה פיזית (הדפסה)</span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>`;
+      ?`<a class="add phys" href="${waLink('שלום אור בראשית, אשמח לקבל הצעת מחיר עבור: '+p.name)}" target="_blank" rel="noopener"><span class="go"><span class="lg">לקבלת הצעת מחיר</span><span class="sm">הצעת מחיר</span></span></a>`
+      :`<button class="add phys" type="button"><span class="go"><span class="lg">הזמנה פיזית (הדפסה)</span><span class="sm">להזמנה</span></span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>`;
     el.innerHTML=`<div class="pmedia">${badge}
         <div class="ptools"><button class="ptool pfav" type="button" aria-pressed="false" data-id="${esc(p.id)}" data-name="${esc(p.name)}" aria-label="הוספה למועדפים: ${esc(p.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.5 8 3.5 4.6 6.8 4.6c2 0 3.6 1.1 4.3 2.6h1.8c.7-1.5 2.3-2.6 4.3-2.6 3.3 0 5.3 3.4 4.1 6.5-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg></button><button class="ptool pexpand" type="button" aria-label="תצוגה מהירה: ${esc(p.name)}">${EXPAND}</button></div></div>
       <div class="pbody">
@@ -1736,7 +1806,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
         <div class="pprice">${priceHTML(p)}</div>
         <div class="pbuy">
           ${physBtn}
-          <a class="add file" href="${waLink('שלום אור בראשית, אשמח לרכוש את הקובץ הדיגיטלי (STL) של: '+p.name)}" target="_blank" rel="noopener"><span class="go">לרכישת קובץ דיגיטלי</span></a>
+          <a class="add file" href="${waLink('שלום אור בראשית, אשמח לרכוש את הקובץ הדיגיטלי (STL) של: '+p.name)}" target="_blank" rel="noopener"><span class="go"><span class="lg">לרכישת קובץ דיגיטלי</span><span class="sm">קובץ דיגיטלי</span></span></a>
         </div>
       </div>`;
     container.appendChild(el);

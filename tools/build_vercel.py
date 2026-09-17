@@ -145,6 +145,8 @@ TOOLS=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(TOOLS)
 sys.path.insert(0,TOOLS)
 import account_layer
 page=account_layer.apply(page)
+import mobile_layer
+page=mobile_layer.apply(page)
 open(os.path.join(ROOT,'firestore.rules'),'w',encoding='utf-8').write(account_layer.RULES)
 cfg=os.path.join(ROOT,'firebase-config.js')
 if not os.path.exists(cfg):   # never overwrite a config the owner already filled in
