@@ -1,6 +1,6 @@
 """Personal-area layer for the Vercel build of Or Bereshit.
 
-Adds Firebase sign-in (Google + email link), a "my account" page (orders, details and
+Adds Firebase sign-in (Google, or an email link with no password), a "my account" page (orders, details and
 addresses, favorites), cart sync between devices, order saving at checkout, and an
 admin page for order statuses. Applied by build_vercel.py after the base page is built.
 The Claude artifact version stays without accounts (it cannot reach outside services).
@@ -90,9 +90,9 @@ LOGIN_DIALOG = f'''<dialog id="loginDlg" aria-labelledby="loginTitle">
       <div><div class="eyebrow">האזור האישי</div><h3 id="loginTitle">כניסה לחשבון</h3></div>
       <button class="close" type="button" id="closeLogin" aria-label="סגירה">×</button>
     </div>
-    <p class="note" id="loginIntro">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p>
+    <p class="note" id="loginIntro">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. בלי סיסמה.</p>
     <button class="btn google-btn" type="button" id="googleLogin">{GOOGLE_G} המשך עם Google</button>
-    <div class="or"><span>או</span></div>
+    <div class="or"><span>או קישור כניסה למייל</span></div>
     <form id="emailLinkForm" novalidate>
       <div class="field"><label for="loginEmail">דוא״ל</label><input id="loginEmail" type="email" autocomplete="email" inputmode="email" required></div>
       <button class="btn btn-ghost" type="submit" id="emailLinkBtn">שלחו לי קישור כניסה</button>
@@ -170,8 +170,9 @@ JS = r'''  /* ---------- personal area: Firebase sign-in, account page, synced c
 
     function openLogin(note){
       say('');
-      $('loginIntro').textContent=note||(completingLink?'כדי להשלים את הכניסה, הקלידו שוב את כתובת הדוא״ל שאליה נשלח הקישור.':'ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.');
+      $('loginIntro').textContent=note||(completingLink?'כדי להשלים את הכניסה, הקלידו שוב את כתובת הדוא״ל שאליה נשלח הקישור.':'ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. בלי סיסמה.');
       $('googleLogin').hidden=completingLink;
+      if(completingLink) setTimeout(()=>$('loginEmail').focus(),50);
       $('emailLinkBtn').textContent=completingLink?'השלמת הכניסה':'שלחו לי קישור כניסה';
       if(!dlg.open) dlg.showModal();
       if(!CFG||!CFG.apiKey) say('האזור האישי עוד לא מחובר. ההפעלה תושלם בקרוב.','bad');
@@ -292,7 +293,7 @@ JS = r'''  /* ---------- personal area: Firebase sign-in, account page, synced c
       if(bootError) return showState('<div class="panel acc-state"><h2 class="carved">לא הצלחנו להתחבר</h2><p class="muted">בדקו את החיבור לאינטרנט ורעננו את הדף.</p></div>');
       if(!auth) return showState('<div class="panel acc-state"><p class="muted">טוען…</p></div>');
       if(!user){
-        showState('<div class="panel acc-state"><h2 class="carved">היכנסו לאזור האישי</h2><p class="muted">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p><button class="btn btn-primary" type="button" id="accLogin">כניסה לחשבון</button></div>');
+        showState('<div class="panel acc-state"><h2 class="carved">היכנסו לאזור האישי</h2><p class="muted">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. נכנסים עם קישור שנשלח למייל, בלי סיסמה.</p><button class="btn btn-primary" type="button" id="accLogin">כניסה לחשבון</button></div>');
         $('accLogin').addEventListener('click',()=>openLogin());
         return;
       }
@@ -403,7 +404,7 @@ JS = r'''  /* ---------- personal area: Firebase sign-in, account page, synced c
           say('שולח…');
           await auth.sendSignInLinkToEmail(email,{url:location.origin+'/?login=link',handleCodeInApp:true});
           try{localStorage.setItem('ob-login-email',email);}catch(err){}
-          say('שלחנו קישור כניסה ל־'+email+'. פתחו אותו במכשיר הזה כדי להיכנס.','ok');
+          say('שלחנו קישור כניסה ל־'+email+'. פתחו את המייל במכשיר הזה ולחצו על הקישור. לא מוצאים? בדקו גם בספאם.','ok');
         }
       }catch(err){ say(errText(err)||'משהו השתבש. נסו שוב.','bad'); }
     });
@@ -448,6 +449,7 @@ JS = r'''  /* ---------- personal area: Firebase sign-in, account page, synced c
         fb=window.firebase; fb.initializeApp(CFG);
         auth=fb.auth(); auth.languageCode='he'; db=fb.firestore();
       }catch(e){ bootError=true; renderAccount(); renderAdmin(); return; }
+      auth.getRedirectResult().catch(e=>{const t=errText(e); if(t) toast(t);});
       if(auth.isSignInWithEmailLink(location.href)){
         let email=null; try{email=localStorage.getItem('ob-login-email');}catch(e){}
         if(email){
@@ -456,7 +458,6 @@ JS = r'''  /* ---------- personal area: Firebase sign-in, account page, synced c
           cleanLinkUrl();
         }else{ completingLink=true; openLogin(); }
       }
-      auth.getRedirectResult().catch(e=>{const t=errText(e); if(t) toast(t);});
       auth.onAuthStateChanged(onUser);
     }
     boot();

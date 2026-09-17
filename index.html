@@ -1262,9 +1262,9 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
       <div><div class="eyebrow">האזור האישי</div><h3 id="loginTitle">כניסה לחשבון</h3></div>
       <button class="close" type="button" id="closeLogin" aria-label="סגירה">×</button>
     </div>
-    <p class="note" id="loginIntro">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p>
+    <p class="note" id="loginIntro">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. בלי סיסמה.</p>
     <button class="btn google-btn" type="button" id="googleLogin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg> המשך עם Google</button>
-    <div class="or"><span>או</span></div>
+    <div class="or"><span>או קישור כניסה למייל</span></div>
     <form id="emailLinkForm" novalidate>
       <div class="field"><label for="loginEmail">דוא״ל</label><input id="loginEmail" type="email" autocomplete="email" inputmode="email" required></div>
       <button class="btn btn-ghost" type="submit" id="emailLinkBtn">שלחו לי קישור כניסה</button>
@@ -2073,8 +2073,9 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
 
     function openLogin(note){
       say('');
-      $('loginIntro').textContent=note||(completingLink?'כדי להשלים את הכניסה, הקלידו שוב את כתובת הדוא״ל שאליה נשלח הקישור.':'ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.');
+      $('loginIntro').textContent=note||(completingLink?'כדי להשלים את הכניסה, הקלידו שוב את כתובת הדוא״ל שאליה נשלח הקישור.':'ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. בלי סיסמה.');
       $('googleLogin').hidden=completingLink;
+      if(completingLink) setTimeout(()=>$('loginEmail').focus(),50);
       $('emailLinkBtn').textContent=completingLink?'השלמת הכניסה':'שלחו לי קישור כניסה';
       if(!dlg.open) dlg.showModal();
       if(!CFG||!CFG.apiKey) say('האזור האישי עוד לא מחובר. ההפעלה תושלם בקרוב.','bad');
@@ -2195,7 +2196,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
       if(bootError) return showState('<div class="panel acc-state"><h2 class="carved">לא הצלחנו להתחבר</h2><p class="muted">בדקו את החיבור לאינטרנט ורעננו את הדף.</p></div>');
       if(!auth) return showState('<div class="panel acc-state"><p class="muted">טוען…</p></div>');
       if(!user){
-        showState('<div class="panel acc-state"><h2 class="carved">היכנסו לאזור האישי</h2><p class="muted">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p><button class="btn btn-primary" type="button" id="accLogin">כניסה לחשבון</button></div>');
+        showState('<div class="panel acc-state"><h2 class="carved">היכנסו לאזור האישי</h2><p class="muted">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר. נכנסים עם קישור שנשלח למייל, בלי סיסמה.</p><button class="btn btn-primary" type="button" id="accLogin">כניסה לחשבון</button></div>');
         $('accLogin').addEventListener('click',()=>openLogin());
         return;
       }
@@ -2306,7 +2307,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
           say('שולח…');
           await auth.sendSignInLinkToEmail(email,{url:location.origin+'/?login=link',handleCodeInApp:true});
           try{localStorage.setItem('ob-login-email',email);}catch(err){}
-          say('שלחנו קישור כניסה ל־'+email+'. פתחו אותו במכשיר הזה כדי להיכנס.','ok');
+          say('שלחנו קישור כניסה ל־'+email+'. פתחו את המייל במכשיר הזה ולחצו על הקישור. לא מוצאים? בדקו גם בספאם.','ok');
         }
       }catch(err){ say(errText(err)||'משהו השתבש. נסו שוב.','bad'); }
     });
@@ -2351,6 +2352,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
         fb=window.firebase; fb.initializeApp(CFG);
         auth=fb.auth(); auth.languageCode='he'; db=fb.firestore();
       }catch(e){ bootError=true; renderAccount(); renderAdmin(); return; }
+      auth.getRedirectResult().catch(e=>{const t=errText(e); if(t) toast(t);});
       if(auth.isSignInWithEmailLink(location.href)){
         let email=null; try{email=localStorage.getItem('ob-login-email');}catch(e){}
         if(email){
@@ -2359,7 +2361,6 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
           cleanLinkUrl();
         }else{ completingLink=true; openLogin(); }
       }
-      auth.getRedirectResult().catch(e=>{const t=errText(e); if(t) toast(t);});
       auth.onAuthStateChanged(onUser);
     }
     boot();
