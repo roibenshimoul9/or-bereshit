@@ -15,4 +15,4 @@ window.FIREBASE_CONFIG = {
 */
 
 // Accounts that see the admin page (#/admin). Keep in sync with isAdmin() in firestore.rules.
-window.OB_ADMIN_EMAILS = ['orattias5@gmail.com'];
+window.OB_ADMIN_EMAILS = ['roibenshimoul9@gmail.com'];

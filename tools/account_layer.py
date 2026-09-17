@@ -474,7 +474,7 @@ service cloud.firestore {
     function isAdmin() {
       return signedIn()
         && request.auth.token.email_verified == true
-        && request.auth.token.email.lower() in ['orattias5@gmail.com'];
+        && request.auth.token.email.lower() in ['roibenshimoul9@gmail.com'];
     }
 
     // One document per customer: details, saved addresses, favorites and synced cart.
@@ -526,7 +526,7 @@ window.FIREBASE_CONFIG = {
 */
 
 // Accounts that see the admin page (#/admin). Keep in sync with isAdmin() in firestore.rules.
-window.OB_ADMIN_EMAILS = ['orattias5@gmail.com'];
+window.OB_ADMIN_EMAILS = ['roibenshimoul9@gmail.com'];
 '''
 
 
