@@ -12,6 +12,35 @@
 | `lib/assistant-rules.js` | ההוראות של ארי והקטלוג שהוא מכיר. כאן מעדכנים מחירים ומוצרים עבורו |
 | `img/` | תמונות המוצרים (WebP מכווץ) |
 | `.env.example` | דוגמה לשמות משתני הסביבה (בלי ערכים) |
+| `firebase-config.js` | חיבור האזור האישי ל־Firebase, ורשימת המיילים של המנהלים |
+| `firestore.rules` | כללי האבטחה של מסד הנתונים (מדביקים ב־Firebase) |
+| `tools/` | סקריפטי הבנייה של `index.html` (לא עולים לאתר) |
+
+## האזור האישי (Firebase)
+
+באזור האישי הלקוחות נכנסים עם Google או עם קישור למייל, ורואים את ההזמנות שלהם עם סטטוס, פרטים וכתובות שמורים, ומועדפים. הסל שלהם נשמר בין מכשירים. בעמוד `#/admin` המנהל מעדכן סטטוס להזמנות.
+
+עד שמחברים את Firebase, האתר עובד כרגיל, ובאזור האישי כתוב שהוא "בדרך".
+
+### הפעלה (פעם אחת, כ־10 דקות)
+
+1. **פרויקט:** נכנסים ל־[console.firebase.google.com](https://console.firebase.google.com), לוחצים **Add project**, ונותנים שם (למשל `or-bereshit`). Google Analytics לא חובה.
+2. **אפליקציית Web:** בדף הפרויקט לוחצים על סמל **`</>`**, נותנים שם, ולוחצים **Register app**. מעתיקים את האובייקט `firebaseConfig` שמופיע.
+3. **כניסה:** ב־**Build → Authentication → Get started**:
+   - **Sign-in method → Google → Enable**, בוחרים מייל תמיכה, **Save**.
+   - **Sign-in method → Email/Password → Enable**, ומפעילים גם **Email link (passwordless sign-in)**. **Save**.
+   - **Settings → Authorized domains → Add domain:** `orbereshit.vercel.app` (ואם יהיה דומיין משלכם, גם אותו).
+4. **מסד נתונים:** ב־**Build → Firestore Database → Create database**, בוחרים אזור באירופה (למשל `eur3`), ו־**Production mode**.
+5. **כללי אבטחה:** ב־Firestore → **Rules**, מוחקים את מה שיש, מדביקים את כל התוכן של `firestore.rules`, ולוחצים **Publish**.
+6. **חיבור האתר:** פותחים את `firebase-config.js` ומחליפים את `window.FIREBASE_CONFIG = null;` באובייקט מסעיף 2, בצורה:
+   `window.FIREBASE_CONFIG = { apiKey: "…", authDomain: "…", projectId: "…", storageBucket: "…", messagingSenderId: "…", appId: "…" };`
+   הערכים האלה ציבוריים מטבעם. הגישה לנתונים מוגנת על ידי כללי האבטחה ורשימת הדומיינים המאושרים.
+7. **מנהלים:** ב־`firebase-config.js` וגם ב־`firestore.rules` (בפונקציה `isAdmin`) רשום המייל שיכול לנהל הזמנות. אם נכנסים עם חשבון Google אחר, מחליפים בשני המקומות ומפרסמים שוב את הכללים.
+8. שומרים, מעלים ל־GitHub, ו־Vercel מעדכן את האתר.
+
+### איך זה עובד בהזמנה
+
+כשלקוח מחובר לוחץ "שליחת הזמנה לוואטסאפ", ההודעה כוללת מספר הזמנה (למשל `OB-3K9QA7`), וההזמנה נשמרת אצלו באזור האישי בסטטוס **התקבלה**. התשלום עדיין מתואם בוואטסאפ, והסכומים בהזמנה הם מה שהלקוח ראה בסל. בודקים אותם מול ההודעה לפני שמאשרים.
 
 ## לפני הכל: מפתח חדש
 

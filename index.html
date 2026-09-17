@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#1A1511">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<script src="/firebase-config.js"></script>
 <title>אור בראשית</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -511,6 +512,76 @@ a.add{text-decoration:none;text-align:center}
 .ask-off{display:grid;gap:10px;justify-items:start}
 .ask-off .btn{padding:10px 18px}
 
+
+/* ---------- personal area ---------- */
+.login .note{margin:0;color:var(--ink-soft);font-size:.92rem}
+.login .note.small{font-size:.78rem}
+.login .note a{color:var(--brass)}
+.google-btn{width:100%;background:#fff;color:#1f1f1f;border:0;border-radius:10px;padding:12px 16px;font-weight:700;gap:10px}
+.google-btn svg{width:20px;height:20px}
+@media (hover:hover) and (pointer:fine){.google-btn:hover{background:#f1efe9}}
+.or{display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-size:.8rem}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+#emailLinkForm{display:grid;gap:10px}
+#emailLinkForm .btn{width:100%;border-radius:10px}
+.login-msg{margin:0;min-height:1.2em;font-size:.86rem;color:var(--ink-soft)}
+.login-msg.ok{color:#A9CFA0}.login-msg.bad{color:#E09A86}
+.icon-btn.signed{border-color:rgba(216,168,96,.5)}
+.icon-btn .avatar{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;background:var(--brass);color:var(--brass-ink);font-size:.72rem;font-weight:700;overflow:hidden}
+.icon-btn .avatar img{width:100%;height:100%;object-fit:cover}
+.ptool.pfav svg{width:17px;height:17px;fill:none;stroke:#2B231C;stroke-width:1.8;transition:fill 200ms ease,stroke 200ms ease,transform 260ms var(--ease-out)}
+.ptool.pfav[aria-pressed="true"] svg{fill:#C4513A;stroke:#C4513A;transform:scale(1.08)}
+.acc-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:clamp(28px,4vw,44px)}
+.acc-head h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,5.4vw,3.8rem);line-height:1.05;margin:8px 0 6px}
+.acc-head .actions{display:flex;flex-wrap:wrap;gap:10px}
+.acc-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:start}
+.acc-grid .span{grid-column:1/-1}
+@media (max-width:900px){.acc-grid{grid-template-columns:1fr}}
+.acc-grid h2{font-family:var(--display);font-weight:400;font-size:1.7rem;margin:0 0 14px}
+.acc-state{padding:clamp(28px,5vw,48px);text-align:center;display:grid;justify-items:center;gap:12px;max-width:620px;margin-inline:auto}
+.acc-state h2{margin:0}
+.orders{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.order{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px}
+.order .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:center}
+.order .no{font-family:var(--util);font-weight:500;direction:ltr}
+.order .when{font-size:.82rem;color:var(--ink-soft)}
+.order .items{margin:0;color:var(--ink-soft);font-size:.92rem}
+.order .sum{font-family:var(--util);font-weight:500;font-variant-numeric:tabular-nums}
+.status{display:inline-flex;align-items:center;gap:6px;font-family:var(--util);font-size:.74rem;font-weight:500;padding:3px 10px;border-radius:999px;background:rgba(241,230,210,.1);color:var(--ink)}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.status.received{color:#E6C07F;background:rgba(230,192,127,.12)}
+.status.printing{color:#9FC4E8;background:rgba(159,196,232,.12)}
+.status.shipped{color:#B9A6E8;background:rgba(185,166,232,.12)}
+.status.delivered{color:#A9CFA0;background:rgba(169,207,160,.12)}
+.status.cancelled{color:#E09A86;background:rgba(224,154,134,.12)}
+.muted{color:var(--ink-soft);margin:0}
+.addr-list{list-style:none;margin:6px 0 14px;padding:0;display:grid;gap:8px}
+.addr-list li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.addr-list b{font-size:.92rem}
+.addr-list span{grid-column:1;color:var(--ink-soft);font-size:.88rem;white-space:pre-line}
+.addr-list .row-actions{grid-row:1/3;grid-column:2;display:flex;flex-direction:column;gap:4px;align-items:end}
+.addr-list button{background:none;border:0;cursor:pointer;color:var(--ink-soft);font:inherit;font-size:.78rem;text-decoration:underline;text-underline-offset:3px}
+.addr-list .def{color:var(--brass);text-decoration:none;cursor:default}
+.acc-form{display:grid;gap:12px}
+.acc-form .two{gap:12px}
+.acc-form .btn{justify-self:start}
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.fav{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid}
+.fav img{width:100%;aspect-ratio:4/3.4;object-fit:cover;display:block}
+.fav div{padding:10px 12px;display:grid;gap:4px}
+.fav b{font-size:.92rem;line-height:1.3}
+.fav .p{font-family:var(--util);font-size:.86rem;color:var(--ink-soft)}
+.fav .acts{display:flex;justify-content:space-between;gap:8px;margin-top:4px}
+.fav button{background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:.8rem;color:var(--brass)}
+.fav button.rm{color:var(--ink-soft)}
+.saved-addr{width:100%;background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;color:inherit}
+.admin-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.admin-wrap{overflow-x:auto}
+.admin-table th,.admin-table td{text-align:start;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.admin-table th{font-family:var(--util);font-size:.74rem;color:var(--ink-soft);font-weight:500}
+.admin-table td.num{font-family:var(--util);font-variant-numeric:tabular-nums;white-space:nowrap}
+.admin-table select{background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);color:inherit;font:inherit;padding:6px 8px;border-radius:6px}
+
 /* ---------- drawer / dialog / toast ---------- */
 .scrim{position:fixed;inset:0;background:rgba(8,5,2,.55);z-index:40;opacity:0;visibility:hidden;transition:opacity 280ms ease,visibility 0s 280ms}
 .scrim.open{opacity:1;visibility:visible;transition:opacity 360ms ease,visibility 0s}
@@ -791,6 +862,55 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
 </main>
 
 <div id="pages">
+
+  <!-- ===== personal area ===== -->
+  <section class="page" data-route="account" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / האזור האישי</nav>
+      <div id="accState"></div>
+      <div id="accMain" hidden>
+        <div class="acc-head">
+          <div><div class="eyebrow">האזור האישי</div><h1 class="carved" id="accHello">שלום</h1><p class="lede" id="accEmail"></p></div>
+          <div class="actions"><a class="btn btn-ghost" href="#/admin" id="adminLink" hidden>ניהול הזמנות</a><button class="btn btn-ghost" type="button" id="logoutBtn">התנתקות</button></div>
+        </div>
+        <div class="acc-grid">
+          <div class="panel">
+            <h2>ההזמנות שלי</h2>
+            <ul class="orders" id="accOrders"></ul>
+          </div>
+          <div class="panel">
+            <h2>פרטים וכתובות</h2>
+            <form class="acc-form" id="accForm" novalidate>
+              <div class="two">
+                <div class="field"><label for="accName">שם מלא</label><input id="accName" type="text" autocomplete="name" maxlength="80"></div>
+                <div class="field"><label for="accPhone">טלפון</label><input id="accPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" dir="ltr"></div>
+              </div>
+              <button class="btn btn-primary" type="submit">שמירת פרטים</button>
+            </form>
+            <h2 style="font-size:1.3rem;margin-top:22px">כתובות למשלוח</h2>
+            <ul class="addr-list" id="accAddrs"></ul>
+            <form class="acc-form" id="addrForm" novalidate>
+              <div class="field"><label for="addrLabel">שם הכתובת (למשל: בית, עבודה)</label><input id="addrLabel" type="text" maxlength="30"></div>
+              <div class="field"><label for="addrText">כתובת מלאה</label><textarea id="addrText" rows="2" maxlength="200" placeholder="עיר, רחוב, מספר בית ודירה"></textarea></div>
+              <button class="btn btn-ghost" type="submit">הוספת כתובת</button>
+            </form>
+          </div>
+          <div class="panel span">
+            <h2>מועדפים</h2>
+            <div class="fav-grid" id="accFavs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-route="admin" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / <a href="#/account">האזור האישי</a> / ניהול הזמנות</nav>
+      <div class="page-hero"><div class="eyebrow">ניהול</div><h1 class="carved">הזמנות</h1><p class="lede">עדכון סטטוס מופיע ללקוח באזור האישי שלו.</p></div>
+      <div id="adminBody"></div>
+    </div>
+  </section>
 
   <!-- ===== support ===== -->
   <section class="page" data-route="support" hidden>
@@ -1136,17 +1256,22 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
   </div>
 </dialog>
 
-<dialog id="loginDlg">
-  <form class="dlg" id="loginForm">
+<dialog id="loginDlg" aria-labelledby="loginTitle">
+  <div class="dlg login">
     <div class="dlg-top">
-      <div><div class="eyebrow">ברוכים הבאים</div><h3>כניסה לחשבון</h3></div>
+      <div><div class="eyebrow">האזור האישי</div><h3 id="loginTitle">כניסה לחשבון</h3></div>
       <button class="close" type="button" id="closeLogin" aria-label="סגירה">×</button>
     </div>
-    <div class="field"><label for="loginEmail">דוא״ל</label><input id="loginEmail" type="email" autocomplete="email" required></div>
-    <div class="field"><label for="loginPass">סיסמה</label><input id="loginPass" type="password" autocomplete="current-password" required></div>
-    <button class="btn btn-primary" type="submit">כניסה</button>
-    <p class="note">עוד אין לכם חשבון? <a href="#" id="signupLink">הרשמה</a></p>
-  </form>
+    <p class="note" id="loginIntro">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p>
+    <button class="btn google-btn" type="button" id="googleLogin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg> המשך עם Google</button>
+    <div class="or"><span>או</span></div>
+    <form id="emailLinkForm" novalidate>
+      <div class="field"><label for="loginEmail">דוא״ל</label><input id="loginEmail" type="email" autocomplete="email" inputmode="email" required></div>
+      <button class="btn btn-ghost" type="submit" id="emailLinkBtn">שלחו לי קישור כניסה</button>
+    </form>
+    <p class="login-msg" id="loginMsg" aria-live="polite"></p>
+    <p class="note small">בכניסה לחשבון אתם מסכימים ל<a href="#/privacy">מדיניות הפרטיות</a>.</p>
+  </div>
 </dialog>
 
 <button class="ask-fab" type="button" id="askFab" aria-controls="ask" aria-expanded="false"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="manea" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#manea)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>צ'אט עם ארי</button>
@@ -1598,13 +1723,13 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
 
   function makeCard(p,container){
     const el=document.createElement('article');
-    el.className='pcard rv'; el.dataset.cat=p.cat;
+    el.className='pcard rv'; el.dataset.cat=p.cat; el.dataset.id=p.id;
     const badge=p.isNew?'<span class="pbadge">חדש באתר</span>':'';
     const physBtn=quoteOnly(p)
       ?`<a class="add phys" href="${waLink('שלום אור בראשית, אשמח לקבל הצעת מחיר עבור: '+p.name)}" target="_blank" rel="noopener"><span class="go">לקבלת הצעת מחיר</span></a>`
       :`<button class="add phys" type="button"><span class="go">הזמנה פיזית (הדפסה)</span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>`;
     el.innerHTML=`<div class="pmedia">${badge}
-        <div class="ptools"><button class="ptool pexpand" type="button" aria-label="תצוגה מהירה: ${esc(p.name)}">${EXPAND}</button></div></div>
+        <div class="ptools"><button class="ptool pfav" type="button" aria-pressed="false" data-id="${esc(p.id)}" data-name="${esc(p.name)}" aria-label="הוספה למועדפים: ${esc(p.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.6-9.3-9.2C1.5 8 3.5 4.6 6.8 4.6c2 0 3.6 1.1 4.3 2.6h1.8c.7-1.5 2.3-2.6 4.3-2.6 3.3 0 5.3 3.4 4.1 6.5-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg></button><button class="ptool pexpand" type="button" aria-label="תצוגה מהירה: ${esc(p.name)}">${EXPAND}</button></div></div>
       <div class="pbody">
         <div class="pmeta"><span>${CAT_NAMES[p.cat]}</span><span>הדפסה לפי הזמנה</span></div>
         <h3>${esc(p.name)}</h3>
@@ -1715,7 +1840,8 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
   const STORE='or-bereshit-cart-v1';
   let cart=[], coupon=null;
   try{const saved=JSON.parse(localStorage.getItem(STORE)||'null'); if(saved){cart=saved.cart||[]; coupon=COUPONS[saved.coupon]?saved.coupon:null;}}catch(e){}
-  const persist=()=>{try{localStorage.setItem(STORE,JSON.stringify({cart,coupon}));}catch(e){}};
+  const acct={cartChanged(){},checkout(){},onRoute(){},openLogin(){},orderNo:null};
+  const persist=()=>{try{localStorage.setItem(STORE,JSON.stringify({cart,coupon}));}catch(e){} acct.cartChanged();};
   let toastT;
   function toast(msg){const t=$('toast');t.hidden=true;void t.offsetWidth;t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600);}
   const thumbOf=id=>{const p=PRODUCTS.find(x=>x.id===id);return p&&p.images[0]?p.images[0]:'';};
@@ -1739,7 +1865,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     const t=totals();
     const rows=cart.map(l=>`• ${l.name} (${l.type==='phys'?'הזמנה פיזית':'קובץ דיגיטלי'}) × ${l.qty} = ${money(l.price*l.qty)}`);
     const addr=$('shipAddr').value.trim();
-    return ['שלום אור בראשית, אשמח להזמין:',...rows,'',`סיכום ביניים: ${money(t.sub)}`,
+    return ['שלום אור בראשית, אשמח להזמין:',...(acct.orderNo?['מספר הזמנה: '+acct.orderNo]:[]),...rows,'',`סיכום ביניים: ${money(t.sub)}`,
       ...(coupon?[`קופון ${coupon}: −${money(t.disc)}`]:[]),`סה״כ: ${money(t.total)}`,
       ...(cart.some(l=>l.type==='phys')?['',`כתובת למשלוח: ${addr||'—'}`]:[])].join('\n');
   }
@@ -1779,7 +1905,8 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
   });
   $('checkout').addEventListener('click',e=>{
     if(!cart.length){e.preventDefault();toast('הסל ריק. הוסיפו פריט כדי להזמין.');return;}
-    if(cart.some(l=>l.type==='phys')&&!$('shipAddr').value.trim()){e.preventDefault();toast('הוסיפו כתובת למשלוח לפני שליחת ההזמנה');$('shipAddr').focus();}
+    if(cart.some(l=>l.type==='phys')&&!$('shipAddr').value.trim()){e.preventDefault();toast('הוסיפו כתובת למשלוח לפני שליחת ההזמנה');$('shipAddr').focus();return;}
+    acct.checkout();
   });
   const openCart=v=>{const d=$('drawer');d.classList.toggle('open',v);$('scrim').classList.toggle('open',v);d.inert=!v;if(v)$('closeCart').focus({preventScroll:true});};
   $('cartBtn').addEventListener('click',()=>openCart(true));
@@ -1797,13 +1924,6 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
   syncSup();
   $('supSend').addEventListener('click',e=>{if(!$('supMsg').value.trim()){e.preventDefault();toast('כתבו לנו כמה מילים לפני השליחה');$('supMsg').focus();}});
   $('supportForm').addEventListener('submit',e=>e.preventDefault());
-
-  /* ---------- login ---------- */
-  const dlg=$('loginDlg');
-  $('loginBtn').addEventListener('click',()=>dlg.showModal());
-  $('closeLogin').addEventListener('click',()=>dlg.close());
-  $('loginForm').addEventListener('submit',e=>{e.preventDefault();dlg.close();toast('מערכת החשבונות תחובר בשלב הבא');});
-  $('signupLink').addEventListener('click',e=>{e.preventDefault();toast('ההרשמה תחובר בשלב הבא');});
 
   /* ---------- engraving ---------- */
   const sync=()=>{
@@ -1855,7 +1975,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     }
 
     // what the server may ask the page to do
-    const PAGE_HASH={home:'#/',collection:'#collection',engrave:'#engrave',faq:'#faq',support:'#/support',guide:'#/guide',specials:'#/specials',licenses:'#/licenses',privacy:'#/privacy',shipping:'#/shipping',returns:'#/returns'};
+    const PAGE_HASH={home:'#/',collection:'#collection',engrave:'#engrave',faq:'#faq',support:'#/support',guide:'#/guide',specials:'#/specials',licenses:'#/licenses',privacy:'#/privacy',shipping:'#/shipping',returns:'#/returns',account:'#/account'};
     function runAction(a){
       if(!a||typeof a!=='object') return;
       const args=a.args||{};
@@ -1935,10 +2055,320 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('open'))openAsk(false);});
   })();
 
+  /* ---------- personal area: Firebase sign-in, account page, synced cart, saved orders, admin ---------- */
+  (()=>{
+    const CFG=window.FIREBASE_CONFIG;
+    const ADMINS=(window.OB_ADMIN_EMAILS||[]).map(e=>String(e).toLowerCase());
+    const SDK='https://www.gstatic.com/firebasejs/10.14.1/';
+    const STATUS={received:'התקבלה',printing:'בהדפסה',shipped:'נשלחה',delivered:'נמסרה',cancelled:'בוטלה'};
+    const dlg=$('loginDlg'), msg=$('loginMsg'), loginBtn=$('loginBtn');
+    let fb=null, auth=null, db=null, user=null, bootError=false, completingLink=false;
+    let profile={name:'',phone:'',addresses:[],defaultAddr:null,favorites:[]};
+    let orders=[], ordersState='idle', unsubOrders=null, unsubAdmin=null, saveT=null, route='';
+    const isAdmin=()=>!!(user&&user.email&&user.emailVerified&&ADMINS.includes(user.email.toLowerCase()));
+    const say=(t,kind)=>{msg.textContent=t||'';msg.className='login-msg'+(kind?' '+kind:'');};
+    const when=ts=>{try{const d=ts&&ts.toDate?ts.toDate():null;return d?d.toLocaleDateString('he-IL',{day:'numeric',month:'long',year:'numeric'}):'';}catch(e){return '';}};
+    const newOrderNo=()=>'OB-'+Date.now().toString(36).toUpperCase().slice(-5)+Math.random().toString(36).slice(2,4).toUpperCase();
+    const slimCart=()=>cart.map(l=>({key:String(l.key),id:String(l.id),name:String(l.name),type:l.type==='file'?'file':'phys',price:Number(l.price)||0,qty:Math.max(1,Math.min(99,l.qty|0))}));
+
+    function openLogin(note){
+      say('');
+      $('loginIntro').textContent=note||(completingLink?'כדי להשלים את הכניסה, הקלידו שוב את כתובת הדוא״ל שאליה נשלח הקישור.':'ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.');
+      $('googleLogin').hidden=completingLink;
+      $('emailLinkBtn').textContent=completingLink?'השלמת הכניסה':'שלחו לי קישור כניסה';
+      if(!dlg.open) dlg.showModal();
+      if(!CFG||!CFG.apiKey) say('האזור האישי עוד לא מחובר. ההפעלה תושלם בקרוב.','bad');
+      else if(bootError) say('לא הצלחנו להתחבר לשירות הכניסה. בדקו את החיבור ורעננו את הדף.','bad');
+    }
+    acct.openLogin=openLogin;
+    $('closeLogin').addEventListener('click',()=>dlg.close());
+    dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+
+    function paintLoginBtn(){
+      if(user){
+        const first=(profile.name||user.displayName||'').trim().split(/\s+/)[0]||'האזור שלי';
+        const pic=user.photoURL?`<img src="${esc(user.photoURL)}" alt="" referrerpolicy="no-referrer">`:esc(first.charAt(0));
+        loginBtn.innerHTML=`<span class="avatar">${pic}</span>${esc(first)}`;
+        loginBtn.classList.add('signed'); loginBtn.setAttribute('aria-label','האזור האישי');
+      }else{
+        loginBtn.textContent='כניסה'; loginBtn.classList.remove('signed'); loginBtn.removeAttribute('aria-label');
+      }
+    }
+    loginBtn.addEventListener('click',()=>{ if(user) location.hash='#/account'; else openLogin(); });
+
+    const loadScript=src=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=res;s.onerror=()=>rej(new Error('load '+src));document.head.appendChild(s);});
+
+    /* --- cart sync --- */
+    function mergeRemoteCart(remote){
+      if(!Array.isArray(remote)||!remote.length) return;
+      let changed=false;
+      remote.forEach(r=>{
+        const p=PRODUCTS.find(x=>x.id===r.id); if(!p) return;
+        const type=r.type==='file'?'file':'phys';
+        if(type==='phys'&&!p.price) return;
+        const key=p.id+'|'+type+'|';
+        const line=cart.find(l=>l.key===key);
+        const qty=Math.max(1,Math.min(99,r.qty|0));
+        if(line){ if(qty>line.qty){line.qty=qty;changed=true;} }
+        else{ cart.push({key,id:p.id,name:p.name,type,finish:null,price:type==='phys'?p.price:(Number(r.price)||0),qty,thumb:thumbOf(p.id)}); changed=true; }
+      });
+      if(changed){ renderCart(); try{localStorage.setItem(STORE,JSON.stringify({cart,coupon}));}catch(e){} }
+    }
+    function saveCartSoon(){
+      if(!user||!db) return;
+      clearTimeout(saveT);
+      const uid=user.uid;
+      saveT=setTimeout(()=>{
+        if(!user||user.uid!==uid) return;
+        db.collection('users').doc(uid).set({cart:slimCart(),updatedAt:fb.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+      },700);
+    }
+    acct.cartChanged=saveCartSoon;
+
+    /* --- saved addresses in the cart --- */
+    function paintSavedAddr(){
+      const box=$('addrBox'); let sel=$('savedAddr');
+      if(!user||!profile.addresses.length){ if(sel) sel.hidden=true; return; }
+      if(!sel){
+        sel=document.createElement('select'); sel.id='savedAddr'; sel.className='saved-addr'; sel.setAttribute('aria-label','בחירת כתובת שמורה');
+        box.insertBefore(sel,$('shipAddr'));
+        sel.addEventListener('change',()=>{const a=profile.addresses.find(x=>x.id===sel.value); if(a){$('shipAddr').value=a.text;$('shipAddr').dispatchEvent(new Event('input'));}});
+      }
+      sel.hidden=false;
+      sel.innerHTML='<option value="">כתובת שמורה…</option>'+profile.addresses.map(a=>`<option value="${esc(a.id)}">${esc(a.label||'כתובת')}</option>`).join('');
+      if(!$('shipAddr').value.trim()){
+        const a=profile.addresses.find(x=>x.id===profile.defaultAddr)||profile.addresses[0];
+        if(a){ $('shipAddr').value=a.text; sel.value=a.id; $('shipAddr').dispatchEvent(new Event('input')); }
+      }
+    }
+
+    /* --- checkout: keep a copy of the order in the account --- */
+    function refreshOrderNo(){ acct.orderNo=user?newOrderNo():null; renderCart(); }
+    acct.checkout=()=>{
+      if(!user||!db||!acct.orderNo) return;
+      const id=acct.orderNo, t=totals(), uid=user.uid;
+      db.collection('orders').doc(id).set({
+        uid, email:user.email||'', name:profile.name||user.displayName||'', phone:profile.phone||'',
+        items:slimCart(), subtotal:Math.round(t.sub), discount:Math.round(t.disc), coupon:coupon||null, total:Math.round(t.total),
+        address:$('shipAddr').value.trim().slice(0,300), status:'received', createdAt:fb.firestore.FieldValue.serverTimestamp()
+      }).then(()=>toast('ההזמנה '+id+' נשמרה באזור האישי')).catch(()=>toast('ההזמנה נשלחה בוואטסאפ, אבל לא נשמרה באזור האישי'));
+      setTimeout(refreshOrderNo,0);
+    };
+
+    /* --- favorites --- */
+    function paintFavButtons(){
+      document.querySelectorAll('.pfav').forEach(b=>{
+        const on=!!user&&profile.favorites.includes(b.dataset.id);
+        b.setAttribute('aria-pressed',String(on));
+        b.setAttribute('aria-label',(on?'הסרה מהמועדפים: ':'הוספה למועדפים: ')+b.dataset.name);
+      });
+    }
+    function toggleFav(id){
+      if(!user){ openLogin('כדי לשמור מוצרים במועדפים, היכנסו לחשבון.'); return; }
+      const on=profile.favorites.includes(id);
+      profile.favorites=on?profile.favorites.filter(x=>x!==id):[...profile.favorites,id];
+      paintFavButtons(); renderAccount();
+      const FV=fb.firestore.FieldValue;
+      db.collection('users').doc(user.uid).set({favorites:on?FV.arrayRemove(id):FV.arrayUnion(id),updatedAt:FV.serverTimestamp()},{merge:true})
+        .then(()=>toast(on?'הוסר מהמועדפים':'נשמר במועדפים'))
+        .catch(()=>{ profile.favorites=on?[...profile.favorites,id]:profile.favorites.filter(x=>x!==id); paintFavButtons(); renderAccount(); toast('לא הצלחנו לשמור. נסו שוב.'); });
+    }
+    document.addEventListener('click',e=>{const b=e.target.closest('.pfav'); if(!b) return; e.stopPropagation(); toggleFav(b.dataset.id);},true);
+
+    /* --- orders --- */
+    function watchOrders(){
+      if(unsubOrders){unsubOrders();unsubOrders=null;}
+      if(!user) return;
+      ordersState='loading'; renderAccount();
+      unsubOrders=db.collection('orders').where('uid','==',user.uid).onSnapshot(qs=>{
+        orders=qs.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>((b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():Infinity)-(a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():Infinity)));
+        ordersState='ready'; renderAccount();
+      },()=>{ordersState='error';renderAccount();});
+    }
+
+    /* --- account page --- */
+    function renderAccount(){
+      if(route!=='account') return;
+      const state=$('accState'), main=$('accMain');
+      const showState=html=>{state.innerHTML=html;state.hidden=false;main.hidden=true;};
+      if(!CFG||!CFG.apiKey) return showState('<div class="panel acc-state"><h2 class="carved">האזור האישי בדרך</h2><p class="muted">בקרוב תוכלו לשמור כאן הזמנות, כתובות ומועדפים.</p><a class="btn btn-ghost" href="#collection">חזרה לקולקציה</a></div>');
+      if(bootError) return showState('<div class="panel acc-state"><h2 class="carved">לא הצלחנו להתחבר</h2><p class="muted">בדקו את החיבור לאינטרנט ורעננו את הדף.</p></div>');
+      if(!auth) return showState('<div class="panel acc-state"><p class="muted">טוען…</p></div>');
+      if(!user){
+        showState('<div class="panel acc-state"><h2 class="carved">היכנסו לאזור האישי</h2><p class="muted">ההזמנות, הכתובות והמועדפים שלכם, בכל מכשיר.</p><button class="btn btn-primary" type="button" id="accLogin">כניסה לחשבון</button></div>');
+        $('accLogin').addEventListener('click',()=>openLogin());
+        return;
+      }
+      state.hidden=true; main.hidden=false;
+      $('accHello').textContent='שלום'+(profile.name?', '+profile.name.split(/\s+/)[0]:'');
+      $('accEmail').textContent=user.email||'';
+      $('adminLink').hidden=!isAdmin();
+      if(document.activeElement!==$('accName')) $('accName').value=profile.name||'';
+      if(document.activeElement!==$('accPhone')) $('accPhone').value=profile.phone||'';
+      const ol=$('accOrders');
+      if(ordersState==='loading') ol.innerHTML='<li class="muted">טוען הזמנות…</li>';
+      else if(ordersState==='error') ol.innerHTML='<li class="muted">לא הצלחנו לטעון את ההזמנות. רעננו את הדף.</li>';
+      else if(!orders.length) ol.innerHTML='<li class="muted">עוד אין הזמנות. הזמנה שתשלחו מהסל תופיע כאן, עם הסטטוס שלה.</li>';
+      else ol.innerHTML=orders.map(o=>{
+        const st=STATUS[o.status]?o.status:'received';
+        const items=(o.items||[]).map(i=>`${esc(i.name)} × ${i.qty|0}`).join(' · ');
+        return `<li class="order"><div class="top"><span class="no">${esc(o.id)}</span><span class="status ${st}">${STATUS[st]}</span></div>
+          <p class="items">${items}</p><div class="top"><span class="when">${when(o.createdAt)}</span><span class="sum">₪${fmt(o.total|0)}</span></div></li>`;
+      }).join('');
+      const al=$('accAddrs');
+      al.innerHTML=profile.addresses.length?profile.addresses.map(a=>`<li><b>${esc(a.label||'כתובת')}</b><span>${esc(a.text)}</span>
+        <div class="row-actions">${profile.defaultAddr===a.id?'<span class="def">ברירת מחדל</span>':`<button type="button" data-def="${esc(a.id)}">קבע כברירת מחדל</button>`}<button type="button" data-del="${esc(a.id)}">מחיקה</button></div></li>`).join(''):'<li class="muted" style="border:0;padding:0">עוד לא שמרתם כתובות.</li>';
+      const fg=$('accFavs');
+      const favs=profile.favorites.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+      fg.innerHTML=favs.length?favs.map(p=>`<div class="fav"><img src="${esc(p.images[0])}" alt="" loading="lazy"><div><b>${esc(p.name)}</b><span class="p">${p.price?'₪'+fmt(p.price):'מחיר לפי הזמנה'}</span>
+        <div class="acts">${p.price?`<button type="button" data-add="${esc(p.id)}">הוספה לסל</button>`:''}<button type="button" class="rm" data-unfav="${esc(p.id)}">הסרה</button></div></div></div>`).join(''):'<p class="muted">לחצו על הלב בכרטיס מוצר כדי לשמור אותו כאן.</p>';
+    }
+    $('accAddrs').addEventListener('click',e=>{
+      const def=e.target.closest('[data-def]'), del=e.target.closest('[data-del]');
+      if(def){ profile.defaultAddr=def.dataset.def; saveProfile({defaultAddr:profile.defaultAddr},'כתובת ברירת המחדל עודכנה'); }
+      if(del){ profile.addresses=profile.addresses.filter(a=>a.id!==del.dataset.del); if(profile.defaultAddr===del.dataset.del) profile.defaultAddr=profile.addresses[0]?profile.addresses[0].id:null; saveProfile({addresses:profile.addresses,defaultAddr:profile.defaultAddr},'הכתובת נמחקה'); }
+    });
+    $('accFavs').addEventListener('click',e=>{
+      const add=e.target.closest('[data-add]'), un=e.target.closest('[data-unfav]');
+      if(add){ const p=PRODUCTS.find(x=>x.id===add.dataset.add); if(p) addToCart(p,'phys',p.price); }
+      if(un) toggleFav(un.dataset.unfav);
+    });
+    function saveProfile(patch,done){
+      if(!user) return;
+      renderAccount(); paintLoginBtn(); paintSavedAddr();
+      db.collection('users').doc(user.uid).set({...patch,updatedAt:fb.firestore.FieldValue.serverTimestamp()},{merge:true})
+        .then(()=>done&&toast(done)).catch(()=>toast('לא הצלחנו לשמור. נסו שוב.'));
+    }
+    $('accForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      profile.name=$('accName').value.trim().slice(0,80); profile.phone=$('accPhone').value.trim().slice(0,20);
+      saveProfile({name:profile.name,phone:profile.phone},'הפרטים נשמרו');
+    });
+    $('addrForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const text=$('addrText').value.trim().slice(0,200), label=$('addrLabel').value.trim().slice(0,30);
+      if(!text){ toast('כתבו כתובת מלאה לפני השמירה'); $('addrText').focus(); return; }
+      if(profile.addresses.length>=10){ toast('אפשר לשמור עד 10 כתובות'); return; }
+      const a={id:Math.random().toString(36).slice(2,10),label:label||'כתובת',text};
+      profile.addresses=[...profile.addresses,a]; if(!profile.defaultAddr) profile.defaultAddr=a.id;
+      $('addrText').value=''; $('addrLabel').value='';
+      saveProfile({addresses:profile.addresses,defaultAddr:profile.defaultAddr},'הכתובת נשמרה');
+    });
+    $('logoutBtn').addEventListener('click',()=>{ if(auth) auth.signOut().then(()=>{toast('התנתקתם מהחשבון');location.hash='#/';}); });
+
+    /* --- admin: order statuses --- */
+    function renderAdmin(){
+      if(route!=='admin'){ if(unsubAdmin){unsubAdmin();unsubAdmin=null;} return; }
+      const body=$('adminBody');
+      if(!auth||!user){ body.innerHTML='<div class="panel acc-state"><p class="muted">היכנסו עם חשבון המנהל כדי לראות הזמנות.</p></div>'; return; }
+      if(!isAdmin()){ body.innerHTML='<div class="panel acc-state"><p class="muted">לחשבון הזה אין הרשאת ניהול.</p></div>'; return; }
+      if(unsubAdmin) return;
+      body.innerHTML='<p class="muted">טוען הזמנות…</p>';
+      unsubAdmin=db.collection('orders').orderBy('createdAt','desc').limit(200).onSnapshot(qs=>{
+        if(!qs.size){ body.innerHTML='<div class="panel acc-state"><p class="muted">עוד אין הזמנות שמורות.</p></div>'; return; }
+        body.innerHTML=`<div class="panel admin-wrap"><table class="admin-table"><thead><tr><th>הזמנה</th><th>תאריך</th><th>לקוח</th><th>פריטים</th><th>סה״כ</th><th>סטטוס</th></tr></thead><tbody>${qs.docs.map(d=>{const o=d.data();const st=STATUS[o.status]?o.status:'received';
+          return `<tr><td class="num">${esc(d.id)}</td><td class="num">${when(o.createdAt)}</td><td>${esc(o.name||'')}<br><span class="muted">${esc(o.phone||'')} ${esc(o.email||'')}</span><br><span class="muted">${esc(o.address||'')}</span></td>
+          <td>${(o.items||[]).map(i=>`${esc(i.name)} × ${i.qty|0}`).join('<br>')}</td><td class="num">₪${fmt(o.total|0)}</td>
+          <td><select data-order="${esc(d.id)}" aria-label="סטטוס הזמנה ${esc(d.id)}">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}"${k===st?' selected':''}>${v}</option>`).join('')}</select></td></tr>`;}).join('')}</tbody></table></div>`;
+      },()=>{ body.innerHTML='<div class="panel acc-state"><p class="muted">אין הרשאה לקרוא את ההזמנות. בדקו את כללי האבטחה ב־Firebase.</p></div>'; unsubAdmin=null; });
+    }
+    $('adminBody').addEventListener('change',e=>{
+      const s=e.target.closest('select[data-order]'); if(!s) return;
+      db.collection('orders').doc(s.dataset.order).update({status:s.value,updatedAt:fb.firestore.FieldValue.serverTimestamp()})
+        .then(()=>toast('הסטטוס עודכן')).catch(()=>toast('לא הצלחנו לעדכן את הסטטוס'));
+    });
+
+    acct.onRoute=r=>{ route=r; renderAccount(); renderAdmin(); };
+
+    /* --- sign-in flows --- */
+    const AUTH_ERR={'auth/popup-closed-by-user':'','auth/cancelled-popup-request':'','auth/invalid-email':'כתובת הדוא״ל לא תקינה.','auth/operation-not-allowed':'שיטת הכניסה הזו עוד לא הופעלה.','auth/unauthorized-domain':'הכתובת של האתר עוד לא אושרה בשירות הכניסה.','auth/unauthorized-continue-uri':'הכתובת של האתר עוד לא אושרה בשירות הכניסה.','auth/invalid-action-code':'קישור הכניסה לא תקף או שכבר נוצל. בקשו קישור חדש.','auth/expired-action-code':'תוקף קישור הכניסה פג. בקשו קישור חדש.','auth/too-many-requests':'יותר מדי ניסיונות. נסו שוב בעוד כמה דקות.','auth/network-request-failed':'אין חיבור לאינטרנט. נסו שוב.'};
+    const errText=e=>(e&&e.code in AUTH_ERR)?AUTH_ERR[e.code]:'משהו השתבש בכניסה. נסו שוב.';
+    $('googleLogin').addEventListener('click',async()=>{
+      if(!auth){ openLogin(); return; }
+      say('פותח את חלון Google…');
+      try{ await auth.signInWithPopup(new fb.auth.GoogleAuthProvider()); }
+      catch(e){
+        if(e&&(e.code==='auth/popup-blocked'||e.code==='auth/operation-not-supported-in-this-environment')){ auth.signInWithRedirect(new fb.auth.GoogleAuthProvider()); return; }
+        const t=errText(e); say(t,t?'bad':'');
+      }
+    });
+    $('emailLinkForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      if(!auth){ openLogin(); return; }
+      const email=$('loginEmail').value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ say('כתבו כתובת דוא״ל תקינה.','bad'); $('loginEmail').focus(); return; }
+      try{
+        if(completingLink){
+          say('משלים כניסה…');
+          await auth.signInWithEmailLink(email,location.href);
+          completingLink=false; cleanLinkUrl();
+        }else{
+          say('שולח…');
+          await auth.sendSignInLinkToEmail(email,{url:location.origin+'/?login=link',handleCodeInApp:true});
+          try{localStorage.setItem('ob-login-email',email);}catch(err){}
+          say('שלחנו קישור כניסה ל־'+email+'. פתחו אותו במכשיר הזה כדי להיכנס.','ok');
+        }
+      }catch(err){ say(errText(err)||'משהו השתבש. נסו שוב.','bad'); }
+    });
+    function cleanLinkUrl(){ try{history.replaceState(null,'',location.pathname+'#/account');}catch(e){} dispatchEvent(new HashChangeEvent('hashchange')); }
+
+    async function onUser(u){
+      user=u||null;
+      if(unsubOrders){unsubOrders();unsubOrders=null;}
+      if(unsubAdmin){unsubAdmin();unsubAdmin=null;}
+      orders=[]; ordersState='idle';
+      if(!user){
+        profile={name:'',phone:'',addresses:[],defaultAddr:null,favorites:[]};
+        paintLoginBtn(); paintFavButtons(); paintSavedAddr(); refreshOrderNo(); renderAccount(); renderAdmin();
+        return;
+      }
+      if(dlg.open){ dlg.close(); toast('נכנסתם לחשבון'); }
+      const ref=db.collection('users').doc(user.uid);
+      let data={};
+      try{ const snap=await ref.get(); data=snap.exists?snap.data():null; }
+      catch(e){ data={}; toast('לא הצלחנו לטעון את פרטי החשבון. נסו לרענן.'); }
+      const FV=fb.firestore.FieldValue;
+      if(data===null){
+        data={};
+        ref.set({email:user.email||'',name:user.displayName||'',phone:'',addresses:[],favorites:[],cart:slimCart(),createdAt:FV.serverTimestamp(),updatedAt:FV.serverTimestamp()}).catch(()=>{});
+      }
+      profile={
+        name:String(data.name||user.displayName||''), phone:String(data.phone||''),
+        addresses:Array.isArray(data.addresses)?data.addresses.filter(a=>a&&a.id&&a.text):[],
+        defaultAddr:data.defaultAddr||null,
+        favorites:Array.isArray(data.favorites)?data.favorites.map(String):[]
+      };
+      mergeRemoteCart(data.cart); saveCartSoon();
+      paintLoginBtn(); paintFavButtons(); paintSavedAddr(); refreshOrderNo(); watchOrders(); renderAccount(); renderAdmin();
+    }
+
+    async function boot(){
+      paintLoginBtn();
+      if(!CFG||!CFG.apiKey){ renderAccount(); return; }
+      try{
+        await loadScript(SDK+'firebase-app-compat.js');
+        await Promise.all([loadScript(SDK+'firebase-auth-compat.js'),loadScript(SDK+'firebase-firestore-compat.js')]);
+        fb=window.firebase; fb.initializeApp(CFG);
+        auth=fb.auth(); auth.languageCode='he'; db=fb.firestore();
+      }catch(e){ bootError=true; renderAccount(); renderAdmin(); return; }
+      if(auth.isSignInWithEmailLink(location.href)){
+        let email=null; try{email=localStorage.getItem('ob-login-email');}catch(e){}
+        if(email){
+          try{ await auth.signInWithEmailLink(email,location.href); try{localStorage.removeItem('ob-login-email');}catch(e){} }
+          catch(e){ toast(errText(e)||'קישור הכניסה לא תקף. בקשו קישור חדש.'); }
+          cleanLinkUrl();
+        }else{ completingLink=true; openLogin(); }
+      }
+      auth.getRedirectResult().catch(e=>{const t=errText(e); if(t) toast(t);});
+      auth.onAuthStateChanged(onUser);
+    }
+    boot();
+  })();
+
   /* ---------- pages ---------- */
   (()=>{
-    const ROUTES=['support','guide','specials','licenses','privacy','shipping','returns'];
-    const TITLES={support:'תמיכה',guide:'מדריך הדפסה',specials:'מבצעים',licenses:'רישיונות דיגיטליים',privacy:'מדיניות פרטיות',shipping:'משלוחים וזמני אספקה',returns:'החזרות וביטולים'};
+    const ROUTES=['support','guide','specials','licenses','privacy','shipping','returns','account','admin'];
+    const TITLES={support:'תמיכה',guide:'מדריך הדפסה',specials:'מבצעים',licenses:'רישיונות דיגיטליים',privacy:'מדיניות פרטיות',shipping:'משלוחים וזמני אספקה',returns:'החזרות וביטולים',account:'האזור האישי',admin:'ניהול הזמנות'};
     const introEl=$('intro'), home=$('top');
     function route(){
       const h=location.hash||'';
@@ -1948,6 +2378,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
       document.querySelectorAll('#pages .page').forEach(pg=>pg.hidden=pg.dataset.route!==r);
       document.querySelectorAll('.nav a[data-route]').forEach(a=>{if(a.dataset.route===r)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
       document.title=isPage?`${TITLES[r]} · אור בראשית`:'אור בראשית';
+      acct.onRoute(r);
       openCart(false);
       if(isPage||h==='#/'||h===''){scrollTo({top:0,behavior:'auto'});}
       else{const t=document.querySelector(h);if(t)requestAnimationFrame(()=>t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}));}
