@@ -1,0 +1,9 @@
+{
+  "name": "or-bereshit",
+  "private": true,
+  "type": "module",
+  "description": "אור בראשית: אתר יודאיקה בהדפסת תלת־ממד, עם העוזר החכם ארי (Gemini) דרך פונקציית שרת ב־Vercel",
+  "engines": {
+    "node": ">=18"
+  }
+}

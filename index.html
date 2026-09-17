@@ -1,0 +1,1999 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="אור בראשית: יודאיקה בהדפסת תלת־ממד ובגימור ידני. פמוטים, גביעי קידוש, חנוכיות ונרות זיכרון בהזמנה אישית.">
+<meta name="theme-color" content="#1A1511">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%AF%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>אור בראשית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bellefair&family=Frank+Ruhl+Libre:wght@400;500&family=Assistant:wght@400;600;700&family=IBM+Plex+Sans+Hebrew:wght@400;500&display=swap">
+<style>
+:root{
+  /* one look everywhere: the dark hewn stone of the entry gate */
+  color-scheme:dark;
+  --ground:#1A1511;
+  --ground-2:#221C17;
+  --niche:#110E0B;
+  --ink:#EFE2CB;
+  --ink-soft:#A99A83;
+  --line:rgba(239,226,203,.14);
+  --brass:#D8A860;
+  --brass-hover:#E7BC7A;
+  --brass-ink:#1A1511;
+  --glow:rgba(230,170,90,.24);
+  --eng-hi:rgba(255,240,215,.07);
+  --eng-lo:rgba(0,0,0,.65);
+  --shadow:rgba(0,0,0,.55);
+  --display:"Bellefair","Frank Ruhl Libre","David",serif;
+  --body:"Assistant","Segoe UI","Arial",sans-serif;
+  --util:"IBM Plex Sans Hebrew","Assistant","Arial",sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
+  --ease-drawer:cubic-bezier(.32,.72,0,1);
+  interpolate-size:allow-keywords;
+}
+
+*{box-sizing:border-box}
+html{background:#1A1511}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0}
+body::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75  0 0 0 0 .62  0 0 0 0 .48  0 0 0 .55 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after{
+  background-image:
+    linear-gradient(to bottom,rgba(0,0,0,.35),transparent 30%,transparent 70%,rgba(0,0,0,.35)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='5' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55  0 0 0 0 .44  0 0 0 0 .32  0 0 0 .6 -.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  /* one stone slab stretched over the whole screen, never tiled, so no seams */
+  background-size:100% 100%,100% 100%;
+  background-repeat:no-repeat;
+}
+.site{position:relative;z-index:1}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:20px}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(26,21,17,.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:opacity 450ms var(--ease-out),transform 550ms var(--ease-out),background-color 400ms ease,border-color 400ms ease,-webkit-backdrop-filter 400ms ease,backdrop-filter 400ms ease}
+/* see-through while it rides up with the page; the stone shows through until the bar docks at the top */
+.top:not(.docked){background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* the bar stays out of the opening screen and slides in once the visitor starts scrolling */
+.top.away{opacity:0;transform:translateY(-14px);pointer-events:none}
+.top .wrap{display:flex;align-items:center;gap:24px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:30px;height:30px;color:var(--brass)}
+.brand .brand-logo{height:42px;width:auto;display:block;overflow:visible;filter:drop-shadow(0 0 10px rgba(230,170,90,.18))}
+.brand .brand-logo .lines{stroke-width:1.25}
+@media (max-width:760px){.brand .brand-logo{height:34px}}
+.brand b{font-family:var(--display);font-weight:400;font-size:1.65rem;line-height:1;letter-spacing:.01em}
+.nav{display:flex;gap:22px;margin-inline-start:auto;align-items:center}
+.nav a{position:relative;text-decoration:none;color:var(--ink-soft);font-weight:600;font-size:.95rem;transition:color 200ms ease}
+.nav a::after{content:"";position:absolute;inset-inline:0;bottom:-4px;height:1px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform 240ms var(--ease-out)}
+.icon-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:2px;padding:7px 12px;cursor:pointer;font-weight:600;font-size:.92rem}
+.icon-btn{transition:border-color 200ms ease,transform 160ms var(--ease-out)}
+.badge{min-width:20px;height:20px;border-radius:10px;background:var(--brass);color:var(--brass-ink);font-size:.75rem;display:inline-grid;place-items:center;font-family:var(--util);font-variant-numeric:tabular-nums;padding-inline:5px}
+@media (max-width:760px){.nav a{display:none}.top .wrap{gap:12px}}
+
+/* ---------- shared ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:2px;padding:14px 26px;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;transition:background-color 200ms ease,border-color 200ms ease,transform 160ms var(--ease-out),box-shadow 200ms ease}
+.btn-primary{background:var(--brass);color:var(--brass-ink);box-shadow:0 1px 0 var(--eng-hi) inset,0 8px 24px -10px var(--shadow)}
+
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+
+.eyebrow{font-family:var(--util);font-size:.8rem;letter-spacing:.08em;color:var(--brass);font-weight:500}
+.carved{text-shadow:0 1px 0 var(--eng-hi),0 -1px 0 var(--eng-lo)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.05;margin:6px 0 14px;text-wrap:balance}
+.lede{color:var(--ink-soft);max-width:58ch;margin:0}
+section{padding-block:clamp(56px,9vw,110px)}
+.section-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px 40px;margin-bottom:40px}
+
+.niche{position:relative;background:var(--niche);border-radius:999px 999px 3px 3px;box-shadow:inset 0 18px 40px -12px var(--shadow),inset 0 -1px 0 var(--eng-hi),0 1px 0 var(--eng-hi);overflow:hidden;max-width:100%}
+.niche canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.niche::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 55% at 50% 70%,rgba(230,170,90,.16),transparent 70%);opacity:0;transition:opacity 400ms ease}
+
+/* press feedback everywhere, hover only where a real pointer exists */
+.btn:active,.icon-btn:active,.chip:active,.swatch:active,.add:active,.cue:active,.plinth button:active,.play:active,.lines button:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover{color:var(--ink)}
+  .nav a:hover::after{transform:scaleX(1)}
+  .icon-btn:hover{border-color:var(--brass)}
+  .btn-primary:hover{background:var(--brass-hover);box-shadow:0 1px 0 var(--eng-hi) inset,0 10px 30px -8px rgba(230,170,90,.35)}
+  .btn-ghost:hover{border-color:var(--brass)}
+  .chip:hover,.swatch:hover{border-color:var(--brass)}
+  .add:hover{color:var(--brass-hover)}
+  .plinth button:hover{text-decoration:underline}
+  .item:hover .niche::after,.lab .niche:hover::after{opacity:1}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(36px,6vw,72px) clamp(56px,8vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(3.6rem,10vw,7.6rem);line-height:.9;margin:14px 0 18px;letter-spacing:-.01em}
+.hero h1 span{display:block;color:var(--brass)}
+.hero .tag{font-size:clamp(1.15rem,2vw,1.4rem);max-width:30ch;margin:0 0 30px;color:var(--ink);text-wrap:balance}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.specs{display:grid;grid-template-columns:repeat(3,auto);gap:10px 34px;margin:42px 0 0;padding-top:22px;border-top:1px solid var(--line);justify-content:start}
+.specs div{display:flex;flex-direction:column}
+.specs dt{font-size:.8rem;color:var(--ink-soft);letter-spacing:.03em}
+.specs dd{margin:0;font-family:var(--util);font-weight:500;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+.stage .niche{width:100%;max-width:440px;aspect-ratio:4/5}
+.plinth{width:100%;max-width:470px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-top:3px solid var(--ground-2);font-family:var(--util);font-size:.82rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.plinth button{background:none;border:0;color:var(--brass);cursor:pointer;font-family:var(--util);font-size:.82rem;padding:4px}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .stage .niche{max-width:340px}
+  .specs{grid-template-columns:repeat(3,1fr);gap:10px 16px}
+}
+
+/* ---------- collection ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;margin-bottom:34px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.chips,.finishes{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 16px;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink-soft)}
+.chip,.swatch{transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,box-shadow 200ms ease,transform 160ms var(--ease-out)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.finishes .lbl{font-size:.85rem;color:var(--ink-soft);margin-inline-end:4px}
+.swatch{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:2px;padding:5px 12px 5px 10px;cursor:pointer;background:transparent;font-size:.9rem;font-weight:600}
+.swatch i{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 -3px 5px rgba(0,0,0,.3),inset 0 2px 3px rgba(255,255,255,.35)}
+.swatch[aria-pressed="true"]{border-color:var(--brass);box-shadow:0 0 0 1px var(--brass) inset}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px 36px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:44px 22px}}
+@media (max-width:520px){.grid{grid-template-columns:1fr}}
+.item{display:flex;flex-direction:column;gap:14px}
+.item .niche{aspect-ratio:5/6;width:100%;cursor:crosshair}
+.item-meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.item h3{font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1.1;margin:0}
+.price{font-family:var(--util);font-weight:500;font-size:1.1rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.item p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.item .facts{font-family:var(--util);font-size:.78rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 14px;font-variant-numeric:tabular-nums}
+.add{align-self:start;background:none;border:0;border-bottom:1px solid var(--brass);padding:4px 0;color:var(--brass);font-weight:700;cursor:pointer}
+.add{display:inline-grid;transition:color 200ms ease,transform 160ms var(--ease-out),border-color 200ms ease}
+.add span{grid-area:1/1;transition:opacity 220ms ease,filter 220ms ease,transform 220ms var(--ease-out)}
+.add .ok{opacity:0;filter:blur(3px);transform:translateY(4px)}
+.add.done{border-color:transparent}
+.add.done .go{opacity:0;filter:blur(3px);transform:translateY(-4px)}
+.add.done .ok{opacity:1;filter:none;transform:none}
+
+/* ---------- process ---------- */
+.process{background:transparent}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;counter-reset:s}
+.step{padding:6px 0 6px 26px;border-inline-start:1px solid var(--line);padding-inline-start:22px}
+.step:first-child{border-inline-start:0;padding-inline-start:0}
+.step .n{font-family:var(--display);font-size:3.2rem;line-height:1;color:var(--brass)}
+.step h3{font-size:1.15rem;margin:10px 0 6px}
+.step p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.step .m{display:block;margin-top:12px;font-family:var(--util);font-size:.78rem;color:var(--ink);font-variant-numeric:tabular-nums}
+@media (max-width:860px){
+  .steps{grid-template-columns:1fr 1fr;gap:34px 22px}
+  .step,.step:first-child{border-inline-start:1px solid var(--line);padding-inline-start:18px}
+}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* ---------- trust strip + customer stories ---------- */
+.trust{list-style:none;margin:clamp(40px,6vw,64px) 0 0;padding:clamp(20px,3vw,28px) 0;display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line)}
+.trust li{display:flex;align-items:center;justify-content:center;gap:14px;padding:6px 16px;text-align:center}
+.trust li+li{border-inline-start:1px solid var(--line)}
+.trust svg{flex:none;width:34px;height:34px;color:var(--brass)}
+.trust b{font-size:clamp(1.05rem,1.9vw,1.35rem);font-weight:700}
+@media (max-width:700px){
+  .trust{grid-template-columns:1fr;padding:6px 0}
+  .trust li{justify-content:flex-start;padding:14px 4px}
+  .trust li+li{border-inline-start:0;border-top:1px solid var(--line)}
+}
+.stories{margin-top:clamp(56px,8vw,96px);text-align:center}
+.stories h2{margin:0 0 clamp(24px,4vw,40px)}
+.story-invite{max-width:620px;margin-inline:auto;display:grid;justify-items:center;gap:12px;padding:clamp(28px,5vw,44px) clamp(20px,4vw,40px);border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(255,240,215,.05),rgba(255,240,215,.02));box-shadow:0 22px 50px -30px #000}
+.story-invite .quote-mark{width:44px;height:34px;color:var(--brass);opacity:.8}
+.story-invite h3{margin:4px 0 0;font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.15}
+.story-invite p{margin:0 0 8px;color:var(--ink-soft);max-width:48ch}
+.story-invite .btn svg{width:18px;height:18px}
+
+/* ---------- print lab ---------- */
+.lab{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,72px);align-items:center;margin-top:clamp(56px,8vw,96px);padding-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+@media (max-width:860px){.lab{grid-template-columns:1fr}}
+.lab .niche{aspect-ratio:4/5;width:100%;max-width:400px;justify-self:center}
+.lab h3{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.05;margin:6px 0 12px}
+.readouts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:28px 0 22px;border-block:1px solid var(--line)}
+.readouts div{padding:14px 0;padding-inline-start:16px;border-inline-start:1px solid var(--line)}
+.readouts div:first-child{border-inline-start:0;padding-inline-start:0}
+.readouts dt{font-size:.78rem;color:var(--ink-soft)}
+.readouts dd{margin:2px 0 0;font-family:var(--util);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.5rem);font-variant-numeric:tabular-nums}
+.scrub{display:flex;align-items:center;gap:16px}
+.play{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--brass);background:rgba(216,168,96,.1);color:var(--brass);cursor:pointer;display:grid;place-items:center;transition:background-color 200ms ease,transform 160ms var(--ease-out)}
+.play svg{width:16px;height:16px}
+@media (hover:hover) and (pointer:fine){.play:hover{background:rgba(216,168,96,.22)}}
+.range{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:28px;background:transparent;cursor:pointer}
+.range::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to left,var(--brass) var(--fill,100%),var(--line) var(--fill,100%))}
+.range::-moz-range-track{height:2px;background:var(--line)}
+.range::-moz-range-progress{height:2px;background:var(--brass)}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-8px;border-radius:50%;background:#FFD796;box-shadow:0 0 0 4px rgba(216,168,96,.25),0 0 14px 2px rgba(255,190,100,.5);transition:transform 160ms var(--ease-out)}
+.range::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:#FFD796;box-shadow:0 0 0 4px rgba(216,168,96,.25),0 0 14px 2px rgba(255,190,100,.5)}
+.range:active::-webkit-slider-thumb{transform:scale(1.15)}
+.lab-note{margin:14px 0 0;font-size:.85rem;color:var(--ink-soft)}
+
+/* ---------- faq ---------- */
+.faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,72px);align-items:start}
+@media (max-width:860px){.faq .wrap{grid-template-columns:1fr}}
+.qa{border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;cursor:pointer;font-size:1.12rem;font-weight:600}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{flex:none;position:relative;width:14px;height:14px}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;inset:6px 0 auto;height:1.5px;background:var(--brass);transition:transform 260ms var(--ease-out)}
+.qa summary i::after{transform:rotate(90deg)}
+.qa details[open] summary i::after{transform:rotate(0)}
+.qa details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size 320ms var(--ease-out),opacity 260ms ease,content-visibility 320ms allow-discrete}
+.qa details[open]::details-content{block-size:auto;opacity:1}
+.qa details p{margin:0 0 22px;color:var(--ink-soft);max-width:60ch}
+
+/* scroll reveals: content waits below and rises into place as it reaches the screen.
+   Only armed once the script confirms it can observe visibility, so nothing stays hidden without it. */
+.reveal-ready .rv{opacity:0;transform:translateY(48px);filter:blur(6px);
+  transition:opacity 900ms var(--ease-out),transform 1100ms var(--ease-out),filter 900ms var(--ease-out);
+  transition-delay:var(--d,0ms)}
+.reveal-ready .rv.in{opacity:1;transform:none;filter:none}
+
+/* ---------- engraving ---------- */
+.engrave .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,70px);align-items:center}
+@media (max-width:860px){.engrave .wrap{grid-template-columns:1fr}}
+.form{display:grid;gap:18px;margin-top:28px;max-width:440px}
+.field{display:grid;gap:6px}
+.field label{font-size:.88rem;font-weight:600;color:var(--ink-soft)}
+.field input,.field select{background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px var(--glow)}
+.plaque{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:4px;display:grid;place-items:center;text-align:center;padding:30px;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 30% 20%,#EFE5D3 0%,#D9C8AC 55%,#B9A485 100%);
+  box-shadow:0 30px 60px -30px var(--shadow),inset 0 0 0 1px rgba(255,255,255,.25),inset 0 -8px 20px rgba(80,55,30,.25)}
+.plaque::before{content:"";position:absolute;inset:0;opacity:.8;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6 .04' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .42  0 0 0 0 .33  0 0 0 0 .22  0 0 0 .45 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");background-size:cover}
+.plaque::after{content:"";position:absolute;inset:16px;border:1px solid rgba(70,50,30,.25);box-shadow:0 1px 0 rgba(255,250,240,.5);border-radius:2px}
+.plaque .inscr{position:relative;z-index:1}
+.plaque .small{font-family:var(--util);font-size:clamp(.7rem,1.6vw,.85rem);letter-spacing:.2em;color:rgba(70,50,30,.6);text-shadow:0 1px 0 rgba(255,250,240,.6)}
+.plaque .name{font-family:var(--display);font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.1;color:rgba(78,56,34,.72);text-shadow:0 1px 0 rgba(255,250,240,.75),0 -1px 1px rgba(40,25,10,.45);margin:8px 0;overflow-wrap:anywhere}
+.plaque .date{font-family:var(--display);font-size:clamp(1rem,2.4vw,1.35rem);color:rgba(78,56,34,.7);text-shadow:0 1px 0 rgba(255,250,240,.7)}
+
+/* ---------- footer ---------- */
+footer{position:relative;border-top:1px solid var(--line);padding-block:clamp(48px,7vw,84px) 28px}
+footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(28px,4vw,56px)}
+@media (max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){footer .cols{grid-template-columns:1fr}}
+footer .brand b{font-size:2rem}
+footer .about{color:var(--ink-soft);max-width:34ch;margin:14px 0 0}
+footer h4{font-family:var(--display);font-weight:400;font-size:1.4rem;margin:0 0 14px;color:var(--ink)}
+footer h4.sub{margin-top:28px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+footer li a{color:var(--ink-soft);text-decoration:none;display:inline-flex;gap:9px;align-items:center;transition:color 200ms ease}
+footer li svg{flex:none;width:16px;height:16px;color:var(--brass)}
+footer .ltr{direction:ltr;unicode-bidi:isolate}
+.socials{display:flex;gap:10px;margin-top:22px}
+.socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--ink-soft);transition:border-color 200ms ease,color 200ms ease,transform 160ms var(--ease-out)}
+.socials svg{width:18px;height:18px}
+.foot-bottom{margin-top:clamp(40px,6vw,64px);padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+@media (hover:hover) and (pointer:fine){footer li a:hover{color:var(--ink)}.socials a:hover{border-color:var(--brass);color:var(--brass)}}
+.socials a:active{transform:scale(.95)}
+
+/* ---------- inner pages ---------- */
+.page{padding-block:clamp(40px,6vw,80px) clamp(80px,10vw,130px)}
+.crumbs{font-family:var(--util);font-size:.8rem;color:var(--ink-soft);margin-bottom:22px}
+.crumbs a{color:var(--brass);text-decoration:none}
+.page-hero{max-width:780px;margin-bottom:clamp(40px,6vw,64px)}
+.page-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.7rem,6.4vw,4.6rem);line-height:1.02;margin:10px 0 16px;text-wrap:balance}
+.prose{max-width:740px}
+.prose h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,2.8vw,2.1rem);line-height:1.15;margin:44px 0 12px}
+.prose h2:first-child{margin-top:0}
+.prose p{color:var(--ink-soft);margin:0 0 14px}
+.prose ul{color:var(--ink-soft);margin:0 0 14px;padding-inline-start:20px;display:grid;gap:8px}
+.prose strong{color:var(--ink);font-weight:600}
+.prose a{color:var(--brass)}
+.panel{padding:clamp(20px,3.5vw,32px);border:1px solid var(--line);border-radius:4px;background:rgba(255,240,215,.025)}
+.panel.warm{border-color:rgba(216,168,96,.35);background:rgba(216,168,96,.06)}
+.panel h3{font-family:var(--display);font-weight:400;font-size:1.5rem;margin:6px 0 10px}
+.panel p:last-child{margin-bottom:0}
+.cta-band{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;margin-top:clamp(48px,7vw,80px);padding-top:28px;border-top:1px solid var(--line)}
+.cta-band p{margin:0;font-family:var(--display);font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.cta-row .btn svg{width:18px;height:18px}
+
+/* support */
+.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.channels{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.channels{grid-template-columns:1fr}}
+.channel{display:grid;gap:6px;align-content:start;padding:24px;border:1px solid var(--line);border-radius:4px;text-decoration:none;background:rgba(255,240,215,.025);transition:border-color 200ms ease,background-color 200ms ease,transform 160ms var(--ease-out)}
+.channel svg{width:26px;height:26px;color:var(--brass);margin-bottom:8px}
+.channel b{font-size:1.12rem}
+.channel span{color:var(--ink-soft);font-size:.93rem}
+.channel .val{font-family:var(--util);color:var(--ink);font-size:.95rem;margin-top:6px}
+.channel.primary{border-color:rgba(216,168,96,.55);background:rgba(216,168,96,.08)}
+.channel:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){.channel:hover{border-color:var(--brass);background:rgba(216,168,96,.07)}}
+.support-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);margin-top:clamp(48px,7vw,84px);align-items:start}
+@media (max-width:860px){.support-grid{grid-template-columns:1fr}}
+.form-card{display:grid;gap:18px}
+.form-card h2{font-size:clamp(1.8rem,3.2vw,2.4rem);margin:4px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+.field textarea{background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%;resize:vertical;min-height:110px;font:inherit;color:inherit}
+.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px var(--glow)}
+.form-note{margin:0;font-size:.84rem;color:var(--ink-soft)}
+.side{display:grid;gap:18px}
+.hours{display:grid;gap:0;margin:8px 0 0}
+.hours div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.hours dt{color:var(--ink-soft)}
+.hours dd{margin:0;font-family:var(--util);font-variant-numeric:tabular-nums}
+.link-list{list-style:none;margin:8px 0 0;padding:0}
+.link-list a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:color 200ms ease}
+.link-list svg{width:18px;height:18px;color:var(--brass);transition:transform 240ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.link-list a:hover svg{transform:translateX(-4px)}}
+
+/* guide */
+.gsteps{display:grid;gap:clamp(34px,5vw,56px);max-width:900px}
+.gstep{display:grid;grid-template-columns:76px 1fr;gap:clamp(14px,3vw,28px)}
+@media (max-width:520px){.gstep{grid-template-columns:1fr}}
+.gstep .n{font-family:var(--display);font-size:3.4rem;line-height:.9;color:var(--brass)}
+.gstep h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,2.8vw,2.1rem);margin:0 0 10px}
+.gstep p{color:var(--ink-soft);margin:0 0 12px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media (max-width:700px){.tools{grid-template-columns:1fr}}
+.tool{padding:16px 18px;border:1px solid var(--line);border-radius:4px}
+.tool b{display:block;font-family:var(--util);font-weight:500;direction:ltr;text-align:right}
+.tool span{color:var(--ink-soft);font-size:.9rem}
+.settings{margin:14px 0 0}
+.settings div{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+@media (max-width:520px){.settings div{grid-template-columns:1fr;gap:4px}}
+.settings dt{font-family:var(--util);font-weight:500}
+.settings dd{margin:0;color:var(--ink-soft)}
+
+/* licenses */
+.lic{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:clamp(40px,6vw,64px)}
+@media (max-width:760px){.lic{grid-template-columns:1fr}}
+.checks{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.checks li{display:grid;grid-template-columns:22px 1fr;gap:8px;color:var(--ink-soft)}
+.checks i{font-style:normal;font-weight:700}
+.checks .y{color:#A9CFA0}
+.checks .x{color:#E09A86}
+
+/* shipping */
+.ship{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 8px}
+@media (max-width:760px){.ship{grid-template-columns:1fr}}
+.ship .panel b{display:block;font-size:1.08rem;margin-bottom:4px}
+.ship .panel .t{font-family:var(--util);color:var(--brass);font-size:.95rem}
+
+/* specials + product buy buttons */
+.item .media{position:relative}
+.sale-badge{position:absolute;top:16px;inset-inline-start:50%;transform:translateX(50%);z-index:2;background:#B4492F;color:#FFF3EA;font-family:var(--util);font-size:.78rem;font-weight:500;padding:4px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
+.price-block{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.price-block .from{font-size:.82rem;color:var(--ink-soft)}
+.price-block .was{font-family:var(--util);font-size:.95rem;color:var(--ink-soft);text-decoration:line-through}
+.price-block small{flex-basis:100%;font-size:.78rem;color:var(--ink-soft)}
+.buy{display:grid;gap:8px;margin-top:4px}
+.buy .add{align-self:stretch;display:grid;place-items:center;border:0;border-radius:2px;padding:12px 16px;font-weight:700;background:var(--brass);color:var(--brass-ink)}
+.buy .add.file{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);font-weight:600}
+.buy .add.done{border-color:transparent}
+@media (hover:hover) and (pointer:fine){.buy .add:hover{color:var(--brass-ink);background:var(--brass-hover)}.buy .add.file:hover{color:var(--ink);background:rgba(216,168,96,.08);box-shadow:inset 0 0 0 1px var(--brass)}}
+.count-note{font-family:var(--util);font-size:.85rem;color:var(--ink-soft);margin:0 0 28px}
+.item.wide{grid-column:span 2}
+.item.wide .niche{aspect-ratio:auto;height:100%;min-height:0}
+.item.wide .media,.item.wide .media .niche{height:clamp(300px,34vw,440px)}
+@media (max-width:900px){.item.wide{grid-column:auto}.item.wide .media,.item.wide .media .niche{height:auto}.item.wide .niche{aspect-ratio:5/6}}
+
+/* nav */
+.nav a[aria-current="page"]{color:var(--ink)}
+.nav a[aria-current="page"]::after{transform:scaleX(1)}
+.nav a.hot{color:#E39B78}
+@media (max-width:760px){
+  .top .wrap{flex-wrap:wrap;row-gap:6px}
+  .nav{order:3;width:100%;margin-inline-start:0;overflow-x:auto;gap:20px;padding-bottom:4px}
+  .nav a{display:inline;white-space:nowrap}
+}
+
+/* ---------- product cards ---------- */
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+@media (max-width:1100px){.pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.pgrid{grid-template-columns:1fr}}
+.pcard{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(255,240,215,.055),rgba(255,240,215,.025));border:1px solid rgba(241,230,210,.1);box-shadow:0 18px 40px -26px #000;transition:transform 300ms var(--ease-out),border-color 250ms ease,box-shadow 300ms ease}
+.pcard .pmedia{position:relative;aspect-ratio:4/3.6;background:radial-gradient(90% 80% at 50% 78%,#2A221B 0%,#110E0B 75%);overflow:hidden;cursor:crosshair}
+.pcard .pmedia::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 75%,rgba(230,170,90,.16),transparent 70%);opacity:0;transition:opacity 400ms ease}
+.pcard canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pbadge{position:absolute;top:12px;inset-inline-start:12px;z-index:2;font-family:var(--util);font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:6px;background:#2F7D5B;color:#F1FFF7;box-shadow:0 6px 14px -6px rgba(0,0,0,.6)}
+.pbadge.sale{background:#B4492F;color:#FFF3EA}
+.ptools{position:absolute;bottom:10px;inset-inline-end:10px;z-index:2;display:flex;gap:6px}
+.ptool{width:32px;height:32px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;background:rgba(245,236,220,.92);color:#2B231C;box-shadow:0 6px 14px -6px rgba(0,0,0,.7);transition:transform 160ms var(--ease-out),background-color 200ms ease}
+.ptool:active{transform:scale(.92)}
+.ptool svg{width:16px;height:16px}
+.ptool .wheel{width:18px;height:18px;border-radius:50%;background:conic-gradient(#D3C2A6 0 33.3%,#57524C 0 66.6%,#B98A42 0);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.pdots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:5px}
+.pdots i{width:6px;height:6px;border-radius:999px;background:rgba(245,236,220,.35);transition:width 260ms var(--ease-out),background-color 260ms ease}
+.pdots i.on{width:16px;background:rgba(245,236,220,.9)}
+.pbody{display:flex;flex-direction:column;gap:10px;padding:14px 16px 16px;flex:1}
+.pmeta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--util);font-size:.74rem;color:var(--ink-soft)}
+.pmeta .layers{font-variant-numeric:tabular-nums}
+.pcard h3{margin:0;font-family:var(--body);font-weight:700;font-size:1.08rem;line-height:1.35;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.pprice{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;margin-top:2px}
+.pprice b{font-family:var(--util);font-weight:500;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.pprice .from{font-size:.8rem;color:var(--ink-soft)}
+.pprice s{font-family:var(--util);font-size:.9rem;color:var(--ink-soft)}
+.pprice small{flex-basis:100%;font-size:.72rem;color:var(--ink-soft)}
+.pbuy{display:grid;gap:8px;margin-top:auto;padding-top:6px}
+.pbuy .add{align-self:stretch;display:grid;place-items:center;border:0;border-radius:10px;padding:11px 12px;font-weight:700;font-size:.9rem;background:var(--brass);color:var(--brass-ink);border-bottom:0}
+.pbuy .add.file{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(241,230,210,.2);font-weight:600}
+@media (hover:hover) and (pointer:fine){
+  .pcard:hover{transform:translateY(-4px);border-color:rgba(216,168,96,.45);box-shadow:0 26px 50px -24px #000}
+  .pcard:hover .pmedia::after{opacity:1}
+  .ptool:hover{background:#fff}
+  .pbuy .add:hover{background:var(--brass-hover);color:var(--brass-ink)}
+  .pbuy .add.file:hover{background:rgba(216,168,96,.08);color:var(--ink);box-shadow:inset 0 0 0 1px var(--brass)}
+}
+.pframes{position:absolute;inset:0}
+.pframes img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 420ms ease,transform 700ms var(--ease-out)}
+.pframes img.on{opacity:1}
+.pcard .pmedia{cursor:zoom-in;touch-action:pan-y}
+.pcard .pmedia::before{content:"";position:absolute;inset:auto 0 0;height:40%;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(10,8,6,.45),transparent)}
+.pdots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:6px}
+.pdots button{width:7px;height:7px;padding:0;border:0;border-radius:999px;background:rgba(245,236,220,.45);cursor:pointer;transition:width 260ms var(--ease-out),background-color 260ms ease}
+.pdots button.on{width:18px;background:rgba(245,236,220,.95)}
+.pprice .quote{font-family:var(--body);font-size:1.1rem}
+a.add{text-decoration:none;text-align:center}
+@media (hover:hover) and (pointer:fine){.pcard:hover .pframes img.on{transform:scale(1.04)}}
+.qside{display:grid;gap:10px}
+.qthumbs{display:flex;gap:8px;flex-wrap:wrap}
+.qthumbs:empty{display:none}
+.qthumbs button{width:58px;height:58px;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:none;opacity:.6;transition:opacity 200ms ease,border-color 200ms ease}
+.qthumbs button[aria-pressed="true"]{opacity:1;border-color:var(--brass)}
+.qthumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.qv .qmedia{touch-action:pan-y}
+.count-note a{color:var(--brass)}
+/* quick view */
+.qv{width:min(880px,calc(100% - 32px))}
+.qv .dlg{grid-template-columns:1fr 1fr;align-items:center;gap:clamp(18px,4vw,36px);padding:clamp(18px,3vw,30px)}
+@media (max-width:700px){.qv .dlg{grid-template-columns:1fr}}
+.qv .qmedia{position:relative;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:radial-gradient(90% 80% at 50% 78%,#2A221B 0%,#110E0B 75%)}
+@media (max-width:700px){.qv .qmedia{aspect-ratio:4/3.4}}
+.qv canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.qv .qinfo{display:grid;gap:12px;align-content:start}
+.qv h3{font-size:clamp(1.8rem,3.4vw,2.4rem)}
+.qv .qdesc{margin:0;color:var(--ink-soft)}
+.qv .qfacts{display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--util);font-size:.8rem;color:var(--ink-soft)}
+.qfinish{display:flex;gap:8px;flex-wrap:wrap}
+.qfinish button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer;font:inherit;font-size:.85rem;color:var(--ink-soft);transition:border-color 200ms ease,color 200ms ease,transform 160ms var(--ease-out)}
+.qfinish button:active{transform:scale(.96)}
+.qfinish button i{width:16px;height:16px;border-radius:50%}
+.qfinish button[aria-pressed="true"]{border-color:var(--brass);color:var(--ink)}
+.qv .dlg-close{position:absolute;top:10px;inset-inline-end:10px;z-index:3}
+
+/* ---------- smart assistant ---------- */
+.ask-fab{position:fixed;left:calc(18px + env(safe-area-inset-left,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:35;display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 10px;border-radius:999px;border:1px solid rgba(216,168,96,.45);background:rgba(26,21,17,.84);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;box-shadow:0 14px 34px -14px #000,0 0 0 0 rgba(230,170,90,.0);transition:transform 160ms var(--ease-out),border-color 200ms ease,opacity 220ms ease,box-shadow 300ms ease}
+.ask-fab .lion{width:34px;height:34px;flex:none}
+.ask-fab:active{transform:scale(.96)}
+.ask-fab[aria-expanded="true"]{opacity:0;pointer-events:none;transform:scale(.92)}
+@media (hover:hover) and (pointer:fine){.ask-fab:hover{border-color:var(--brass);box-shadow:0 14px 34px -14px #000,0 0 26px -4px rgba(230,170,90,.45)}}
+.ask{position:fixed;left:calc(18px + env(safe-area-inset-left,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:45;width:min(410px,calc(100vw - 36px));height:min(620px,calc(100dvh - 36px));display:flex;flex-direction:column;
+  background:rgba(24,19,15,.93);-webkit-backdrop-filter:blur(22px) saturate(130%);backdrop-filter:blur(22px) saturate(130%);border:1px solid rgba(216,168,96,.28);border-radius:18px;box-shadow:0 40px 90px -30px #000;overflow:hidden;padding:0;
+  transform-origin:bottom left;opacity:0;transform:scale(.94) translateY(10px);visibility:hidden;
+  transition:opacity 180ms ease,transform 240ms var(--ease-out),visibility 0s 240ms}
+.ask.open{opacity:1;transform:none;visibility:visible;transition:opacity 220ms ease,transform 380ms var(--ease-out),visibility 0s}
+@media (max-width:520px){.ask{left:0;right:0;bottom:0;width:100%;height:min(86dvh,680px);border-radius:18px 18px 0 0;padding:0 0 env(safe-area-inset-bottom,0px)}}
+.ask-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ask-head .lion{width:40px;height:40px;flex:none}
+.ask-head b{display:block;font-family:var(--display);font-weight:400;font-size:1.45rem;line-height:1.1}
+.ask-head small{display:block;color:var(--ink-soft);font-size:.8rem}
+.ask-head .close{margin-inline-start:auto}
+.ask-log{flex:1;overflow:auto;padding:16px;display:grid;align-content:start;gap:10px;overscroll-behavior:contain}
+.msg{max-width:88%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;line-height:1.6;font-size:.95rem;overflow-wrap:anywhere}
+.msg.bot{justify-self:end;background:rgba(255,240,215,.06);border:1px solid var(--line);border-end-end-radius:5px}
+.msg.me{justify-self:start;background:var(--brass);color:var(--brass-ink);border-end-start-radius:5px;font-weight:600}
+@starting-style{.msg{opacity:0;transform:translateY(6px)}}
+.msg{transition:opacity 240ms ease,transform 300ms var(--ease-out)}
+.msg.thinking{color:var(--ink-soft)}
+.msg.thinking::after{content:"";display:inline-block;width:1.2em;text-align:start;animation:dots 1.2s steps(4,end) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+.msg.note{justify-self:center;max-width:100%;padding:4px 12px;border-radius:999px;font-family:var(--util);font-size:.76rem;color:var(--brass);background:rgba(216,168,96,.1);border:1px solid rgba(216,168,96,.25)}
+.msg.err{border-color:rgba(224,154,134,.4)}
+.ask-sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px}
+.ask-sugg button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font:inherit;font-size:.82rem;color:var(--ink-soft);cursor:pointer;transition:border-color 200ms ease,color 200ms ease,transform 160ms var(--ease-out)}
+.ask-sugg button:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.ask-sugg button:hover{border-color:var(--brass);color:var(--ink)}}
+.ask-form{display:flex;align-items:flex-end;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.ask-form textarea{flex:1;min-width:0;resize:none;max-height:120px;background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);border-radius:14px;padding:10px 14px;font:inherit;color:inherit;line-height:1.45}
+.ask-form textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px var(--glow)}
+.ask-go{flex:none;width:44px;height:44px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;background:var(--brass);color:var(--brass-ink);transition:transform 160ms var(--ease-out),background-color 200ms ease,opacity 200ms ease}
+.ask-go:active{transform:scale(.94)}
+.ask-go:disabled{opacity:.45;cursor:default}
+.ask-go svg{width:18px;height:18px}
+.ask-go.stop{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.ask-foot{margin:0;padding:0 14px 12px;font-size:.72rem;color:var(--ink-soft);text-align:center}
+.ask-off{display:grid;gap:10px;justify-items:start}
+.ask-off .btn{padding:10px 18px}
+
+/* ---------- drawer / dialog / toast ---------- */
+.scrim{position:fixed;inset:0;background:rgba(8,5,2,.55);z-index:40;opacity:0;visibility:hidden;transition:opacity 280ms ease,visibility 0s 280ms}
+.scrim.open{opacity:1;visibility:visible;transition:opacity 360ms ease,visibility 0s}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(440px,100%);background:var(--ground);z-index:41;display:flex;flex-direction:column;box-shadow:20px 0 60px -20px var(--shadow);padding:calc(20px + env(safe-area-inset-top,0px)) 22px calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-102%);visibility:hidden;transition:transform 260ms var(--ease-out),visibility 0s 260ms}
+.drawer.open{transform:none;visibility:visible;transition:transform 480ms var(--ease-drawer),visibility 0s}
+.drawer header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.drawer h3{font-family:var(--display);font-weight:400;font-size:1.9rem;margin:0}
+.close{background:none;border:0;font-size:1.6rem;cursor:pointer;line-height:1;padding:4px 8px;color:var(--ink-soft)}
+.lines{flex:1;overflow:auto;list-style:none;margin:0;padding:10px 0}
+.lines li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lines small{display:block;color:var(--ink-soft);font-family:var(--util);font-size:.75rem}
+.lines button{background:none;border:0;color:var(--ink-soft);cursor:pointer;font-size:.85rem;text-decoration:underline}
+.empty{color:var(--ink-soft);padding:30px 0}
+.total{display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;padding:14px 0;font-variant-numeric:tabular-nums}
+dialog{border:0;border-radius:4px;padding:0;background:var(--ground);color:var(--ink);width:min(440px,calc(100% - 32px));box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(8,5,2,.6)}
+dialog[open]{animation:dlgIn 260ms var(--ease-out)}
+dialog[open]::backdrop{animation:fadeIn 260ms ease}
+@keyframes dlgIn{from{opacity:0;transform:scale(.96) translateY(6px)}}
+@keyframes fadeIn{from{opacity:0}}
+.dlg{padding:30px 28px;display:grid;gap:16px}
+.dlg-top{display:flex;justify-content:space-between;align-items:start}
+.dlg h3{font-family:var(--display);font-weight:400;font-size:2.2rem;margin:0;line-height:1}
+.dlg .note{font-size:.85rem;color:var(--ink-soft);margin:0}
+.drawer h3 .badge{vertical-align:middle;margin-inline-start:6px}
+.cart-scroll{flex:1;overflow:auto;padding-block:14px;display:grid;align-content:start;gap:12px;overscroll-behavior:contain}
+.cart-scroll .lines{flex:none;overflow:visible;padding:0;display:grid;gap:10px}
+.lines li.line{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:4px;background:rgba(255,240,215,.03)}
+.line img{width:62px;height:74px;object-fit:cover;border-radius:31px 31px 2px 2px;background:var(--niche);display:block}
+.line .info{display:grid;gap:3px;min-width:0}
+.line .name{font-weight:700;line-height:1.3}
+.line .meta{font-family:var(--util);font-size:.74rem;color:var(--ink-soft)}
+.tag{justify-self:start;font-family:var(--util);font-size:.68rem;padding:1px 9px;border-radius:999px;background:rgba(216,168,96,.16);color:var(--brass)}
+.tag.file{background:rgba(150,175,210,.15);color:#B4C8E2}
+.line .end{display:grid;justify-items:end;gap:8px}
+.line .lp{font-family:var(--util);font-weight:500;font-variant-numeric:tabular-nums}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.qty button{width:28px;height:28px;background:none;border:0;cursor:pointer;color:var(--ink);font-size:1rem;line-height:1;text-decoration:none;transition:transform 160ms var(--ease-out)}
+.qty button:active{transform:scale(.9)}
+.qty span{min-width:20px;text-align:center;font-family:var(--util);font-size:.85rem;font-variant-numeric:tabular-nums}
+.line .rm{background:none;border:0;padding:2px;cursor:pointer;color:var(--ink-soft);display:grid;place-items:center;text-decoration:none}
+.line .rm svg{width:16px;height:16px}
+@media (hover:hover) and (pointer:fine){.line .rm:hover{color:#E09A86}}
+.cbox{padding:14px;border:1px solid var(--line);border-radius:4px;display:grid;gap:8px}
+.cbox label{font-size:.86rem;font-weight:600;color:var(--ink-soft)}
+.cbox textarea,.cbox input{background:color-mix(in srgb,var(--ground) 70%,var(--niche));border:1px solid var(--line);border-radius:2px;padding:10px 12px;width:100%;font:inherit;color:inherit;resize:vertical}
+.cbox textarea:focus,.cbox input:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px var(--glow)}
+.coupon{display:flex;gap:8px}
+.coupon .btn{padding:10px 18px}
+.coupon-msg{margin:0;font-size:.8rem;min-height:1em;color:var(--ink-soft)}
+.coupon-msg.ok{color:#A9CFA0}.coupon-msg.bad{color:#E09A86}
+.summary{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
+.sum-row{display:flex;justify-content:space-between;gap:12px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.sum-row.disc{color:#A9CFA0}
+.sum-row.grand{color:var(--ink);font-size:1.35rem;font-weight:700;padding-top:4px}
+.pay-note{margin:8px 0 6px;font-size:.84rem;color:var(--ink-soft);text-align:center}
+.pay-note a{display:block;color:var(--brass);font-family:var(--util);font-weight:500;font-size:1.1rem;text-decoration:none;direction:ltr}
+.wa-btn svg{width:20px;height:20px}
+.toast{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:12px 20px;border-radius:2px;z-index:60;font-weight:600;max-width:calc(100% - 32px);text-align:center;transition:opacity 300ms ease,transform 400ms var(--ease-out)}
+@starting-style{.toast{opacity:0;transform:translate(-50%,14px)}}
+
+/* ---------- intro (first screen, same stone as the site) ---------- */
+.intro{position:relative;height:clamp(560px,100svh,940px);color:#EFE2CB;font-family:var(--body);overflow:hidden;
+  --mx:50%;--my:45%;--sp:0}
+.intro-light{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(900px 700px at var(--mx) var(--my),rgba(242,196,120,.13),transparent 62%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+.intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transform:translateY(calc(var(--sp) * 90px));opacity:calc(1 - var(--sp) * 1.2)}
+.intro-ui{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;padding:calc(22px + env(safe-area-inset-top,0px)) 24px calc(22px + env(safe-area-inset-bottom,0px));pointer-events:none;opacity:calc(1 - var(--sp) * 1.6)}
+.intro-ui>*{pointer-events:auto}
+.intro-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--util);font-size:.78rem;letter-spacing:.14em;color:rgba(239,226,203,.55)}
+.intro-logo{position:absolute;left:0;right:0;top:0;display:grid;justify-items:center;pointer-events:none}
+.intro-logo[hidden]{display:none}
+.intro-logo-svg{display:block;height:84px;width:auto;overflow:visible;filter:drop-shadow(0 0 18px rgba(240,180,100,.28))}
+.intro-logo-svg .lines{stroke-width:.95}
+.intro-logo.reveal{transform:translateY(16px);transition:opacity 1.2s ease,transform 1.4s var(--ease-out)}
+.intro-logo.reveal.on{transform:none}
+.verse{align-self:start;justify-self:center;text-align:center;margin-top:clamp(40px,11vh,120px)}
+.verse cite{display:block;font-style:normal;font-family:var(--util);font-size:.72rem;letter-spacing:.3em;color:#C79A57;margin-bottom:10px}
+.verse p{margin:0;font-family:"Frank Ruhl Libre",var(--display);font-size:clamp(1.15rem,2.6vw,1.7rem);color:rgba(246,232,208,.88);letter-spacing:.02em}
+.intro-bottom{display:grid;justify-items:center;gap:18px;text-align:center;padding-bottom:clamp(10px,6vh,60px)}
+.intro-bottom .sub{margin:0;font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(239,226,203,.7);max-width:40ch}
+.cue{display:grid;justify-items:center;gap:10px;background:none;border:0;color:#F6E6C8;cursor:pointer;font-weight:700;font-size:1rem;padding:6px 18px}
+.cue .rail{position:relative;width:1px;height:46px;background:rgba(239,226,203,.18);overflow:hidden}
+.cue .rail::after{content:"";position:absolute;left:-1px;width:3px;height:14px;border-radius:2px;background:#FFD796;box-shadow:0 0 10px 2px rgba(255,190,100,.7);animation:drop 1.9s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes drop{0%{top:-14px;opacity:0}20%{opacity:1}100%{top:46px;opacity:0}}
+.cue:hover .rail{background:rgba(216,168,96,.5)}
+.meter{display:flex;align-items:center;gap:12px;font-family:var(--util);font-size:.74rem;color:rgba(239,226,203,.5);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+.meter .bar{width:min(220px,40vw);height:1px;background:rgba(239,226,203,.16);position:relative;overflow:hidden}
+.meter .bar i{position:absolute;inset:0;background:#D8A860;transform-origin:right;transform:scaleX(var(--p,0))}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;animation:revealIn .9s ease 3.6s forwards}
+@keyframes revealIn{to{opacity:1;transform:none}}
+.reveal.on{opacity:1;transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+
+</head>
+<body>
+<header class="intro" id="intro" dir="rtl" lang="he" aria-label="פתיחה — אור בראשית">
+  <div class="intro-light"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="intro-ui">
+    <div class="intro-top">
+      <span>OR · BERESHIT</span>
+      <span>יודאיקה בהדפסת תלת־ממד</span>
+    </div>
+    <div class="intro-logo reveal" id="introLogo" aria-hidden="true"><svg class="intro-logo-svg" viewBox="-34.5 -29 69 43.6" role="img" aria-label="אור בראשית"><defs><linearGradient id="sunGi" x1="0" y1="-16" x2="0" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F6DDA6"/><stop offset=".55" stop-color="#D9AE66"/><stop offset="1" stop-color="#B98A45"/></linearGradient><linearGradient id="lineGi" x1="-34" y1="0" x2="34" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C99A55"/><stop offset=".5" stop-color="#EBC98A"/><stop offset="1" stop-color="#C99A55"/></linearGradient><mask id="skyi" maskUnits="userSpaceOnUse" x="-40" y="-40" width="80" height="80"><rect x="-40" y="-40" width="80" height="42.6" fill="#fff"/><path d="M-30.5 7.3C-29.4 6.2-28.2 6-26.6 6.2C-25.8 4.8-24.2 4.2-22.6 4.9C-21.2 2.4-18.2 1.4-15.6 2.6C-13.6 1.2-10.6 1.6-9.6 3.6C-8.2 3-6.6 3.2-5.8 4.4L-3.6 4.4C-2.6 3.5-1 3.4 0 4.2L7.4 4.2C8.6 3.1 10.8 3 12.2 3.9L32.6 3.9" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><circle cx="0" cy="1.6" r="13.4" fill="url(#sunGi)" mask="url(#skyi)"/><g fill="none" stroke="url(#lineGi)" class="lines" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"><path d="M-15.80 -0.00L-32.50 -0.00M-15.14 -3.77L-30.47 -7.60M-13.34 -7.70L-26.15 -15.10M-10.17 -11.30L-19.14 -21.25M-5.86 -13.81L-10.71 -25.22M15.80 -0.00L32.50 -0.00M15.14 -3.77L30.47 -7.60M13.34 -7.70L26.15 -15.10M10.17 -11.30L19.14 -21.25M5.86 -13.81L10.71 -25.22M0 -14.6L0 -26.6"/><path d="M-30.5 7.3C-29.4 6.2-28.2 6-26.6 6.2C-25.8 4.8-24.2 4.2-22.6 4.9C-21.2 2.4-18.2 1.4-15.6 2.6C-13.6 1.2-10.6 1.6-9.6 3.6C-8.2 3-6.6 3.2-5.8 4.4L-3.6 4.4C-2.6 3.5-1 3.4 0 4.2L7.4 4.2C8.6 3.1 10.8 3 12.2 3.9L32.6 3.9"/><path d="M2.2 5.3C3.2 6.7 4.6 7.2 6.4 7.2L27.6 7.2M-26.2 9.8L-2.8 9.8M3.6 12.4C4.6 10.6 6 9.8 8 9.8L22.4 9.8M-15.6 12.4L15.2 12.4"/></g></svg></div>
+    <div class="verse reveal" id="verse">
+      <cite>בראשית · א׳, ג׳</cite>
+      <p>וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר</p>
+    </div>
+    <div class="intro-bottom">
+      <h1 class="sr">אור בראשית</h1>
+      <p class="sub reveal" id="introSub">יודאיקה ומוצרים לבית שמודפסים בתלת־ממד, שכבה אחר שכבה</p>
+      <button class="cue reveal" type="button" id="enterBtn">גללו למטה<span class="rail"></span></button>
+      <div class="meter" aria-hidden="true"><span id="meterTxt">שכבה 0</span><span class="bar"><i id="meterBar"></i></span><span>0.08 מ״מ</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="site" id="site" dir="rtl" lang="he">
+
+<div id="topSentinel" aria-hidden="true" style="height:1px;margin-bottom:-1px"></div>
+<header class="top away" id="topbar">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="אור בראשית — דף הבית">
+      <svg class="brand-logo" viewBox="-34.5 -29 69 43.6" role="img" aria-label="אור בראשית"><defs><linearGradient id="sunGh" x1="0" y1="-16" x2="0" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F6DDA6"/><stop offset=".55" stop-color="#D9AE66"/><stop offset="1" stop-color="#B98A45"/></linearGradient><linearGradient id="lineGh" x1="-34" y1="0" x2="34" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C99A55"/><stop offset=".5" stop-color="#EBC98A"/><stop offset="1" stop-color="#C99A55"/></linearGradient><mask id="skyh" maskUnits="userSpaceOnUse" x="-40" y="-40" width="80" height="80"><rect x="-40" y="-40" width="80" height="42.6" fill="#fff"/><path d="M-30.5 7.3C-29.4 6.2-28.2 6-26.6 6.2C-25.8 4.8-24.2 4.2-22.6 4.9C-21.2 2.4-18.2 1.4-15.6 2.6C-13.6 1.2-10.6 1.6-9.6 3.6C-8.2 3-6.6 3.2-5.8 4.4L-3.6 4.4C-2.6 3.5-1 3.4 0 4.2L7.4 4.2C8.6 3.1 10.8 3 12.2 3.9L32.6 3.9" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><circle cx="0" cy="1.6" r="13.4" fill="url(#sunGh)" mask="url(#skyh)"/><g fill="none" stroke="url(#lineGh)" class="lines" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"><path d="M-15.80 -0.00L-32.50 -0.00M-15.14 -3.77L-30.47 -7.60M-13.34 -7.70L-26.15 -15.10M-10.17 -11.30L-19.14 -21.25M-5.86 -13.81L-10.71 -25.22M15.80 -0.00L32.50 -0.00M15.14 -3.77L30.47 -7.60M13.34 -7.70L26.15 -15.10M10.17 -11.30L19.14 -21.25M5.86 -13.81L10.71 -25.22M0 -14.6L0 -26.6"/><path d="M-30.5 7.3C-29.4 6.2-28.2 6-26.6 6.2C-25.8 4.8-24.2 4.2-22.6 4.9C-21.2 2.4-18.2 1.4-15.6 2.6C-13.6 1.2-10.6 1.6-9.6 3.6C-8.2 3-6.6 3.2-5.8 4.4L-3.6 4.4C-2.6 3.5-1 3.4 0 4.2L7.4 4.2C8.6 3.1 10.8 3 12.2 3.9L32.6 3.9"/><path d="M2.2 5.3C3.2 6.7 4.6 7.2 6.4 7.2L27.6 7.2M-26.2 9.8L-2.8 9.8M3.6 12.4C4.6 10.6 6 9.8 8 9.8L22.4 9.8M-15.6 12.4L15.2 12.4"/></g></svg>
+      <b>אור בראשית</b>
+    </a>
+    <nav class="nav" aria-label="ראשי">
+      <a href="#collection">קולקציה</a>
+      <a href="#/guide" data-route="guide">מדריך הדפסה</a>
+      <a href="#/specials" data-route="specials" class="hot">מבצעים</a>
+      <a href="#/support" data-route="support">תמיכה</a>
+      <button class="icon-btn" id="loginBtn" type="button">כניסה</button>
+      <button class="icon-btn" id="cartBtn" type="button" aria-label="סל קניות">סל <span class="badge" id="cartCount">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section id="collection">
+    <div class="wrap">
+      <div class="section-head rv">
+        <div>
+          <div class="eyebrow">הקולקציה</div>
+          <h2 class="carved">יודאיקה ועיצוב לבית</h2>
+        </div>
+        <p class="lede">כל פריט מודפס בתלת־ממד לפי הזמנה. לחצו על תמונה כדי לראות אותה בגדול ולעבור בין התמונות.</p>
+      </div>
+
+      <div class="toolbar rv">
+        <div class="chips" role="group" aria-label="סינון לפי קטגוריה">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true">הכול</button>
+          <button class="chip" type="button" data-filter="judaica" aria-pressed="false">יודאיקה</button>
+          <button class="chip" type="button" data-filter="home" aria-pressed="false">לבית</button>
+        </div>
+      </div>
+
+      <div class="pgrid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="process" class="process">
+    <div class="wrap">
+      <div class="eyebrow">הטכנולוגיה</div>
+      <h2 class="carved">הדפסה בתלת־ממד, שכבה אחר שכבה</h2>
+      <p class="lede">כל פריט נבנה במדפסת תלת־ממד מדויקת, שמניחה חומר בשכבות של 0.08 מ״מ, אחת על גבי השנייה, עד שהחפץ שלם. כך אפשר ליצור צורות, חריטות ופרטים עדינים שקשה להשיג ביציקה או בעבודת מתכת, ולהתאים כל פריט אישית. מראה האבן הוא גימור צבע שנעשה ביד. הפריטים לא עשויים מאבן.</p>
+      <ul class="trust rv" aria-label="למה להזמין מאיתנו">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><b>הדפסה לפי הזמנה</b></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 4v16M12 4v16M18 4v16"/><circle cx="6" cy="9" r="2.2" fill="var(--ground)"/><circle cx="12" cy="15" r="2.2" fill="var(--ground)"/><circle cx="18" cy="8" r="2.2" fill="var(--ground)"/></svg><b>עיצוב אישי מלא</b></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="5" rx="1"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4"/></svg><b>משלוח לכל הארץ</b></li>
+      </ul>
+
+      <div class="stories rv">
+        <h2 class="carved">לקוחות מספרים</h2>
+        <div class="story-invite">
+          <svg class="quote-mark" viewBox="0 0 48 36" aria-hidden="true"><path d="M20 2C9 5 2 13 2 23c0 7 4.6 11 10 11 5 0 8.6-3.6 8.6-8.4 0-4.6-3.3-7.9-7.8-7.9-.9 0-1.8.1-2.4.4C11 12.4 15 8.2 21.4 6zm25 0C34 5 27 13 27 23c0 7 4.6 11 10 11 5 0 8.6-3.6 8.6-8.4 0-4.6-3.3-7.9-7.8-7.9-.9 0-1.8.1-2.4.4C36 12.4 40 8.2 46.4 6z" fill="currentColor"/></svg>
+          <h3>המקום הזה שמור לסיפור שלכם</h3>
+          <p>קיבלתם מאיתנו נר זיכרון, מזוזה או מתנה לבית? נשמח לשמוע איך היה, ועם רשותכם נפרסם כאן את הדברים.</p>
+          <a class="btn btn-primary wa-btn" href="https://wa.me/972546843548?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%90%D7%95%D7%A8%20%D7%91%D7%A8%D7%90%D7%A9%D7%99%D7%AA%2C%20%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%A9%D7%AA%D7%A3%20%D7%97%D7%95%D7%95%D7%99%D7%94%20%D7%9E%D7%94%D7%94%D7%96%D7%9E%D7%A0%D7%94%20%D7%A9%D7%9C%D7%99%3A" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg> שיתוף חוויה בוואטסאפ</a>
+        </div>
+      </div>
+
+      <div class="lab">
+        <div class="niche rv"><canvas id="labCanvas" role="img" aria-label="גביע קידוש בהדפסה, לפי המיקום בסרגל"></canvas></div>
+        <div class="rv">
+          <div class="eyebrow">המעבדה</div>
+          <h3 class="carved">עצרו את ההדפסה בכל שכבה</h3>
+          <p class="lede">גררו את הסרגל כדי לראות איך גביע לדוגמה נבנה במדפסת: מהבסיס, דרך הרגל הדקה ועד שפת הגביע.</p>
+          <dl class="readouts">
+            <div><dt>שכבה</dt><dd id="labLayer">2,250</dd></div>
+            <div><dt>גובה</dt><dd id="labHeight">180.0 מ״מ</dd></div>
+            <div><dt>זמן הדפסה</dt><dd id="labTime">26:00 ש׳</dd></div>
+          </dl>
+          <div class="scrub">
+            <button class="play" type="button" id="labPlay" aria-label="הפעלת הדפסה">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path id="labIcon" d="M12 3v10L3 8z"/></svg>
+            </button>
+            <input class="range" id="labRange" type="range" min="0" max="1000" value="1000" aria-label="התקדמות ההדפסה">
+          </div>
+          <p class="lab-note">כל שכבה בעובי 0.08 מ״מ. גביע אחד הוא 2,250 שכבות.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engrave" class="engrave">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">הקדשה אישית</div>
+        <h2 class="carved">הקדשה שמודפסת כחלק מהחפץ</h2>
+        <p class="lede">ההקדשה אינה מודבקת ואינה נחרטת אחר כך — היא חלק מהמודל, ונבנית יחד עם החפץ עצמו.</p>
+        <div class="form">
+          <div class="field">
+            <label for="engName">שם או הקדשה</label>
+            <input id="engName" type="text" maxlength="28" value="למשפחת לוי">
+          </div>
+          <div class="field">
+            <label for="engOcc">לרגל</label>
+            <select id="engOcc">
+              <option>חנוכת הבית</option>
+              <option>נישואין</option>
+              <option>בר מצווה</option>
+              <option>בת מצווה</option>
+              <option>שבת ומועד</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="engDate">תאריך עברי</label>
+            <input id="engDate" type="text" maxlength="24" value="כ״ה באלול תשפ״ו">
+          </div>
+        </div>
+      </div>
+      <div class="plaque rv" aria-live="polite">
+        <div class="inscr">
+          <div class="small" id="pOcc">חנוכת הבית</div>
+          <div class="name" id="pName">למשפחת לוי</div>
+          <div class="date" id="pDate">כ״ה באלול תשפ״ו</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq process">
+    <div class="wrap">
+      <div class="rv">
+        <div class="eyebrow">שאלות נפוצות</div>
+        <h2 class="carved">מה כדאי לדעת לפני שמזמינים</h2>
+        <p class="lede">לא מצאתם תשובה? כתבו לנו ונחזור אליכם תוך יום עסקים.</p>
+      </div>
+      <div class="qa rv">
+        <details open>
+          <summary>ממה עשויים הפריטים?<i></i></summary>
+          <p>כל הפריטים מודפסים בתלת־ממד מחומר הדפסה איכותי ועמיד. מראה האבן מתקבל בגימור צבע ידני, כך שהפריטים קלים בהרבה מחפצי אבן ועמידים לשימוש יומיומי.</p>
+        </details>
+        <details>
+          <summary>אפשר להוסיף שם או הקדשה?<i></i></summary>
+          <p>כן, בחלק מהמוצרים, כמו הנטלה, המזוזה ונר הזיכרון, אפשר להוסיף שם או הקדשה. כתבו את הנוסח בהודעת ההזמנה בוואטסאפ, ונתאם איתכם את הפרטים לפני ההדפסה.</p>
+        </details>
+        <details>
+          <summary>איך מנקים ושומרים?<i></i></summary>
+          <p>ניגוב במטלית לחה ומים פושרים. לא במדיח ולא בחומרי ניקוי שוחקים. שעווה שנטפה על פמוט יוצאת בקלות אחרי כמה דקות במקפיא.</p>
+        </details>
+        <details>
+          <summary>כמה זמן לוקח עד שההזמנה מגיעה?<i></i></summary>
+          <p>כל פריט מודפס לפי הזמנה: ההדפסה לוקחת בדרך כלל 1–4 ימי עסקים, ומשלוח עד הבית עוד 2–4 ימי עסקים. כל הפרטים בעמוד <a href="#/shipping">משלוחים וזמני אספקה</a>.</p>
+        </details>
+        <details>
+          <summary>אפשר להזמין עיצוב שלא מופיע בקולקציה?<i></i></summary>
+          <p>כן. אנחנו מתכננים גם פריטים מיוחדים: חנוכייה לבית כנסת, מתנה לקהילה או שחזור של חפץ משפחתי. ספרו לנו מה אתם מדמיינים.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="pages">
+
+  <!-- ===== support ===== -->
+  <section class="page" data-route="support" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / תמיכה</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">תמיכה ושירות לקוחות</div>
+        <h1 class="carved">איך אפשר לעזור?</h1>
+        <p class="lede">שאלה על מוצר, הזמנה שכבר יצאה לדרך או רעיון לחפץ מיוחד. בחרו את הדרך הנוחה לכם, ונחזור אליכם בהקדם.</p>
+      </div>
+
+      <div class="channels">
+        <a class="channel primary rv" href="https://wa.me/972546843548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg><b>וואטסאפ</b><span>הדרך המהירה להגיע אלינו, גם לתיאום הזמנה ותשלום.</span><span class="val" dir="ltr">054-684-3548</span></a>
+        <a class="channel rv" href="tel:0546843548"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 3h3.5l1.7 4.3-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1L21 15.5V19a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.2 2 2 0 0 1 5 3z"/></svg><b>טלפון</b><span>מעדיפים לדבר? התקשרו בשעות הפעילות.</span><span class="val" dir="ltr">054-684-3548</span></a>
+        <a class="channel rv" href="mailto:polymode3d@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg><b>דוא״ל</b><span>לפניות מפורטות, קבצים ותמונות.</span><span class="val" dir="ltr">polymode3d@gmail.com</span></a>
+        <a class="channel rv" href="https://t.me/POLYMODE3DBOT" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.8c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.7 13.4l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4z"/></svg><b>תמיכה אישית בטלגרם</b><span>בוט לתמיכה אישית ולעיון בקטלוג.</span></a>
+        <a class="channel rv" href="https://t.me/+K04URryHB1Q5ZTU0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.8c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.7 13.4l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4z"/></svg><b>ערוץ העדכונים</b><span>מוצרים חדשים ומבצעים ראשונים בטלגרם.</span></a>
+        <a class="channel rv" href="https://www.instagram.com/polymode.3d/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg><b>אינסטגרם</b><span>תמונות מהסטודיו ומהבתים של הלקוחות.</span></a>
+      </div>
+
+      <div class="support-grid">
+        <form class="panel form-card rv" id="supportForm" novalidate>
+          <div>
+            <div class="eyebrow">השאירו הודעה</div>
+            <h2 class="carved">כתבו לנו</h2>
+          </div>
+          <div class="two">
+            <div class="field"><label for="supName">שם מלא</label><input id="supName" type="text" autocomplete="name"></div>
+            <div class="field"><label for="supOrder">מספר הזמנה (אם יש)</label><input id="supOrder" type="text" inputmode="numeric"></div>
+          </div>
+          <div class="field">
+            <label for="supTopic">נושא הפנייה</label>
+            <select id="supTopic">
+              <option>שאלה על מוצר</option>
+              <option>הזמנה קיימת</option>
+              <option>הקדשה אישית</option>
+              <option>הזמנת עיצוב מיוחד</option>
+              <option>החזרה או ביטול</option>
+              <option>קובץ דיגיטלי או רישיון</option>
+              <option>אחר</option>
+            </select>
+          </div>
+          <div class="field"><label for="supMsg">ההודעה שלכם</label><textarea id="supMsg" rows="5"></textarea></div>
+          <a class="btn btn-primary wa-btn" id="supSend" href="https://wa.me/972546843548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg> שליחה בוואטסאפ</a>
+          <p class="form-note">ההודעה תיפתח בוואטסאפ עם כל הפרטים שמילאתם, ותוכלו לבדוק אותה לפני השליחה.</p>
+        </form>
+
+        <div class="side">
+          <div class="panel rv">
+            <div class="eyebrow">שעות פעילות</div>
+            <dl class="hours">
+              <div><dt>ראשון–חמישי</dt><dd>9:00–17:00</dd></div>
+              <div><dt>שישי וערבי חג</dt><dd>סגור</dd></div>
+              <div><dt>שבת וחג</dt><dd>סגור</dd></div>
+            </dl>
+          </div>
+          <div class="panel rv">
+            <div class="eyebrow">אולי התשובה כבר כאן</div>
+            <ul class="link-list">
+              <li><a href="#faq">שאלות נפוצות <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a></li>
+              <li><a href="#/shipping">משלוחים וזמני אספקה <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a></li>
+              <li><a href="#/returns">החזרות וביטולים <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a></li>
+              <li><a href="#/licenses">רישיונות דיגיטליים <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== guide ===== -->
+  <section class="page" data-route="guide" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / מדריך הדפסה</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">מדריך הדפסה פיזית</div>
+        <h1 class="carved">מקובץ דיגיטלי לחפץ על השולחן</h1>
+        <p class="lede">רכשתם קובץ STL ורוצים להדפיס אותו בעצמכם? כך עושים את זה נכון, שלב אחר שלב, עם התאמות לחפצי יודאיקה.</p>
+      </div>
+      <div class="gsteps">
+        <div class="gstep rv"><div class="n">1</div><div>
+          <h2>בחירת תוכנת חיתוך (Slicer)</h2>
+          <p>קודם מעבירים את קובץ ה־STL דרך סלייסר: תוכנה שמתרגמת את המודל לשכבות ולפקודות שהמדפסת מבינה (G-code).</p>
+          <div class="tools">
+            <div class="tool"><b>UltiMaker Cura</b><span>הפופולרית והקלה ביותר למתחילים</span></div>
+            <div class="tool"><b>PrusaSlicer</b><span>שליטה מלאה ודיוק גבוה</span></div>
+            <div class="tool"><b>Bambu Studio</b><span>מותאמת למדפסות Bambu Lab</span></div>
+          </div>
+        </div></div>
+        <div class="gstep rv"><div class="n">2</div><div>
+          <h2>מיקום ואוריינטציה</h2>
+          <p>ייבאו את הקובץ וקבעו איך המודל יונח על משטח ההדפסה. <strong>כלל הזהב:</strong> הצד השטוח ביותר על המשטח, להידבקות טובה ופחות תמיכות.</p>
+          <p>ביודאיקה: הדפיסו גביעים, פמוטים ובתי מזוזה במצב עמידה, וכוונו חריטות והקדשות כלפי מעלה או הצידה, לא כלפי המשטח, כדי שהאותיות ייצאו חדות.</p>
+        </div></div>
+        <div class="gstep rv"><div class="n">3</div><div>
+          <h2>הגדרות הדפסה חשובות</h2>
+          <dl class="settings">
+            <div><dt>Layer Height</dt><dd>0.2 מ״מ הוא הסטנדרט. לחריטות ולאותיות קטנות רדו ל־0.08–0.12 מ״מ.</dd></div>
+            <div><dt>Infill (מילוי)</dt><dd>לחפצי נוי מספיק 10%–15%. לפמוטים ולחנוכיות עדיף 25% ומעלה, בשביל משקל ויציבות.</dd></div>
+            <div><dt>Supports (תמיכות)</dt><dd>כשיש חלקים ״באוויר״ בזווית של יותר מ־45 מעלות, הפעילו תמיכות.</dd></div>
+            <div><dt>חומר</dt><dd>PLA מתאים לרוב חפצי הנוי. לפריטים שעומדים ליד חום, כמו מעמדי נרות, עדיף PETG או ASA.</dd></div>
+          </dl>
+        </div></div>
+        <div class="gstep rv"><div class="n">4</div><div>
+          <h2>חיתוך והדפסה</h2>
+          <p>לחצו על Slice, העבירו את קובץ ה־G-code לכרטיס הזיכרון של המדפסת או שלחו אותו ברשת. ודאו שמשטח ההדפסה נקי ומפולס.</p>
+        </div></div>
+      </div>
+
+      <div class="support-grid" style="margin-top:clamp(40px,6vw,64px)">
+        <div class="panel warm rv">
+          <div class="eyebrow">טיפ של מקצוענים</div>
+          <h3>תסתכלו על השכבה הראשונה</h3>
+          <p>אם היא נדבקת מושלם, רוב העבודה כבר מאחוריכם.</p>
+        </div>
+        <div class="panel rv">
+          <div class="eyebrow">בטיחות</div>
+          <h3>פלסטיק ואש לא הולכים יחד</h3>
+          <p>במעמדי נרות מודפסים השתמשו בנרות LED או בכוסית זכוכית. כלי שמגיע במגע עם מזון או משקה צריך ציפוי המיועד למגע עם מזון.</p>
+        </div>
+      </div>
+
+      <div class="cta-band rv">
+        <p>נתקעתם, או מעדיפים שנדפיס עבורכם עם גימור ידני?</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#/support">דברו איתנו</a>
+          <a class="btn btn-ghost" href="#collection">לקולקציה</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== specials ===== -->
+  <section class="page" data-route="specials" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / מבצעים</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">הצעות לזמן מוגבל</div>
+        <h1 class="carved">מבצעים</h1>
+        <p class="lede">ריכזנו כאן את ההנחות על חפצי היודאיקה שלנו. המחיר המוזל חל על הזמנה פיזית.</p>
+      </div>
+      <p class="count-note" id="specialsCount"></p>
+      <div class="pgrid" id="specialsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== licenses ===== -->
+  <section class="page" data-route="licenses" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / רישיונות דיגיטליים</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">רישיונות דיגיטליים</div>
+        <h1 class="carved">שומרים על היצירה, ועליכם</h1>
+        <p class="lede">כל קובץ שנרכש באור בראשית מגיע עם רישיון שימוש ברור, שמגן גם עליכם וגם על המעצבים שלנו.</p>
+      </div>
+      <div class="lic">
+        <div class="panel rv">
+          <div class="eyebrow">רישיון אישי · סטנדרט</div>
+          <h3>לבית ולמשפחה</h3>
+          <ul class="checks">
+            <li><i class="y">✓</i>הדפסה פיזית של המודל ללא הגבלה, לשימוש אישי.</li>
+            <li><i class="y">✓</i>שימוש במודל בפרויקטים פרטיים שאינם מיועדים למכירה.</li>
+            <li><i class="x">✗</i>אסור למכור, לשתף או להפיץ את הקבצים הדיגיטליים.</li>
+          </ul>
+        </div>
+        <div class="panel rv">
+          <div class="eyebrow">רישיון מסחרי</div>
+          <h3>לבתי מלאכה ולחנויות</h3>
+          <p class="lede" style="font-size:.95rem">בחלק מהמודלים אפשר לרכוש רישיון שמתיר מכירה של <strong>הדפסות פיזיות</strong>.</p>
+          <ul class="checks">
+            <li><i class="y">✓</i>מכירת הדפסות פיזיות של המודל בחנות שלכם.</li>
+            <li><i class="x">✗</i>אסור למכור או להפיץ את קובץ ה־STL עצמו.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prose rv">
+        <h2>החזרים על מוצרים דיגיטליים</h2>
+        <p>קבצים דיגיטליים זמינים להורדה מיד לאחר הרכישה, ולכן אין אפשרות להחזר כספי אחרי רכישת קובץ. מומלץ לעיין היטב בתיאור ובתמונות לפני הרכישה, ואם משהו לא ברור, <a href="#/support">פנו אלינו</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== privacy ===== -->
+  <section class="page" data-route="privacy" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / מדיניות פרטיות</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">מידע חשוב</div>
+        <h1 class="carved">מדיניות פרטיות</h1>
+        <p class="lede">אנחנו באור בראשית מתחייבים לשמור על פרטיות הלקוחות ולאבטח את המידע האישי שנמסר לנו. כאן מפורט איך אנחנו אוספים מידע, משתמשים בו ושומרים עליו.</p>
+      </div>
+      <div class="prose rv">
+        <h2>איסוף מידע</h2>
+        <p>כשאתם מבצעים הזמנה, יוצרים קשר או משתמשים בשירותי האתר, אנחנו עשויים לאסוף מידע בסיסי: שם מלא, כתובת דוא״ל, מספר טלפון וכתובת למשלוח. המידע נאסף כדי שנוכל לתת לכם את השירות בצורה הטובה ביותר.</p>
+        <h2>שימוש במידע</h2>
+        <p>המידע משמש רק לטיפול בהזמנה, כולל הדפסה, גימור ומשלוח; ליצירת קשר אם יש שאלה או בעיה בהזמנה; ולשיפור השירות באתר. לא נעביר את הפרטים שלכם לצד שלישי ללא אישורכם המפורש.</p>
+        <h2>אבטחת מידע</h2>
+        <p>אנחנו נוקטים באמצעי אבטחה כדי לשמור על המידע שלכם. עם זאת, שום העברת מידע באינטרנט אינה בטוחה במאה אחוזים, ולכן איננו יכולים להבטיח אבטחה מוחלטת.</p>
+        <h2>עוגיות (Cookies)</h2>
+        <p>האתר עשוי להשתמש בעוגיות כדי לשפר את חוויית הגלישה, לזכור העדפות, כמו תכולת הסל, ולאסוף נתונים סטטיסטיים אנונימיים. אפשר לחסום עוגיות בהגדרות הדפדפן.</p>
+        <h2>יצירת קשר</h2>
+        <p>לכל שאלה בנושא פרטיות: <a href="mailto:polymode3d@gmail.com">polymode3d@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== shipping ===== -->
+  <section class="page" data-route="shipping" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / משלוחים וזמני אספקה</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">מידע חשוב</div>
+        <h1 class="carved">משלוחים וזמני אספקה</h1>
+        <p class="lede">אנחנו עושים הכל כדי שההדפסה תהיה מהירה והמשלוח יעיל, בלי להתפשר על האיכות.</p>
+      </div>
+      <div class="prose rv">
+        <h2>תהליך ההדפסה</h2>
+        <p>כל פריט מודפס בתלת־ממד רק אחרי שההזמנה מתקבלת, ולכן זמן ההדפסה והגימור הם חלק מזמן האספקה. בדרך כלל זה לוקח <strong>1–4 ימי עסקים</strong>, לפי גודל החפץ ומורכבותו. הקדשה אישית עשויה להוסיף יום או יומיים.</p>
+        <h2>זמני משלוח (אחרי סיום ההדפסה)</h2>
+      </div>
+      <div class="ship">
+        <div class="panel rv"><b>שליח עד הבית</b><span class="t">2–4 ימי עסקים</span><p class="lede" style="font-size:.93rem;margin-top:8px">לפי אזור החלוקה.</p></div>
+        <div class="panel rv"><b>נקודת איסוף או לוקר</b><span class="t">3–5 ימי עסקים</span><p class="lede" style="font-size:.93rem;margin-top:8px">מרגע שליחת החבילה.</p></div>
+        <div class="panel rv"><b>איסוף עצמי מהסטודיו</b><span class="t">בתיאום מראש</span><p class="lede" style="font-size:.93rem;margin-top:8px">נעדכן בהודעה כשההזמנה מוכנה לאיסוף.</p></div>
+      </div>
+      <div class="prose rv">
+        <h2>מעקב אחר המשלוח</h2>
+        <p>כשההזמנה מודפסת, ארוזה ומוכנה ליציאה, נשלח לכם עדכון בוואטסאפ או במייל עם מספר מעקב, כדי שתוכלו לדעת בכל רגע איפה החבילה.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== returns ===== -->
+  <section class="page" data-route="returns" hidden>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="מיקום"><a href="#/">דף הבית</a> / החזרות וביטולים</nav>
+      <div class="page-hero rv">
+        <div class="eyebrow">מידע חשוב</div>
+        <h1 class="carved">מדיניות החזרות וביטולים</h1>
+        <p class="lede">אנחנו בטוחים באיכות החפצים שאנחנו מדפיסים. ומכיוון שכל פריט נוצר במיוחד עבורכם, מדיניות ההחזרות מותאמת לאופי העבודה.</p>
+      </div>
+      <div class="prose rv">
+        <h2>ביטול הזמנה</h2>
+        <p>ההדפסות נעשות לפי הזמנה ובהתאמה אישית, כמו הקדשה. לכן אפשר לבטל הזמנה רק לפני שהייצור התחיל בפועל. רוצים לבטל? <a href="#/support">פנו אלינו</a> מהר ככל האפשר. אם ההדפסה כבר התחילה או הסתיימה, לא ניתן לבטל ולקבל החזר כספי מלא.</p>
+        <h2>פריט פגום או שגוי</h2>
+        <p>קיבלתם פריט שהודפס בצורה לקויה, נשבר במשלוח או לא תואם להזמנה? פנו אלינו <strong>תוך 48 שעות</strong> מקבלת המשלוח, עם תמונה של הפגם. נדפיס ונשלח פריט חלופי בלי תוספת תשלום, או נזכה אתכם.</p>
+        <h2>החזרת פריט שאינו פגום</h2>
+        <p>פריט שיוצר והודפס במיוחד עבור לקוח אינו ניתן להחזרה, בהתאם לחוק הגנת הצרכן (טובין שיוצרו במיוחד עבור הצרכן). בפריטים כלליים לגמרי, ולפנים משורת הדין בלבד, צרו קשר ונבחן את הבקשה. ייתכנו דמי ביטול ומשלוח כחוק.</p>
+        <h2>איך פונים אלינו?</h2>
+        <p>לכל שאלה על ביטולים והחזרות כתבו ל־<a href="mailto:polymode3d@gmail.com">polymode3d@gmail.com</a> או <a href="https://wa.me/972546843548" target="_blank" rel="noopener">בוואטסאפ</a>, וציינו את מספר ההזמנה.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="#/"><b>אור בראשית</b></a>
+        <p class="about">יודאיקה בהדפסת תלת־ממד ובגימור ידני. חפצי קודש שנבנים שכבה אחר שכבה, בהזמנה אישית ובקבצים דיגיטליים.</p>
+      </div>
+      <div>
+        <h4>ניווט מהיר</h4>
+        <ul>
+          <li><a href="#collection">קולקציה / חנות</a></li>
+          <li><a href="#/guide">מדריך הדפסה פיזית</a></li>
+          <li><a href="#/specials">מבצעים</a></li>
+          <li><a href="#/support">תמיכה ושירות לקוחות</a></li>
+        </ul>
+        <h4 class="sub">טלגרם</h4>
+        <ul>
+          <li><a href="https://t.me/POLYMODE3DBOT" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.8c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.7 13.4l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4z"/></svg>תמיכה אישית וקטלוג</a></li>
+          <li><a href="https://t.me/+K04URryHB1Q5ZTU0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.8c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.7 13.4l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4z"/></svg>ערוץ עדכונים ומוצרים</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>צור קשר</h4>
+        <ul>
+          <li><a href="tel:0546843548"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 3h3.5l1.7 4.3-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1L21 15.5V19a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.2 2 2 0 0 1 5 3z"/></svg><span class="ltr">054-684-3548</span></a></li>
+          <li><a href="mailto:polymode3d@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg><span class="ltr">polymode3d@gmail.com</span></a></li>
+          <li><a href="https://wa.me/972546843548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>מידע חשוב</h4>
+        <ul>
+          <li><a href="#/licenses">רישיונות דיגיטליים</a></li>
+          <li><a href="#/privacy">מדיניות פרטיות</a></li>
+          <li><a href="#/shipping">משלוחים וזמני אספקה</a></li>
+          <li><a href="#/returns">מדיניות החזרות וביטולים</a></li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/profile.php?id=61585997738460&amp;locale=he_IL" target="_blank" rel="noopener" aria-label="פייסבוק"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.4V21z"/></svg></a>
+          <a href="https://t.me/+K04URryHB1Q5ZTU0" target="_blank" rel="noopener" aria-label="טלגרם"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.8c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.7 13.4l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4z"/></svg></a>
+          <a href="https://www.instagram.com/polymode.3d/" target="_blank" rel="noopener" aria-label="אינסטגרם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 אור בראשית · כל הזכויות שמורות</span><span>א׳–ה׳ 9:00–17:00</span></div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="סל קניות" inert>
+  <header><h3>הסל שלך <span class="badge" id="cartCount2">0</span></h3><button class="close" type="button" id="closeCart" aria-label="סגירת הסל">×</button></header>
+  <div class="cart-scroll">
+    <ul class="lines" id="lines"></ul>
+    <div class="cbox" id="addrBox" hidden>
+      <label for="shipAddr">כתובת למשלוח</label>
+      <textarea id="shipAddr" rows="3" placeholder="עיר, רחוב, מספר בית ודירה"></textarea>
+    </div>
+    <div class="cbox" id="couponBox" hidden>
+      <label for="couponInput">קוד קופון</label>
+      <div class="coupon"><input id="couponInput" type="text" placeholder="הזינו קוד קופון" autocomplete="off"><button class="btn btn-ghost" type="button" id="couponApply">החל</button></div>
+      <p class="coupon-msg" id="couponMsg" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="summary">
+    <div class="sum-row"><span>סיכום ביניים</span><span id="subtotal">₪0</span></div>
+    <div class="sum-row disc" id="discRow" hidden><span id="discLabel">הנחת קופון</span><span id="discount">−₪0</span></div>
+    <div class="sum-row grand"><span>סה״כ</span><span id="total">₪0</span></div>
+    <p class="pay-note">לביצוע הרכישה ותיאום תשלום, לחצו על הכפתור למעבר לוואטסאפ או התקשרו:<a href="tel:0546843548">054-684-3548</a></p>
+    <a class="btn btn-primary wa-btn" id="checkout" href="https://wa.me/972546843548" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg> שליחת הזמנה לוואטסאפ</a>
+  </div>
+</aside>
+
+<dialog class="qv" id="quickView" aria-label="תצוגה מהירה">
+  <div class="dlg">
+    <button class="close dlg-close" type="button" id="qvClose" aria-label="סגירה">×</button>
+    <div class="qside"><div class="qmedia" id="qvMedia"></div><div class="qthumbs" id="qvThumbs"></div></div>
+    <div class="qinfo">
+      <div class="eyebrow" id="qvCat"></div>
+      <h3 id="qvName"></h3>
+      <div class="pprice" id="qvPrice"></div>
+      <p class="qdesc" id="qvDesc"></p>
+      <div class="qfacts" id="qvFacts"></div>
+      <div class="pbuy">
+        <button class="add phys" type="button" id="qvPhys"><span class="go">הזמנה פיזית (הדפסה)</span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>
+        <a class="add file" id="qvFile" href="#" target="_blank" rel="noopener"><span class="go">לרכישת קובץ דיגיטלי</span></a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="loginDlg">
+  <form class="dlg" id="loginForm">
+    <div class="dlg-top">
+      <div><div class="eyebrow">ברוכים הבאים</div><h3>כניסה לחשבון</h3></div>
+      <button class="close" type="button" id="closeLogin" aria-label="סגירה">×</button>
+    </div>
+    <div class="field"><label for="loginEmail">דוא״ל</label><input id="loginEmail" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="loginPass">סיסמה</label><input id="loginPass" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-primary" type="submit">כניסה</button>
+    <p class="note">עוד אין לכם חשבון? <a href="#" id="signupLink">הרשמה</a></p>
+  </form>
+</dialog>
+
+<button class="ask-fab" type="button" id="askFab" aria-controls="ask" aria-expanded="false"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="manea" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#manea)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>צ'אט עם ארי</button>
+<section class="ask" id="ask" role="dialog" aria-label="ארי, העוזר החכם של אור בראשית" inert>
+  <div class="ask-head"><svg class="lion" viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="maneb" cx="50%" cy="55%" r="55%"><stop offset=".45" stop-color="#E0A04A"/><stop offset="1" stop-color="#8A5A22"/></radialGradient></defs><polygon points="16.0,2.0 18.9,6.2 23.5,4.0 23.9,9.1 29.0,9.5 26.8,14.1 31.0,17.0 26.8,19.9 29.0,24.5 23.9,24.9 23.5,30.0 18.9,27.8 16.0,32.0 13.1,27.8 8.5,30.0 8.1,24.9 3.0,24.5 5.2,19.9 1.0,17.0 5.2,14.1 3.0,9.5 8.1,9.1 8.5,4.0 13.1,6.2" fill="url(#maneb)"/><circle cx="10.6" cy="11" r="2.5" fill="#D9A45E"/><circle cx="21.4" cy="11" r="2.5" fill="#D9A45E"/><circle cx="10.6" cy="11" r="1.2" fill="#9B6429"/><circle cx="21.4" cy="11" r="1.2" fill="#9B6429"/><circle cx="16" cy="17.5" r="8.4" fill="#F0D199"/><circle cx="13" cy="16" r="1.05" fill="#3A2615"/><circle cx="19" cy="16" r="1.05" fill="#3A2615"/><ellipse cx="16" cy="20.6" rx="3.7" ry="2.8" fill="#FFF1D6"/><path d="M14.5 18.5h3L16 20.2z" fill="#5A3418"/><path d="M16 20.2v1.1m0 0c-.7.8-1.7.8-2.3.2m2.3-.2c.7.8 1.7.8 2.3.2" stroke="#5A3418" stroke-width=".7" fill="none" stroke-linecap="round"/></svg>
+    <div><b>ארי · העוזר החכם</b><small>מוצרים, הזמנות, הקדשות ומשלוחים</small></div>
+    <button class="close" type="button" id="askClose" aria-label="סגירת הצ'אט">×</button>
+  </div>
+  <div class="ask-log" id="askLog" aria-live="polite">
+    <div class="msg bot">שלום, אני ארי מאור בראשית. מחפשים מתנה, חפץ לשבת או משהו לזכר יקירים? ספרו לי למי ולאיזה אירוע, ואמליץ על מה שהכי מתאים.</div>
+  </div>
+  <div class="ask-sugg" id="askSugg">
+    <button type="button">מתנה עד ₪100</button>
+    <button type="button">מה מתאים לחנוכת בית?</button>
+    <button type="button">כמה זמן לוקח משלוח?</button>
+    <button type="button">איך מזמינים הקדשה אישית?</button>
+  </div>
+  <form class="ask-form" id="askForm">
+    <textarea id="askInput" rows="1" placeholder="כתבו לארי..." aria-label="הודעה לארי"></textarea>
+    <button class="ask-go" type="submit" id="askGo" aria-label="שליחה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+  </form>
+  <p class="ask-foot">ארי הוא עוזר דיגיטלי ועלול לטעות. כדאי לוודא פרטים חשובים מול הצוות.</p>
+</section>
+
+<div class="toast" id="toast" hidden role="status"></div>
+</div>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TILT = 0.17;
+  const MATS = {
+    stone:{hi:'#F4ECDF',mid:'#CDBA9C',lo:'#6C5943'},
+    basalt:{hi:'#A7A098',mid:'#5A544E',lo:'#1E1C1A'},
+    brass:{hi:'#F6DC99',mid:'#B8873F',lo:'#4A3112'},
+    wax:{hi:'#FFFCF4',mid:'#EFE5D2',lo:'#B8A98C'}
+  };
+  let finish = 'stone';
+
+  function curve(pts){
+    return t=>{
+      if(t<=pts[0][0]) return pts[0][1];
+      for(let i=1;i<pts.length;i++){
+        if(t<=pts[i][0]){
+          const [t0,r0]=pts[i-1],[t1,r1]=pts[i];
+          const u=(t-t0)/((t1-t0)||1), s=u*u*(3-2*u);
+          return r0+(r1-r0)*s;
+        }
+      }
+      return pts[pts.length-1][1];
+    };
+  }
+  function candlestick(x, h){
+    const k=h/.62;
+    return [
+      {x,y0:0,h,open:false,prof:curve([[0,.13],[.05,.13],[.08,.1],[.13,.04],[.3,.03],[.36,.055],[.42,.03],[.62,.028],[.68,.05],[.74,.028],[.86,.035],[.93,.072],[1,.078]].map(p=>[p[0],p[1]*Math.min(1,k*1.05)]))},
+      {x,y0:h,h:.2,mat:'wax',flame:true,prof:()=>.024}
+    ];
+  }
+
+  const MODELS = {
+    hero: {mm:200, parts:[
+      {x:0,y0:0,h:.4,open:true,tealight:true,flame:true,flameDy:.008,glowR:2.1,prof:curve([[0,.196],[.03,.2],[1,.2]])},
+      {x:0,y0:.4,h:.74,shell:true,R:.186,engrave:'יזכור',engraveAt:.3,
+        prof:t=>.186*Math.sqrt(Math.max(0,1-Math.pow(t,2.2)))*Math.pow(Math.max(0,1-t),.35)}
+    ]},
+    candles:{mm:240, parts:[...candlestick(-.17,.6), ...candlestick(.17,.6)]},
+    kiddush:{mm:180, parts:[{x:0,y0:0,h:.8,open:true,prof:curve([[0,.2],[.04,.2],[.07,.15],[.16,.05],[.3,.03],[.4,.048],[.46,.03],[.52,.036],[.6,.12],[.75,.17],[.9,.19],[1,.198]])}]},
+    menorah:{mm:210, parts:(()=>{
+      const p=[{x:0,y0:0,h:.07,prof:curve([[0,.46],[.6,.46],[1,.43]])}];
+      for(let i=-4;i<=4;i++){
+        if(i===0) p.push({x:0,y0:.07,h:.46,flame:true,open:true,prof:curve([[0,.034],[.8,.022],[.88,.046],[1,.046]])});
+        else p.push({x:i*.1,y0:.07,h:.32,flame:true,open:true,prof:curve([[0,.03],[.78,.02],[.88,.04],[1,.04]])});
+      }
+      return p;})()},
+    besamim:{mm:200, parts:[{x:0,y0:0,h:.9,prof:curve([[0,.14],[.05,.14],[.09,.05],[.3,.03],[.36,.052],[.4,.03],[.46,.04],[.56,.13],[.66,.14],[.74,.06],[.78,.035],[.9,.02],[.97,.008],[1,0]])}]},
+    mezuzah:{mm:150, parts:[{x:0,y0:0,h:.95,prof:curve([[0,.06],[.03,.06],[.045,.075],[.075,.075],[.09,.055],[.3,.055],[.31,.062],[.33,.055],[.6,.055],[.61,.062],[.63,.055],[.9,.055],[.915,.075],[.95,.075],[.965,.06],[.99,.045],[1,.02]])}]},
+    seder:{mm:90, parts:[
+      {x:0,y0:0,h:.12,open:false,prof:curve([[0,.28],[.25,.3],[.5,.44],[1,.5]])},
+      {x:-.27,y0:.12,h:.11,open:true,prof:curve([[0,.05],[.4,.07],[1,.075]])},
+      {x:0,y0:.12,h:.11,open:true,prof:curve([[0,.05],[.4,.07],[1,.075]])},
+      {x:.27,y0:.12,h:.11,open:true,prof:curve([[0,.05],[.4,.07],[1,.075]])}
+    ]}
+  };
+
+  class Printer{
+    constructor(canvas, model, opts){
+      this.c=canvas; this.ctx=canvas.getContext('2d'); this.model=model;
+      this.step=opts.step; this.flicker=!!opts.flicker; this.onLayer=opts.onLayer;
+      this.buf=document.createElement('canvas'); this.b=this.buf.getContext('2d');
+      this.p=1; this.anim=null; this.resize();
+    }
+    resize(){
+      const r=this.c.getBoundingClientRect(); if(!r.width) return;
+      const dpr=Math.min(2,devicePixelRatio||1);
+      this.W=r.width; this.H=r.height;
+      for(const cv of [this.c,this.buf]){cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);}
+      this.ctx.setTransform(dpr,0,0,dpr,0,0); this.b.setTransform(dpr,0,0,dpr,0,0);
+      const parts=this.model.parts;
+      let top=0, ext=0, baseR=0;
+      for(const p of parts){
+        const hasFlame=p.flame?.09:0;
+        top=Math.max(top,p.y0+p.h+hasFlame);
+        let mr=0; for(let i=0;i<=40;i++) mr=Math.max(mr,p.prof(i/40));
+        p.maxR=mr; ext=Math.max(ext,Math.abs(p.x)+mr);
+        if(p.y0===0) baseR=Math.max(baseR,mr);
+      }
+      const archPad=this.H*.14;
+      const unit=Math.min((this.H-archPad-this.H*.08)/(top+baseR*TILT), this.W*.84/(2*ext));
+      this.unit=unit;
+      const total=top*unit+baseR*TILT*unit;
+      this.baseY=archPad+(this.H-archPad-total)/2+top*unit;
+      this.N=Math.floor(parts.reduce((m,p)=>Math.max(m,p.y0+p.h),0)*unit/this.step);
+      this.drawn=-1; this.b.clearRect(0,0,this.W,this.H);
+      this.render(performance.now());
+    }
+    mat(p){return MATS[p.mat||this.finish||finish];}
+    layer(i){
+      const b=this.b, y=this.baseY-i*this.step, yu=i*this.step/this.unit;
+      for(const p of this.model.parts){
+        if(yu<p.y0||yu>p.y0+p.h) continue;
+        const t=(yu-p.y0)/p.h, r=p.prof(t)*this.unit;
+        if(r<.6) continue;
+        const cx=this.W/2+p.x*this.unit, m=this.mat(p);
+        if(p.shell){
+          // inner face of a curved panel: the back arc of the cylinder, narrowed to the panel's width
+          const R=p.R*this.unit, th=Math.acos(Math.min(1,r/R)), a0=Math.PI+th, a1=2*Math.PI-th;
+          const gs=b.createLinearGradient(cx-r,0,cx+r,0);
+          // concave: light falls on the far (right) inner wall, the near side sits in shadow
+          gs.addColorStop(0,m.hi); gs.addColorStop(.09,m.lo); gs.addColorStop(.42,m.mid); gs.addColorStop(.78,m.hi); gs.addColorStop(.96,m.mid); gs.addColorStop(1,m.hi);
+          b.beginPath(); b.ellipse(cx,y,R,R*TILT,0,a0,a1);
+          b.strokeStyle=gs; b.lineWidth=this.step*1.15; b.stroke();
+          b.beginPath(); b.ellipse(cx,y+this.step*.42,R,R*TILT,0,a0,a1);
+          b.strokeStyle=m.lo; b.globalAlpha=.12; b.lineWidth=Math.max(.5,this.step*.22); b.stroke(); b.globalAlpha=1;
+          // the panel's cut edges, facing the viewer
+          const ey=y-R*TILT*Math.sin(th), edge=Math.max(1.5,this.unit*.022);
+          b.fillStyle=m.hi; b.fillRect(cx+r-edge*.2,ey-this.step*.6,edge,this.step*1.2);
+          b.fillStyle=m.mid; b.fillRect(cx-r-edge*.8,ey-this.step*.6,edge,this.step*1.2);
+          continue;
+        }
+        const g=b.createLinearGradient(cx-r,0,cx+r,0);
+        g.addColorStop(0,m.mid); g.addColorStop(.3,m.hi); g.addColorStop(.58,m.mid); g.addColorStop(1,m.lo);
+        b.beginPath(); b.ellipse(cx,y,r,r*TILT,0,0,Math.PI);
+        b.strokeStyle=g; b.lineWidth=this.step*1.15; b.stroke();
+        b.beginPath(); b.ellipse(cx,y+this.step*.42,r,r*TILT,0,0,Math.PI);
+        b.strokeStyle=m.lo; b.globalAlpha=.16; b.lineWidth=Math.max(.5,this.step*.22); b.stroke(); b.globalAlpha=1;
+        const topI=Math.floor((p.y0+p.h)*this.unit/this.step);
+        if(i===topI) this.cap(b,p,cx,y,r,m,1);
+      }
+    }
+    cap(ctx,p,cx,y,r,m,alpha){
+      ctx.globalAlpha=alpha;
+      const g=ctx.createLinearGradient(cx-r,y-r*TILT,cx+r,y+r*TILT);
+      g.addColorStop(0,m.hi); g.addColorStop(1,m.mid);
+      ctx.beginPath(); ctx.ellipse(cx,y,r,r*TILT,0,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+      if(p.open){
+        ctx.beginPath(); ctx.ellipse(cx,y+r*TILT*.08,r*.84,r*TILT*.8,0,0,Math.PI*2);
+        const gi=ctx.createLinearGradient(0,y-r*TILT,0,y+r*TILT); gi.addColorStop(0,m.lo); gi.addColorStop(1,m.mid);
+        ctx.fillStyle=gi; ctx.fill();
+        if(p.tealight&&alpha===1){
+          const tr=r*.6, ty=y+r*TILT*.22, w=MATS.wax;
+          ctx.beginPath(); ctx.ellipse(cx,ty+tr*TILT*.4,tr,tr*TILT,0,0,Math.PI*2); ctx.fillStyle=w.lo; ctx.fill();
+          const gw=ctx.createLinearGradient(cx-tr,0,cx+tr,0); gw.addColorStop(0,w.mid); gw.addColorStop(.4,w.hi); gw.addColorStop(1,w.mid);
+          ctx.beginPath(); ctx.ellipse(cx,ty,tr,tr*TILT,0,0,Math.PI*2); ctx.fillStyle=gw; ctx.fill();
+          ctx.beginPath(); ctx.ellipse(cx,ty,tr*.8,tr*TILT*.8,0,0,Math.PI*2); ctx.strokeStyle='rgba(150,130,100,.35)'; ctx.lineWidth=1; ctx.stroke();
+        }
+      }
+      ctx.globalAlpha=1;
+    }
+    render(now){
+      if(!this.W) return;
+      const ctx=this.ctx, k=Math.floor(this.p*this.N);
+      if(k<this.drawn){this.b.clearRect(0,0,this.W,this.H);this.drawn=-1;}
+      for(let i=this.drawn+1;i<=k;i++) this.layer(i);
+      this.drawn=Math.max(this.drawn,k);
+      ctx.clearRect(0,0,this.W,this.H);
+      ctx.drawImage(this.buf,0,0,this.W,this.H);
+      for(const p of this.model.parts){
+        if(!p.engrave) continue;
+        const cx=this.W/2+p.x*this.unit, ty=this.baseY-(p.y0+p.h*p.engraveAt)*this.unit, m=this.mat(p);
+        const printY=this.p>=1?0:this.baseY-k*this.step;
+        ctx.save(); ctx.beginPath(); ctx.rect(0,printY,this.W,this.H); ctx.clip();
+        ctx.font=`700 ${Math.round(this.unit*.07)}px Assistant, "IBM Plex Sans Hebrew", sans-serif`;
+        ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.direction='rtl';
+        ctx.globalAlpha=.55; ctx.fillStyle=m.hi; ctx.fillText(p.engrave,cx,ty+1.2);
+        ctx.globalAlpha=.78; ctx.fillStyle=m.lo; ctx.fillText(p.engrave,cx,ty);
+        ctx.restore();
+      }
+      if(this.p<1){
+        const y=this.baseY-k*this.step, yu=k*this.step/this.unit;
+        ctx.strokeStyle='rgba(210,160,90,.35)'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(this.W*.08,y); ctx.lineTo(this.W*.92,y); ctx.stroke();
+        for(const p of this.model.parts){
+          if(yu<p.y0||yu>p.y0+p.h) continue;
+          const r=p.prof((yu-p.y0)/p.h)*this.unit; if(r<.6) continue;
+          const cx=this.W/2+p.x*this.unit;
+          let nx,ny;
+          if(p.shell){
+            const R=p.R*this.unit, th=Math.acos(Math.min(1,r/R));
+            const a=Math.PI+th+(Math.PI-2*th)*(.5+.5*Math.sin(now/260));
+            nx=cx+R*Math.cos(a); ny=y+R*TILT*Math.sin(a);
+          } else {
+            this.cap(ctx,p,cx,y,r,this.mat(p),.55);
+            const a=(now/260+p.x*7)%(Math.PI*2);
+            nx=cx+r*Math.cos(a); ny=y+r*TILT*Math.sin(a);
+          }
+          const gl=ctx.createRadialGradient(nx,ny,0,nx,ny,14);
+          gl.addColorStop(0,'rgba(255,236,190,1)'); gl.addColorStop(.25,'rgba(255,184,102,.8)'); gl.addColorStop(1,'rgba(255,160,70,0)');
+          ctx.fillStyle=gl; ctx.beginPath(); ctx.arc(nx,ny,14,0,Math.PI*2); ctx.fill();
+        }
+      } else {
+        const lit=this.lit==null?1:this.lit;
+        if(lit>0) for(const p of this.model.parts) if(p.flame) this.flame(p,now,lit);
+      }
+      if(this.onLayer) this.onLayer(k,this.N);
+    }
+    flame(p,now,lit){
+      const ctx=this.ctx, cx=this.W/2+p.x*this.unit, topY=this.baseY-(p.y0+p.h)*this.unit;
+      const s=this.unit/420;
+      const f=this.flicker&&!reduce ? 1+Math.sin(now/90+p.x*20)*.06+Math.sin(now/37+p.x*9)*.04 : 1;
+      const sway=this.flicker&&!reduce ? Math.sin(now/210+p.x*13)*2*s : 0;
+      const fh=Math.max(9,34*s)*f*lit, fw=Math.max(3.5,10*s)*lit, fy=topY+(p.flameDy||0)*this.unit-2*s;
+      const R=Math.max(26,110*s*(p.glowR||1))*lit;
+      const glow=ctx.createRadialGradient(cx,fy-fh*.5,0,cx,fy-fh*.5,R);
+      glow.addColorStop(0,'rgba(255,196,110,.5)'); glow.addColorStop(1,'rgba(255,170,80,0)');
+      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(cx,fy-fh*.5,R,0,Math.PI*2); ctx.fill();
+      const g=ctx.createLinearGradient(0,fy-fh,0,fy);
+      g.addColorStop(0,'rgba(255,190,90,.9)'); g.addColorStop(.55,'#FFE7B0'); g.addColorStop(1,'rgba(255,255,245,1)');
+      ctx.beginPath(); ctx.moveTo(cx+sway,fy-fh);
+      ctx.quadraticCurveTo(cx+fw,fy-fh*.35,cx,fy);
+      ctx.quadraticCurveTo(cx-fw,fy-fh*.35,cx+sway,fy-fh);
+      ctx.fillStyle=g; ctx.fill();
+      ctx.strokeStyle='rgba(40,30,20,.7)'; ctx.lineWidth=Math.max(1,1.4*s);
+      ctx.beginPath(); ctx.moveTo(cx,fy+1); ctx.lineTo(cx,fy-fh*.22); ctx.stroke();
+    }
+    print(ms, done){
+      if(reduce){this.p=1;this.lit=1;this.render(performance.now());done&&done();return;}
+      cancelAnimationFrame(this.anim);
+      const t0=performance.now(); this.lit=0; this.p=0;
+      const tick=now=>{
+        const u=Math.min(1,(now-t0)/ms);
+        this.p=u<1?1-Math.pow(1-u,1.4):1;
+        this.render(now);
+        if(u<1) this.anim=requestAnimationFrame(tick);
+        else {this.lit=1; this.render(now); done&&done();}
+      };
+      this.anim=requestAnimationFrame(tick);
+    }
+  }
+
+  const fmt=n=>n.toLocaleString('he-IL');
+
+  /* ---------- intro gate ---------- */
+  (function intro(){
+    const root=document.getElementById('intro');
+    const cv=document.getElementById('dust'), ctx=cv.getContext('2d');
+    let W,H,dpr,parts=[],t0=0,raf=0,active=true,revealed=false,textTop=0,textBot=0;
+    const mouse={x:-9999,y:-9999};
+    const PRINT_MS=2600;
+    const meterTxt=document.getElementById('meterTxt'), meterBar=document.getElementById('meterBar');
+
+    function build(){
+      // an embedding frame may be taller than the screen; fit the gate to what the viewer can actually see
+      // fill the whole window; only when embedded in a frame taller than the screen, estimate what's visible
+      const tallFrame=innerHeight>(screen.availHeight||innerHeight);
+      const visible=tallFrame?(screen.availHeight-140):innerHeight;
+      root.style.height=Math.max(520,visible)+'px';
+      const r=root.getBoundingClientRect(); W=r.width; H=r.height;
+      if(W<2||H<2){W=W||0;H=H||0;return;}   // not laid out yet; the resize observer below retries
+      dpr=Math.min(2,devicePixelRatio||1);
+      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+      const fs=Math.min(W*.2,H*.26,230);
+      const off=document.createElement('canvas'); off.width=Math.ceil(W); off.height=Math.ceil(H);
+      const o=off.getContext('2d');
+      o.direction='rtl'; o.textAlign='center'; o.textBaseline='middle';
+      o.font=`400 ${fs}px Bellefair, "Frank Ruhl Libre", serif`;
+      o.fillStyle='#fff';
+      const cy=H*.55;
+      o.fillText('אור בראשית',W/2,cy);
+      const gap=W<640?3:4;
+      const data=o.getImageData(0,0,off.width,off.height).data;
+      const old=parts; parts=[]; textTop=Infinity; textBot=0;
+      for(let y=0;y<off.height;y+=gap){
+        for(let x=0;x<off.width;x+=gap){
+          if(data[(y*off.width+x)*4+3]>140){
+            textTop=Math.min(textTop,y); textBot=Math.max(textBot,y);
+            parts.push({tx:x,ty:y});
+          }
+        }
+      }
+      const span=Math.max(1,textBot-textTop);
+      // place the logo midway between the verse and the top of the name, sized to the space
+      const logoEl=document.getElementById('introLogo'), verseEl=document.getElementById('verse');
+      if(logoEl&&verseEl&&textTop<Infinity){
+        const rr=root.getBoundingClientRect(), vb=verseEl.getBoundingClientRect().bottom-rr.top;
+        const gap=textTop-vb, h=Math.min(96,gap*.62);
+        logoEl.hidden=h<34;
+        if(!logoEl.hidden){
+          logoEl.style.top=Math.round(vb+(gap-h)/2)+'px';
+          logoEl.firstElementChild.style.height=Math.round(h)+'px';
+        }
+      }
+      parts.forEach((p,i)=>{
+        const prev=old[i];
+        p.x=prev?prev.x:W*Math.random(); p.y=prev?prev.y:H+20+Math.random()*H*.4;
+        p.sx=p.x; p.sy=p.y;
+        p.delay=(1-(p.ty-textTop)/span)*PRINT_MS*.78+Math.random()*260;
+        p.dur=700+Math.random()*500;
+        p.vx=0; p.vy=0; p.ox=0; p.oy=0;
+        p.s=gap<4?1.5:1.9+Math.random()*.5;
+        const shade=(p.ty-textTop)/span;
+        p.c=shade<.5?(Math.random()<.18?'#FFE2A8':'#E9C88F'):(Math.random()<.12?'#F6DDB0':'#C99A58');
+        p.ph=Math.random()*Math.PI*2;
+      });
+    }
+
+    function frame(now){
+      if(!t0) t0=now;
+      const el=now-t0;
+      ctx.clearRect(0,0,W,H);
+      const ease=u=>1-Math.pow(1-u,3);
+      let settled=0, scanY=H;
+      // ambient glow behind text once printed
+      const glowA=Math.min(1,Math.max(0,(el-PRINT_MS*.7)/1200));
+      if(glowA>0){
+        const cy=(textTop+textBot)/2, g=ctx.createRadialGradient(W/2,cy,0,W/2,cy,Math.max(W,H)*.45);
+        g.addColorStop(0,`rgba(240,180,100,${.16*glowA})`); g.addColorStop(1,'rgba(240,180,100,0)');
+        ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      }
+      for(const p of parts){
+        const u=Math.min(1,Math.max(0,(el-p.delay)/p.dur));
+        let x,y;
+        if(u<1||reduce){
+          if(reduce){x=p.tx;y=p.ty;}
+          else{
+            const e=ease(u);
+            x=p.sx+(p.tx-p.sx)*e+Math.sin(u*Math.PI)*(p.tx-W/2)*.08;
+            y=p.sy+(p.ty-p.sy)*e;
+          }
+          if(u>0&&u<1) scanY=Math.min(scanY,p.ty);
+        } else {
+          settled++;
+          // mouse repulsion with spring return
+          const dx=p.tx+p.ox-mouse.x, dy=p.ty+p.oy-mouse.y, d2=dx*dx+dy*dy, R=95;
+          if(d2<R*R){const d=Math.sqrt(d2)||1,f=(1-d/R)*2.4;p.vx+=dx/d*f;p.vy+=dy/d*f;}
+          p.vx+=-p.ox*.06; p.vy+=-p.oy*.06; p.vx*=.84; p.vy*=.84; p.ox+=p.vx; p.oy+=p.vy;
+          x=p.tx+p.ox+Math.sin(now/900+p.ph)*.35; y=p.ty+p.oy+Math.cos(now/1100+p.ph)*.35;
+        }
+        if(u<=0&&!reduce){ // dormant dust drifting at the floor
+          x=p.sx+Math.sin(now/700+p.ph)*3; y=p.sy;
+          if(y>H) continue;
+        }
+        ctx.globalAlpha=u<1&&!reduce?.35+.65*u:1;
+        ctx.fillStyle=p.c; ctx.fillRect(x,y,p.s,p.s);
+      }
+      ctx.globalAlpha=1;
+      const prog=parts.length?settled/parts.length:1;
+      // print-head scan line
+      if(prog<1&&!reduce&&scanY<H){
+        const g=ctx.createLinearGradient(W*.1,0,W*.9,0);
+        g.addColorStop(0,'rgba(255,200,120,0)'); g.addColorStop(.5,'rgba(255,214,150,.75)'); g.addColorStop(1,'rgba(255,200,120,0)');
+        ctx.fillStyle=g; ctx.fillRect(W*.1,scanY,W*.8,1.2);
+        const hx=W/2+Math.sin(now/180)*W*.3;
+        const hg=ctx.createRadialGradient(hx,scanY,0,hx,scanY,26);
+        hg.addColorStop(0,'rgba(255,238,200,1)'); hg.addColorStop(.3,'rgba(255,184,102,.7)'); hg.addColorStop(1,'rgba(255,160,70,0)');
+        ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(hx,scanY,26,0,Math.PI*2); ctx.fill();
+      }
+      const shown=reduce?1:prog;
+      meterTxt.textContent='שכבה '+fmt(Math.round(shown*1850))+' / '+fmt(1850);
+      meterBar.style.setProperty('--p',shown);
+      if(!revealed&&(el>PRINT_MS*.55||reduce)) revealed=true, document.querySelectorAll('.intro .reveal').forEach((n,i)=>setTimeout(()=>n.classList.add('on'),reduce?0:i*260));
+      if(active) raf=requestAnimationFrame(frame);
+    }
+
+    root.addEventListener('pointermove',e=>{
+      const r=root.getBoundingClientRect();
+      mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;
+      root.style.setProperty('--mx',(mouse.x/W*100)+'%'); root.style.setProperty('--my',(mouse.y/H*100)+'%');
+    });
+    root.addEventListener('pointerleave',()=>{mouse.x=mouse.y=-9999;});
+    document.getElementById('enterBtn').addEventListener('click',()=>{
+      document.getElementById('site').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    });
+    addEventListener('resize',build);
+    let lastW=0;
+    new ResizeObserver(es=>{const w=Math.round(es[0].contentRect.width);if(w&&w!==lastW){lastW=w;build();}}).observe(root);
+    // fade the opening screen as the page scrolls past it
+    let ticking=false;
+    addEventListener('scroll',()=>{
+      if(ticking) return; ticking=true;
+      requestAnimationFrame(()=>{ticking=false;const sp=Math.min(1,Math.max(0,scrollY/(H||1)));root.style.setProperty('--sp',reduce?0:sp.toFixed(3));});
+    },{passive:true});
+    // menu bar: hidden while the opening screen is (almost) fully in view
+    const topbar=document.getElementById('topbar');
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>{
+        const e=es[es.length-1];
+        topbar.classList.toggle('away',e.intersectionRatio>.92);
+      },{threshold:[0,.25,.5,.75,.85,.92,.96,1]}).observe(root);
+    } else topbar.classList.remove('away');
+    // pause the dust while the opening screen is out of view
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>{
+        const vis=es[es.length-1].isIntersecting;
+        if(vis&&!active&&t0){active=true;raf=requestAnimationFrame(frame);}
+        else if(!vis){active=false;cancelAnimationFrame(raf);}
+      }).observe(root);
+    }
+
+    const start=()=>{build(); raf=requestAnimationFrame(frame);};
+    const fontReady=document.fonts&&document.fonts.load?Promise.race([document.fonts.load('400 120px Bellefair'),new Promise(r=>setTimeout(r,1500))]):Promise.resolve();
+    fontReady.then(start,start);
+  })();
+
+  /* ---------- collection ---------- */
+  const PRODUCTS=[{"id": "personal-memorial-candle", "cat": "judaica", "isNew": true, "name": "נר זיכרון אישי", "price": 119, "material": "PLA / PETG", "desc": "נר זיכרון אישי מעוצב ומרגש, מודפס בתלת-ממד בגימור איכותי. הפריט כולל נר חשמלי בטיחותי ומהודר המפיץ אור חם ומנחם, ויוצר פינת הנצחה מרגשת, מכבדת וייחודית בביתכם.", "images": ["img/personal-memorial-candle-1.webp", "img/personal-memorial-candle-2.webp", "img/personal-memorial-candle-3.webp", "img/personal-memorial-candle-4.webp"]}, {"id": "custom-designed-mezuzah", "cat": "judaica", "isNew": true, "name": "מזוזה בעיצוב אישי", "price": 59, "material": "PLA Silk / PETG", "desc": "בית מזוזה מעוצב בעיצוב מודרני ואלגנטי, הניתן להתאמה אישית מלאה. מודפס בתלת-ממד ברמת גימור יוצאת דופן. המזוזה משלבת הידור ומסורת עם מראה נקי המעניק סגנון ייחודי לכל פתח וכניסה.", "images": ["img/custom-designed-mezuzah-1.webp", "img/custom-designed-mezuzah-2.webp"]}, {"id": "custom-designed-netla", "cat": "judaica", "isNew": true, "name": "נטלה מעוצבת בעיצוב אישי", "price": 59, "material": "PETG / PLA", "desc": "נטלה (ספל נטילת ידיים) מעוצבת הניתנת להתאמה אישית מלאה. מודפסת בתלת-ממד ברמת גימור גבוהה, המשלבת מסורת עם חדשנות. ניתן לבחור צבעים ייחודיים ולהוסיף חריטת שם או הקדשה אישית.", "images": ["img/custom-designed-netla-1.webp", "img/custom-designed-netla-2.webp"]}, {"id": "designed-key-hanger", "cat": "home", "isNew": true, "name": "מתלה למפתחות מעוצב", "price": 79, "material": "PLA / PETG", "desc": "מתלה מפתחות מעוצב לקיר, מודפס בתלת-ממד. משלב עיצוב מודרני ואלגנטי עם פונקציונליות מושלמת לסדר בכניסה לבית, לשמור על המפתחות מאורגנים ולהוסיף חן לקיר.", "images": ["img/designed-key-hanger-1.webp", "img/designed-key-hanger-2.webp", "img/designed-key-hanger-3.webp"]}, {"id": "stone-pattern-planter", "cat": "home", "isNew": true, "name": "אדנית לעציץ דגם אבן", "price": 69, "material": "PLA Marble / Stone", "desc": "אדנית לעציץ בעיצוב דמוי אבן טבעית מודפסת בתלת-ממד. שילוב מושלם של מראה כפרי ואותנטי עם טכנולוגיה מודרנית. מתאימה לשימוש פנים ומוסיפה טאץ' עיצובי מיוחד לכל צמח.", "images": ["img/stone-pattern-planter-1.webp", "img/stone-pattern-planter-2.webp"]}, {"id": "home-stand-decorative", "cat": "home", "isNew": true, "name": "מעמד HOME לבית", "price": 79, "material": "PLA", "desc": "מעמד דקורטיבי לבית בעיצוב המילה HOME, מודפס בתלת-ממד. פריט עיצוב נקי ומרשים שמתאים לכל קונסולה או מדף, ומוסיף חום ואווירה ביתית נעימה. מושלם כמתנה מקורית או לשדרוג העיצוב בבית.", "images": ["img/home-stand-decorative-1.webp", "img/home-stand-decorative-2.webp", "img/home-stand-decorative-3.webp", "img/home-stand-decorative-4.webp"]}, {"id": "decorative-home-tray", "cat": "home", "isNew": true, "name": "מגש דקורטיבי לבית", "price": 99, "material": "PLA Silk / Marble", "desc": "מגש דקורטיבי ויוקרתי מודפס בתלת-ממד. פריט עיצובי מרשים ופונקציונלי שיוסיף טאץ' מודרני לחלל הבית. מושלם להגשה, לארגון פריטים על השולחן או כפריט נוי אלגנטי לעיצוב פנים.", "images": ["img/decorative-home-tray-1.webp", "img/decorative-home-tray-2.webp", "img/decorative-home-tray-3.webp"]}, {"id": "home-door-sign-judaica", "cat": "home", "isNew": false, "name": "שלט לבית (ניתן לבחור במגוון צבעים)", "price": 70, "material": "PLA Silk / Marble", "desc": "שלט כניסה מעוצב ומרשים לבית. ניתן להזמין במגוון שילובי צבעים וטקסטורות לבחירתכם. עיצוב נקי ויוקרתי שמוסיף חן לכל דלת כניסה.", "images": ["img/home-door-sign-judaica-1.webp", "img/home-door-sign-judaica-2.webp"]}, {"id": "hamsa-set-premium", "cat": "judaica", "isNew": false, "name": "חמסות עם מחזיקי מפתחות ומעמד, וחמסה גדולה", "price": 0, "material": "Silk Gold / Marble PLA / Wood PLA", "desc": "סט יודאיקה מרהיב הכולל חמסה גדולה דקורטיבית להצבה על המעמד, בתוספת חמסות קטנות המשמשות כמחזיקי מפתחות תואמים. עיצוב ייחודי המשלב מסורת עם נגיעה מודרנית. מתנה מושלמת לחנוכת בית, משרד חדש או אירועים משפחתיים.", "images": ["img/hamsa-set-premium-1.webp", "img/hamsa-set-premium-2.webp", "img/hamsa-set-premium-3.webp"]}, {"id": "judaica-blessing-candlesticks", "cat": "judaica", "isNew": false, "name": "פמוטים עם ברכה", "price": 150, "material": "Marble PLA / Silk Gold / White Matte", "desc": "פמוטי שבת מעוצבים הכוללים את ברכת הדלקת הנרות בחזית המודל. עיצוב אלגנטי המשלב מסורת יהודית עם טכנולוגיה מודרנית. ניתן לבחור במגוון צבעים מרהיבים, כולל טקסטורת שיש (Marble) יוקרתית או צבעי משי (Silk) מבריקים. מתנה מדהימה לחגים, שבתות, חתונה או חנוכת בית.", "images": ["img/judaica-blessing-candlesticks-1.webp", "img/judaica-blessing-candlesticks-2.webp"]}];
+  const grid=document.getElementById('grid');
+  const printers=[];
+  const CAT_NAMES={judaica:'יודאיקה',home:'לבית'};
+  const WA_NUM='972546843548';
+  const waLink=text=>'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(text);
+  const quoteOnly=p=>!p.price;
+  const EXPAND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>';
+  const priceHTML=p=>quoteOnly(p)
+    ?`<b class="quote">מחיר לפי הזמנה</b><small>הצעת מחיר אישית בוואטסאפ</small>`
+    :`<span class="from">החל מ־</span><b>₪${fmt(p.price)}</b><small>מחיר להזמנה פיזית</small>`;
+  const flash=btn=>{clearTimeout(btn._t);btn.classList.add('done');btn._t=setTimeout(()=>btn.classList.remove('done'),1600);};
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // photo stack with dots; swipe or tap a dot to change
+  function gallery(root,images,alt,onChange){
+    const frames=images.map((src,i)=>`<img src="${src}" alt="${i?'':esc(alt)}" loading="${i?'lazy':'eager'}" decoding="async" class="${i?'':'on'}">`).join('');
+    const dots=images.length>1?`<div class="pdots">${images.map((_,i)=>`<button type="button" class="${i?'':'on'}" aria-label="תמונה ${i+1} מתוך ${images.length}"></button>`).join('')}</div>`:'';
+    root.insertAdjacentHTML('afterbegin',`<div class="pframes">${frames}</div>${dots}`);
+    const imgsEl=[...root.querySelectorAll('.pframes img')], dotEls=[...root.querySelectorAll('.pdots button')];
+    let cur=0;
+    const show=i=>{
+      cur=(i+images.length)%images.length;
+      imgsEl.forEach((im,k)=>im.classList.toggle('on',k===cur));
+      dotEls.forEach((d,k)=>d.classList.toggle('on',k===cur));
+      onChange&&onChange(cur);
+    };
+    dotEls.forEach((d,k)=>d.addEventListener('click',e=>{e.stopPropagation();show(k);}));
+    let x0=null;
+    root.addEventListener('pointerdown',e=>{x0=e.clientX;});
+    root.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>36)show(cur+(dx<0?1:-1));});
+    return {show,get index(){return cur;}};
+  }
+
+  function makeCard(p,container){
+    const el=document.createElement('article');
+    el.className='pcard rv'; el.dataset.cat=p.cat;
+    const badge=p.isNew?'<span class="pbadge">חדש באתר</span>':'';
+    const physBtn=quoteOnly(p)
+      ?`<a class="add phys" href="${waLink('שלום אור בראשית, אשמח לקבל הצעת מחיר עבור: '+p.name)}" target="_blank" rel="noopener"><span class="go">לקבלת הצעת מחיר</span></a>`
+      :`<button class="add phys" type="button"><span class="go">הזמנה פיזית (הדפסה)</span><span class="ok" aria-hidden="true">נוסף לסל ✓</span></button>`;
+    el.innerHTML=`<div class="pmedia">${badge}
+        <div class="ptools"><button class="ptool pexpand" type="button" aria-label="תצוגה מהירה: ${esc(p.name)}">${EXPAND}</button></div></div>
+      <div class="pbody">
+        <div class="pmeta"><span>${CAT_NAMES[p.cat]}</span><span>הדפסה לפי הזמנה</span></div>
+        <h3>${esc(p.name)}</h3>
+        <div class="pprice">${priceHTML(p)}</div>
+        <div class="pbuy">
+          ${physBtn}
+          <a class="add file" href="${waLink('שלום אור בראשית, אשמח לרכוש את הקובץ הדיגיטלי (STL) של: '+p.name)}" target="_blank" rel="noopener"><span class="go">לרכישת קובץ דיגיטלי</span></a>
+        </div>
+      </div>`;
+    container.appendChild(el);
+    const media=el.querySelector('.pmedia');
+    const g=gallery(media,p.images,p.name);
+    media.addEventListener('click',e=>{if(e.target.closest('.pdots'))return;openQuick(p,g.index);});
+    el.querySelector('.pexpand').addEventListener('click',e=>{e.stopPropagation();openQuick(p,g.index);});
+    if(!quoteOnly(p)){const phys=el.querySelector('.add.phys');phys.addEventListener('click',()=>{addToCart(p,'phys',p.price);flash(phys);});}
+  }
+
+  /* quick view: large photos, full description and ordering */
+  let qvProduct=null, qvGallery=null;
+  function openQuick(p,start){
+    const dlg=document.getElementById('quickView');
+    qvProduct=p;
+    const media=document.getElementById('qvMedia');
+    media.innerHTML='';
+    qvGallery=gallery(media,p.images,p.name,i=>{thumbs.forEach((t,k)=>t.setAttribute('aria-pressed',String(k===i)));});
+    const tb=document.getElementById('qvThumbs');
+    tb.innerHTML=p.images.length>1?p.images.map((src,i)=>`<button type="button" aria-label="תמונה ${i+1}"><img src="${src}" alt=""></button>`).join(''):'';
+    const thumbs=[...tb.querySelectorAll('button')];
+    thumbs.forEach((t,k)=>t.addEventListener('click',()=>qvGallery.show(k)));
+    qvGallery.show(start||0);
+    document.getElementById('qvCat').textContent=CAT_NAMES[p.cat];
+    document.getElementById('qvName').textContent=p.name;
+    document.getElementById('qvPrice').innerHTML=priceHTML(p);
+    document.getElementById('qvDesc').textContent=p.desc;
+    document.getElementById('qvFacts').innerHTML=`<span>חומר מומלץ: <bdi>${esc(p.material)}</bdi></span><span>קובץ: <bdi>STL</bdi></span>`;
+    const phys=document.getElementById('qvPhys'), q=quoteOnly(p);
+    phys.querySelector('.go').textContent=q?'לקבלת הצעת מחיר':'הזמנה פיזית (הדפסה)';
+    phys.dataset.quote=q?'1':'';
+    document.getElementById('qvFile').href=waLink('שלום אור בראשית, אשמח לרכוש את הקובץ הדיגיטלי (STL) של: '+p.name);
+    dlg.showModal();
+  }
+  document.getElementById('qvClose').addEventListener('click',()=>document.getElementById('quickView').close());
+  document.getElementById('quickView').addEventListener('click',e=>{if(e.target.id==='quickView')e.currentTarget.close();});
+  document.getElementById('qvPhys').addEventListener('click',e=>{
+    const btn=e.currentTarget;
+    if(btn.dataset.quote){window.open(waLink('שלום אור בראשית, אשמח לקבל הצעת מחיר עבור: '+qvProduct.name),'_blank','noopener');return;}
+    addToCart(qvProduct,'phys',qvProduct.price);flash(btn);
+  });
+
+  PRODUCTS.forEach(p=>makeCard(p,grid));
+  const onSaleList=PRODUCTS.filter(p=>p.originalPrice&&p.originalPrice>p.price);
+  onSaleList.forEach(p=>makeCard(p,document.getElementById('specialsGrid')));
+  document.getElementById('specialsCount').innerHTML=onSaleList.length
+    ?`נמצאו ${onSaleList.length} פריטים במבצע`
+    :'כרגע אין מבצעים פעילים. מבצעים חדשים מתפרסמים קודם ב<a href="https://t.me/+K04URryHB1Q5ZTU0" target="_blank" rel="noopener">ערוץ הטלגרם</a> שלנו, ובינתיים מוזמנים <a href="#collection">לקולקציה</a>.';
+
+  /* ---------- print lab ---------- */
+  const lab=new Printer(document.getElementById('labCanvas'),MODELS.kiddush,{step:2.2});
+  printers.push(lab);
+  (()=>{
+    const range=document.getElementById('labRange'), btn=document.getElementById('labPlay'), icon=document.getElementById('labIcon');
+    const LAYERS=2250, MM=180, HOURS=26;
+    let playing=false, raf=0;
+    const show=v=>{
+      const u=v/1000;
+      lab.p=u; lab.render(performance.now());
+      range.style.setProperty('--fill',(u*100)+'%');
+      document.getElementById('labLayer').textContent=fmt(Math.round(u*LAYERS));
+      document.getElementById('labHeight').textContent=(u*MM).toFixed(1)+' מ״מ';
+      const mins=Math.round(u*HOURS*60);
+      document.getElementById('labTime').textContent=String(Math.floor(mins/60)).padStart(2,'0')+':'+String(mins%60).padStart(2,'0')+' ש׳';
+    };
+    const setPlaying=v=>{
+      playing=v; cancelAnimationFrame(raf);
+      icon.setAttribute('d',v?'M4 3h3v10H4zM9 3h3v10H9z':'M12 3v10L3 8z');
+      btn.setAttribute('aria-label',v?'השהיית הדפסה':'הפעלת הדפסה');
+    };
+    btn.addEventListener('click',()=>{
+      if(playing){setPlaying(false);return;}
+      let v=+range.value>=1000?0:+range.value;
+      setPlaying(true);
+      let last=performance.now();
+      const tick=now=>{
+        v=Math.min(1000,v+(now-last)/7);
+        last=now; range.value=v; show(v);
+        if(v<1000&&playing) raf=requestAnimationFrame(tick); else setPlaying(false);
+      };
+      raf=requestAnimationFrame(tick);
+    });
+    range.addEventListener('input',()=>{setPlaying(false);show(+range.value);});
+    new ResizeObserver(()=>show(+range.value)).observe(lab.c);
+  })();
+
+  document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===ch));
+    const f=ch.dataset.filter;
+    grid.querySelectorAll('.pcard').forEach(it=>{it.hidden=!(f==='all'||it.dataset.cat===f);});
+    printers.forEach(pr=>pr.resize());
+  }));
+
+  const ro=new ResizeObserver(()=>printers.forEach(pr=>pr.resize()));
+  printers.forEach(pr=>ro.observe(pr.c));
+
+  /* ---------- cart ---------- */
+  const $=id=>document.getElementById(id);
+  const WA='972546843548';
+  const COUPONS={'BERESHIT10':{pct:10,label:'BERESHIT10 · 10%'}};
+  const STORE='or-bereshit-cart-v1';
+  let cart=[], coupon=null;
+  try{const saved=JSON.parse(localStorage.getItem(STORE)||'null'); if(saved){cart=saved.cart||[]; coupon=COUPONS[saved.coupon]?saved.coupon:null;}}catch(e){}
+  const persist=()=>{try{localStorage.setItem(STORE,JSON.stringify({cart,coupon}));}catch(e){}};
+  let toastT;
+  function toast(msg){const t=$('toast');t.hidden=true;void t.offsetWidth;t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600);}
+  const thumbOf=id=>{const p=PRODUCTS.find(x=>x.id===id);return p&&p.images[0]?p.images[0]:'';};
+  function addToCart(p,type,price,fin,src){
+    const chosen=type==='phys'?(fin||finish):null;
+    const key=p.id+'|'+type+'|'+(chosen||'');
+    const line=cart.find(l=>l.key===key);
+    if(line) line.qty++;
+    else cart.push({key,id:p.id,name:p.name,type,finish:chosen,price,qty:1,thumb:thumbOf(p.id)});
+    renderCart(); persist();
+    if(!reduce)$('cartCount').animate([{transform:'scale(1)'},{transform:'scale(1.35)'},{transform:'scale(1)'}],{duration:320,easing:'cubic-bezier(.23,1,.32,1)'});
+    toast('נוסף לסל: '+p.name+' · '+(type==='phys'?'הזמנה פיזית':'קובץ דיגיטלי'));
+  }
+  const money=n=>'₪'+fmt(Math.round(n));
+  function totals(){
+    const sub=cart.reduce((s,l)=>s+l.price*l.qty,0);
+    const disc=coupon?sub*COUPONS[coupon].pct/100:0;
+    return {sub,disc,total:sub-disc};
+  }
+  function waText(){
+    const t=totals();
+    const rows=cart.map(l=>`• ${l.name} (${l.type==='phys'?'הזמנה פיזית':'קובץ דיגיטלי'}) × ${l.qty} = ${money(l.price*l.qty)}`);
+    const addr=$('shipAddr').value.trim();
+    return ['שלום אור בראשית, אשמח להזמין:',...rows,'',`סיכום ביניים: ${money(t.sub)}`,
+      ...(coupon?[`קופון ${coupon}: −${money(t.disc)}`]:[]),`סה״כ: ${money(t.total)}`,
+      ...(cart.some(l=>l.type==='phys')?['',`כתובת למשלוח: ${addr||'—'}`]:[])].join('\n');
+  }
+  const RM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13"/></svg>';
+  function renderCart(){
+    const count=cart.reduce((s,l)=>s+l.qty,0);
+    $('cartCount').textContent=count; $('cartCount2').textContent=count;
+    const ul=$('lines'); ul.innerHTML='';
+    if(!cart.length) ul.innerHTML='<li class="empty">הסל שלך ריק כרגע.</li>';
+    cart.forEach(l=>{
+      const li=document.createElement('li'); li.className='line';
+      li.innerHTML=`${l.thumb?`<img src="${l.thumb}" alt="">`:'<img alt="">'}
+        <div class="info"><span class="tag ${l.type==='file'?'file':''}">${l.type==='phys'?'פיזי':'דיגיטלי'}</span><span class="name">${l.name}</span>
+        <span class="meta">${l.type==='phys'?'הדפסה וגימור ידני כלולים':'קובץ STL להורדה · רישיון אישי'}</span></div>
+        <div class="end"><button class="rm" type="button" aria-label="הסרת ${l.name}">${RM}</button><span class="lp">${money(l.price*l.qty)}</span>
+        <span class="qty"><button type="button" data-d="1" aria-label="הוספת יחידה">+</button><span>${l.qty}</span><button type="button" data-d="-1" aria-label="הורדת יחידה">−</button></span></div>`;
+      li.querySelector('.rm').addEventListener('click',()=>{cart=cart.filter(x=>x!==l);renderCart();persist();});
+      li.querySelectorAll('.qty button').forEach(b=>b.addEventListener('click',()=>{l.qty+=+b.dataset.d;if(l.qty<1)cart=cart.filter(x=>x!==l);renderCart();persist();}));
+      ul.appendChild(li);
+    });
+    $('addrBox').hidden=!cart.some(l=>l.type==='phys');
+    $('couponBox').hidden=!cart.length;
+    const t=totals();
+    $('subtotal').textContent=money(t.sub);
+    $('discRow').hidden=!coupon||!cart.length;
+    if(coupon){$('discLabel').textContent='קופון '+COUPONS[coupon].label;$('discount').textContent='−'+money(t.disc);}
+    $('total').textContent=money(t.total);
+    $('checkout').href='https://wa.me/'+WA+'?text='+encodeURIComponent(waText());
+  }
+  renderCart();
+  $('shipAddr').addEventListener('input',()=>{$('checkout').href='https://wa.me/'+WA+'?text='+encodeURIComponent(waText());});
+  $('couponApply').addEventListener('click',()=>{
+    const code=$('couponInput').value.trim().toUpperCase(), msg=$('couponMsg');
+    if(COUPONS[code]){coupon=code;msg.textContent=`הקופון הופעל: ${COUPONS[code].pct}% הנחה`;msg.className='coupon-msg ok';}
+    else{msg.textContent=code?'הקוד לא תקף. בדקו את האיות ונסו שוב.':'הזינו קוד קופון.';msg.className='coupon-msg bad';}
+    renderCart(); persist();
+  });
+  $('checkout').addEventListener('click',e=>{
+    if(!cart.length){e.preventDefault();toast('הסל ריק. הוסיפו פריט כדי להזמין.');return;}
+    if(cart.some(l=>l.type==='phys')&&!$('shipAddr').value.trim()){e.preventDefault();toast('הוסיפו כתובת למשלוח לפני שליחת ההזמנה');$('shipAddr').focus();}
+  });
+  const openCart=v=>{const d=$('drawer');d.classList.toggle('open',v);$('scrim').classList.toggle('open',v);d.inert=!v;if(v)$('closeCart').focus({preventScroll:true});};
+  $('cartBtn').addEventListener('click',()=>openCart(true));
+  $('closeCart').addEventListener('click',()=>openCart(false));
+  $('scrim').addEventListener('click',()=>openCart(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false);});
+
+  /* ---------- support form → WhatsApp ---------- */
+  const supText=()=>{
+    const v=id=>$(id).value.trim();
+    return ['שלום אור בראשית,',`נושא: ${v('supTopic')}`,...(v('supName')?[`שם: ${v('supName')}`]:[]),...(v('supOrder')?[`מספר הזמנה: ${v('supOrder')}`]:[]),'',v('supMsg')].join('\n');
+  };
+  const syncSup=()=>{$('supSend').href='https://wa.me/'+WA+'?text='+encodeURIComponent(supText());};
+  ['supName','supOrder','supTopic','supMsg'].forEach(id=>$(id).addEventListener('input',syncSup));
+  syncSup();
+  $('supSend').addEventListener('click',e=>{if(!$('supMsg').value.trim()){e.preventDefault();toast('כתבו לנו כמה מילים לפני השליחה');$('supMsg').focus();}});
+  $('supportForm').addEventListener('submit',e=>e.preventDefault());
+
+  /* ---------- login ---------- */
+  const dlg=$('loginDlg');
+  $('loginBtn').addEventListener('click',()=>dlg.showModal());
+  $('closeLogin').addEventListener('click',()=>dlg.close());
+  $('loginForm').addEventListener('submit',e=>{e.preventDefault();dlg.close();toast('מערכת החשבונות תחובר בשלב הבא');});
+  $('signupLink').addEventListener('click',e=>{e.preventDefault();toast('ההרשמה תחובר בשלב הבא');});
+
+  /* ---------- engraving ---------- */
+  const sync=()=>{
+    $('pName').textContent=$('engName').value.trim()||'השם שלכם';
+    $('pOcc').textContent=$('engOcc').value;
+    $('pDate').textContent=$('engDate').value;
+  };
+  ['engName','engOcc','engDate'].forEach(id=>$(id).addEventListener('input',sync));
+  sync();
+
+  /* ---------- header docking ---------- */
+  (()=>{
+    const bar=$('topbar'), sentinel=$('topSentinel');
+    if(!('IntersectionObserver' in window)){bar.classList.add('docked');return;}
+    // the bar turns solid a moment before it reaches the top edge (40px early)
+    new IntersectionObserver(es=>{
+      const e=es[es.length-1];
+      bar.classList.toggle('docked',!e.isIntersecting&&e.boundingClientRect.top<40);
+    },{rootMargin:'-40px 0px 0px 0px',threshold:0}).observe(sentinel);
+    // direct check on scroll as well, so the switch lands exactly as the bar arrives
+    addEventListener('scroll',()=>bar.classList.toggle('docked',sentinel.getBoundingClientRect().top<40),{passive:true});
+  })();
+
+  /* ---------- smart assistant (ארי) — answered by /api/chat (Gemini on the server) ---------- */
+  (()=>{
+    const fab=$('askFab'), panel=$('ask'), log=$('askLog'), form=$('askForm'), input=$('askInput'), go=$('askGo'), sugg=$('askSugg');
+    const ENDPOINT='/api/chat';
+    const WA_LINK='https://wa.me/972546843548';
+    const SEND_ICON=go.innerHTML;
+    const STOP_ICON='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>';
+    let offline=false, busy=false, ctl=null;
+    const turns=[];
+
+    const scrollDown=()=>{log.scrollTop=log.scrollHeight;};
+    function addMsg(kind,text){
+      const m=document.createElement('div'); m.className='msg '+kind; m.textContent=text;
+      log.appendChild(m); scrollDown(); return m;
+    }
+    const clean=t=>t.replace(/\*\*(.+?)\*\*/g,'$1').replace(/^#+\s*/gm,'').replace(/^\s*[-*]\s+/gm,'• ');
+
+    function goOffline(){
+      if(offline) return; offline=true;
+      const m=document.createElement('div'); m.className='msg bot ask-off';
+      m.innerHTML='<span>העוזר החכם לא זמין כרגע. הצוות שלנו ישמח לעזור בוואטסאפ.</span>';
+      const a=document.createElement('a'); a.className='btn btn-primary'; a.href=WA_LINK; a.target='_blank'; a.rel='noopener'; a.textContent='לשיחה בוואטסאפ';
+      m.appendChild(a); log.appendChild(m); scrollDown();
+      input.disabled=true; go.disabled=true; sugg.hidden=true;
+      input.placeholder='העוזר לא זמין כרגע';
+    }
+
+    // what the server may ask the page to do
+    const PAGE_HASH={home:'#/',collection:'#collection',engrave:'#engrave',faq:'#faq',support:'#/support',guide:'#/guide',specials:'#/specials',licenses:'#/licenses',privacy:'#/privacy',shipping:'#/shipping',returns:'#/returns'};
+    function runAction(a){
+      if(!a||typeof a!=='object') return;
+      const args=a.args||{};
+      if(a.name==='add_to_cart'){
+        const p=PRODUCTS.find(x=>x.id===String(args.product_id));
+        if(!p) return;
+        if(!p.price) return;
+        addToCart(p,'phys',p.price);
+        addMsg('note','נוסף לסל: '+p.name);
+      } else if(a.name==='open_page'){
+        const h=PAGE_HASH[String(args.page)];
+        if(h){location.hash=h;addMsg('note','פתחתי עבורכם את העמוד');}
+      }
+    }
+
+    function setBusy(v){
+      busy=v; go.classList.toggle('stop',v); go.innerHTML=v?STOP_ICON:SEND_ICON;
+      go.setAttribute('aria-label',v?'עצירה':'שליחה'); go.type=v?'button':'submit';
+    }
+
+    // reveal the answer quickly word by word, so it reads like it is being written
+    function typeOut(el,text){
+      if(reduce){el.textContent=text;return Promise.resolve();}
+      const words=text.split(/(\s+)/); let i=0;
+      return new Promise(done=>{
+        const step=()=>{i=Math.min(words.length,i+3);el.textContent=words.slice(0,i).join('');scrollDown();if(i<words.length)requestAnimationFrame(step);else done();};
+        step();
+      });
+    }
+
+    async function send(text){
+      text=text.trim();
+      if(busy||offline||!text) return;
+      sugg.hidden=true;
+      addMsg('me',text); input.value=''; autoGrow();
+      turns.push({role:'user',content:text.slice(0,1500)});
+      const bubble=addMsg('bot thinking','ארי חושב');
+      setBusy(true);
+      ctl=new AbortController();
+      let recent=turns.slice(-16); while(recent.length&&recent[0].role!=='user') recent.shift();
+      try{
+        const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:recent}),signal:ctl.signal});
+        if(res.status===503||res.status===404){bubble.remove();goOffline();return;}
+        const data=await res.json().catch(()=>({}));
+        bubble.classList.remove('thinking');
+        if(!res.ok){
+          bubble.textContent=res.status===429?'יש כרגע עומס. נסו לשלוח שוב בעוד רגע.':'משהו השתבש בחיבור. נסו לשלוח שוב.';
+          bubble.classList.add('err');
+          return;
+        }
+        (Array.isArray(data.actions)?data.actions:[]).forEach(runAction);
+        const out=clean(String(data.text||''));
+        turns.push({role:'assistant',content:out.slice(0,1500)});
+        log.appendChild(bubble);                 // keep the answer below any action notes
+        await typeOut(bubble,out);
+      }catch(e){
+        bubble.classList.remove('thinking');
+        if(e&&e.name==='AbortError'){bubble.textContent='עצרתי.';}
+        else if(location.protocol==='file:'){bubble.remove();goOffline();}
+        else{bubble.textContent='אין חיבור לשרת כרגע. בדקו את החיבור ונסו שוב.';bubble.classList.add('err');}
+      }finally{setBusy(false);ctl=null;scrollDown();}
+    }
+
+    function autoGrow(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,120)+'px';}
+    input.addEventListener('input',autoGrow);
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(input.value);}});
+    form.addEventListener('submit',e=>{e.preventDefault();send(input.value);});
+    go.addEventListener('click',e=>{if(busy){e.preventDefault();ctl&&ctl.abort();}});
+    sugg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>send(b.textContent)));
+
+    const openAsk=v=>{
+      panel.classList.toggle('open',v); panel.inert=!v; fab.setAttribute('aria-expanded',String(v));
+      if(v){if(!input.disabled)input.focus({preventScroll:true});scrollDown();} else fab.focus({preventScroll:true});
+    };
+    fab.addEventListener('click',()=>openAsk(true));
+    $('askClose').addEventListener('click',()=>openAsk(false));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('open'))openAsk(false);});
+  })();
+
+  /* ---------- pages ---------- */
+  (()=>{
+    const ROUTES=['support','guide','specials','licenses','privacy','shipping','returns'];
+    const TITLES={support:'תמיכה',guide:'מדריך הדפסה',specials:'מבצעים',licenses:'רישיונות דיגיטליים',privacy:'מדיניות פרטיות',shipping:'משלוחים וזמני אספקה',returns:'החזרות וביטולים'};
+    const introEl=$('intro'), home=$('top');
+    function route(){
+      const h=location.hash||'';
+      const r=h.startsWith('#/')?h.slice(2):'';
+      const isPage=ROUTES.includes(r);
+      introEl.hidden=isPage; home.hidden=isPage;
+      document.querySelectorAll('#pages .page').forEach(pg=>pg.hidden=pg.dataset.route!==r);
+      document.querySelectorAll('.nav a[data-route]').forEach(a=>{if(a.dataset.route===r)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+      document.title=isPage?`${TITLES[r]} · אור בראשית`:'אור בראשית';
+      openCart(false);
+      if(isPage||h==='#/'||h===''){scrollTo({top:0,behavior:'auto'});}
+      else{const t=document.querySelector(h);if(t)requestAnimationFrame(()=>t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}));}
+      printers.forEach(pr=>pr.resize());
+    }
+    addEventListener('hashchange',route);
+    // a fresh load always opens on the opening screen: drop a leftover jump to a section
+    // (e.g. #collection) and don't restore an old scroll position
+    try{history.scrollRestoration='manual';}catch(e){}
+    if(location.hash&&!location.hash.startsWith('#/')){
+      try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+    }
+    route();
+    if(!location.hash||location.hash==='#/') requestAnimationFrame(()=>scrollTo(0,0));
+  })();
+
+  /* ---------- scroll reveal ---------- */
+  (()=>{
+    if(!('IntersectionObserver' in window)) return;
+    // more of the page takes part: hero text and stage, the form, footer columns
+    document.querySelectorAll('footer .cols > div')
+      .forEach(el=>el.classList.add('rv'));
+    // siblings that arrive together cascade one after another (product rows cascade per row)
+    const groups=new Map();
+    document.querySelectorAll('.rv').forEach(el=>{
+      const i=groups.get(el.parentElement)||0;
+      const slot=el.parentElement.classList.contains('grid')?i%3:i;
+      el.style.setProperty('--d',Math.min(slot*110,440)+'ms');
+      groups.set(el.parentElement,i+1);
+    });
+    document.documentElement.classList.add('reveal-ready');
+    const io=new IntersectionObserver(entries=>{
+      // reveal what enters the screen, and anything a jump (menu link) carried past above it
+      entries.forEach(e=>{if(e.isIntersecting||e.boundingClientRect.bottom<0){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -10% 0px',threshold:.06});
+    document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+    // belt and braces: a plain scroll check catches anything the observer was late on
+    addEventListener('scroll',()=>{
+      const limit=innerHeight*.9;
+      document.querySelectorAll('.reveal-ready .rv:not(.in)').forEach(el=>{
+        if(el.offsetParent&&el.getBoundingClientRect().top<limit){el.classList.add('in');io.unobserve(el);}
+      });
+    },{passive:true});
+  })();
+})();
+</script>
+
+</body>
+</html>
