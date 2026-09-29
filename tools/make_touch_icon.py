@@ -1,17 +1,19 @@
-"""Home-screen icon for iPhone (apple-touch-icon.png) from the OB monogram in favicon.svg.
+"""Home-screen icon for iPhone (apple-touch-icon.png) from the sun drawing in favicon.svg.
 
 iOS always puts the icon on a rounded square and fills anything transparent with black,
-so the tile is drawn on purpose: a white monogram on black, the same pair as the tab icon.
+so the tile is drawn on purpose: a white sun on black, the same pair as the tab icon.
+The drawing's lines are thin, so they are thickened a little to stay clear at 180px.
 Run after changing favicon.svg:  python tools/make_touch_icon.py   (needs Pillow)
 """
 import os, re
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 svg = open(os.path.join(ROOT, 'favicon.svg'), encoding='utf-8').read()
 d = re.search(r'<path[^>]* d="([^"]+)"', svg).group(1)
-MW, MH = 879, 793          # the monogram's own box inside the path
+MW, MH = 612, 418          # the drawing's own box inside the path
+THICKEN = 8                # extra line weight, in the drawing's units
 
 loops, cur, pos = [], None, (0, 0)
 for cmd, args in re.findall(r'([MLQZ])([-\d. ]*)', d):
@@ -32,9 +34,9 @@ for cmd, args in re.findall(r'([MLQZ])([-\d. ]*)', d):
         loops.append(cur); cur = None
 if cur: loops.append(cur)
 
-SIZE, SS = 180, 8                     # final size, supersampling for smooth edges
+SIZE, SS = 180, 4                     # final size, supersampling for smooth edges
 big = SIZE * SS
-w = big * 0.62                        # monogram width: clear of the corners iOS rounds off
+w = big * 0.70                        # drawing width: clear of the corners iOS rounds off
 k = w / MW
 ox, oy = (big - w) / 2, (big - MH * k) / 2
 
@@ -42,8 +44,10 @@ mask = np.zeros((big, big), bool)
 for lp in loops:
     im = Image.new('1', (big, big), 0)
     ImageDraw.Draw(im).polygon([(ox + x * k, oy + y * k) for x, y in lp], fill=1)
-    mask ^= np.asarray(im, bool)      # even-odd, so the counters stay open
+    mask ^= np.asarray(im, bool)      # even-odd, so enclosed gaps stay open
 
-tile = Image.fromarray(np.where(mask, 255, 0).astype(np.uint8)).resize((SIZE, SIZE), Image.LANCZOS)
-tile.convert('RGB').save(os.path.join(ROOT, 'apple-touch-icon.png'), optimize=True)
+img = Image.fromarray(np.where(mask, 255, 0).astype(np.uint8))
+r = max(1, round(THICKEN * k / 2))
+img = img.filter(ImageFilter.MaxFilter(2 * r + 1))   # thicken every line evenly
+img.resize((SIZE, SIZE), Image.LANCZOS).convert('RGB').save(os.path.join(ROOT, 'apple-touch-icon.png'), optimize=True)
 print('apple-touch-icon.png', SIZE, 'x', SIZE)
