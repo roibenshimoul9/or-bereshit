@@ -133,7 +133,9 @@ HEAD='''<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="אור בראשית: יודאיקה בהדפסת תלת־ממד ובגימור ידני. פמוטים, גביעי קידוש, חנוכיות ונרות זיכרון בהזמנה אישית.">
 <meta name="theme-color" content="#1A1511">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<!-- ?v= changes whenever the icon does: phones keep an old icon under the same address for weeks -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
 '''
 # title + fonts + styles belong in <head>; the page body starts at the intro
