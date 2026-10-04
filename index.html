@@ -141,6 +141,10 @@ section{padding-block:clamp(56px,9vw,110px)}
 .chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 16px;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink-soft)}
 .chip,.swatch{transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,box-shadow 200ms ease,transform 160ms var(--ease-out)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+/* a way out to the sister site, not a filter: POLYMODE blue so it reads as its own thing */
+.chip-poly{display:inline-flex;align-items:center;gap:6px;text-decoration:none;letter-spacing:.04em;color:#7FB2FF;border-color:rgba(127,178,255,.5);background:rgba(127,178,255,.08)}
+.chip-poly svg{width:13px;height:13px;flex:none}
+@media (hover:hover) and (pointer:fine){.chip.chip-poly:hover{border-color:#7FB2FF;background:rgba(127,178,255,.18);color:#A9CBFF}}
 .finishes .lbl{font-size:.85rem;color:var(--ink-soft);margin-inline-end:4px}
 .swatch{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:2px;padding:5px 12px 5px 10px;cursor:pointer;background:transparent;font-size:.9rem;font-weight:600}
 .swatch i{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 -3px 5px rgba(0,0,0,.3),inset 0 2px 3px rgba(255,255,255,.35)}
@@ -819,6 +823,7 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
           <button class="chip" type="button" data-filter="all" aria-pressed="true">הכול</button>
           <button class="chip" type="button" data-filter="judaica" aria-pressed="false">יודאיקה</button>
           <button class="chip" type="button" data-filter="home" aria-pressed="false">לבית</button>
+          <a class="chip chip-poly" href="https://polymode3d.vercel.app/" target="_blank" rel="noopener" aria-label="POLYMODE, נפתח בלשונית חדשה"><span dir="ltr">POLYMODE</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16 16 8M9 8h7v7"/></svg></a>
         </div>
       </div>
 
@@ -1901,8 +1906,8 @@ dialog[open]::backdrop{animation:fadeIn 260ms ease}
     new ResizeObserver(()=>show(+range.value)).observe(lab.c);
   })();
 
-  document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
-    document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===ch));
+  document.querySelectorAll('.chip[data-filter]').forEach(ch=>ch.addEventListener('click',()=>{
+    document.querySelectorAll('.chip[data-filter]').forEach(c=>c.setAttribute('aria-pressed',c===ch));
     const f=ch.dataset.filter;
     grid.querySelectorAll('.pcard').forEach(it=>{it.hidden=!(f==='all'||it.dataset.cat===f);});
     printers.forEach(pr=>pr.resize());
