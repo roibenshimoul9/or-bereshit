@@ -142,8 +142,9 @@ section{padding-block:clamp(56px,9vw,110px)}
 .chip,.swatch{transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,box-shadow 200ms ease,transform 160ms var(--ease-out)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 /* a way out to the sister site, not a filter: POLYMODE blue so it reads as its own thing */
-.chip-poly{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;font-size:.8rem;text-decoration:none;letter-spacing:.04em;color:#7FB2FF;border-color:rgba(127,178,255,.5);background:rgba(127,178,255,.08)}
-.chip-poly svg{width:11px;height:11px;flex:none}
+.chip-poly{display:inline-block;white-space:nowrap;text-decoration:none;letter-spacing:.04em;color:#7FB2FF;border-color:rgba(127,178,255,.5);background:rgba(127,178,255,.08)}
+.chip-poly span{font-size:.87em}
+.chip-poly svg{width:11px;height:11px;margin-inline-start:6px;vertical-align:-1px}
 @media (hover:hover) and (pointer:fine){.chip.chip-poly:hover{border-color:#7FB2FF;background:rgba(127,178,255,.18);color:#A9CBFF}}
 .finishes .lbl{font-size:.85rem;color:var(--ink-soft);margin-inline-end:4px}
 .swatch{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:2px;padding:5px 12px 5px 10px;cursor:pointer;background:transparent;font-size:.9rem;font-weight:600}
