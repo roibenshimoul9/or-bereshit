@@ -149,6 +149,8 @@ import account_layer
 page=account_layer.apply(page)
 import mobile_layer
 page=mobile_layer.apply(page)
+import seo_layer
+page=seo_layer.apply(page,ROOT)
 open(os.path.join(ROOT,'firestore.rules'),'w',encoding='utf-8').write(account_layer.RULES)
 cfg=os.path.join(ROOT,'firebase-config.js')
 if not os.path.exists(cfg):   # never overwrite a config the owner already filled in
